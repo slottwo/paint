@@ -1,2 +1,1 @@
-gcc -lGL -lglut -lGLU -o program src/$1.c
-./program
+gcc $1 -o program -lGL -lglut -lGLU
