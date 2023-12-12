@@ -3,8 +3,8 @@
 
 #define SCREEN_WIDTH 1366
 #define SCREEN_HEIGH 768
-#define W 100
-#define H 75
+#define W 150
+#define H 100
 #define SIZE_RATIO 4
 
 void init()
@@ -17,9 +17,18 @@ void init()
 
 void display()
 {
+    int h = 25 * sqrt(3); // 15 + 50 * sin(pi/3)
+
     glClear(GL_COLOR_BUFFER_BIT);
 
     glBegin(GL_TRIANGLES);
+
+    glColor3f(1, 0, 0);
+    glVertex2f(25, (H - h) / 2);
+    glColor3f(0, 1, 0);
+    glVertex2f(75, (H - h) / 2);
+    glColor3f(0, 0, 1);
+    glVertex2f(50, (H + h) / 2);
 
     glEnd();
 

@@ -3,8 +3,8 @@
 
 #define SCREEN_WIDTH 1366
 #define SCREEN_HEIGH 768
-#define W 100
-#define H 75
+#define W 200
+#define H 150
 #define SIZE_RATIO 4
 
 void init()
