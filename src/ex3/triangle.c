@@ -3,32 +3,31 @@
 
 #define SCREEN_WIDTH 1366
 #define SCREEN_HEIGH 768
-#define W 200
-#define H 150
-#define SIZE_RATIO 4
+#define W 400
+#define H 400
 
 void init()
 {
     glClearColor(0, 0, 0, 0);
 
     glMatrixMode(GL_PROJECTION);
-    gluOrtho2D(0, W, 0, H);
+    gluOrtho2D(0, 1, 0, 1);
 }
 
 void display()
 {
-    int h = 25 * sqrt(3); // 15 + 50 * sin(pi/3)
+    float h = sqrt(3) / 4;
 
     glClear(GL_COLOR_BUFFER_BIT);
 
     glBegin(GL_TRIANGLES);
 
     glColor3f(1, 0, 0);
-    glVertex2f(25, (H - h) / 2);
+    glVertex2f(0.25, (1 - h) / 2);
     glColor3f(0, 1, 0);
-    glVertex2f(75, (H - h) / 2);
+    glVertex2f(0.75, (1 - h) / 2);
     glColor3f(0, 0, 1);
-    glVertex2f(50, (H + h) / 2);
+    glVertex2f(0.5, (1 + h) / 2);
 
     glEnd();
 
@@ -42,10 +41,10 @@ int main(int argc, char const *argv[])
     glutInit(&argc, (char **)argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
     glutInitWindowPosition(
-        (SCREEN_WIDTH - W * SIZE_RATIO) / 2,
-        (SCREEN_HEIGH - H * SIZE_RATIO) / 2);
-    glutInitWindowSize(W * SIZE_RATIO, H * SIZE_RATIO);
-    glutCreateWindow("Program");
+        (SCREEN_WIDTH - W) / 2,
+        (SCREEN_HEIGH - H) / 2);
+    glutInitWindowSize(W, H);
+    glutCreateWindow("Triangle");
 
     // Drawing presets
     init();
