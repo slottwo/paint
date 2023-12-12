@@ -1,1 +1,3 @@
-gcc $1 -o program -lGL -lglut -lGLU
+gcc $1 -o out -lGL -lglut -lGLU
+./out
+rm out
