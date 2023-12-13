@@ -11,7 +11,7 @@
 void drawCircle(double r, double x, double y)
 {
 
-    glBegin(GL_POINTS);
+    glBegin(GL_POLYGON);
     for (float i = 0; i < 2 * PI; i += 0.001)
     {
         glVertex2f(x + r * sin(i), y + r * cos(i));
@@ -40,15 +40,17 @@ void onDisplay()
 
     glClear(GL_COLOR_BUFFER_BIT);
 
+    // Sky
+
     glBegin(GL_POLYGON);
 
-    RGB(107, 73, 132, color);
+    RGB(19,24,98, color);
     glColor3fv(color);
 
     glVertex2d(0, 1);
     glVertex2d(1, 1);
 
-    RGB(43, 47, 119, color);
+    RGB(46,68,130, color);
     glColor3fv(color);
 
     glVertex2d(1, 0);
@@ -56,19 +58,18 @@ void onDisplay()
 
     glEnd();
 
-    RGB(246, 241, 213, color);
+    // Moon
+
+    RGB(245, 243, 206, color);
     glColor3fv(color);
-    drawCircle(0.4, 0.5, 0.5);
+    drawCircle(0.45, 0.5, 0.5);
+
+    // Nika
 
     
-    // glColor3f(0,0,0);
-    drawCircle(0.1, 0.5, 0.7);
 
-    glBegin(GL_LINES);
-    glVertex2d(0.5, 0.6);
-    glVertex2d(0.4, 0.4);
-    glVertex2d(0.3, 0.5);
-    glVertex2d(0.4, 0.4);
+    glBegin(GL_LINE_STRIP);
+    
 
     glEnd();
 
@@ -85,7 +86,7 @@ int main(int argc, char const *argv[])
         (SCREEN_WIDTH - W) / 2,
         (SCREEN_HEIGH - H) / 2);
     glutInitWindowSize(W, H);
-    glutCreateWindow("Triangle");
+    glutCreateWindow("JOY BOY HAS RETURNED!");
 
     // Drawing presets
     onInitialization();
