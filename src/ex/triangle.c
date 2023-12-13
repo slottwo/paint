@@ -6,7 +6,7 @@
 #define W 400
 #define H 400
 
-void init()
+void onInitialization()
 {
     glClearColor(0, 0, 0, 0);
 
@@ -14,7 +14,7 @@ void init()
     gluOrtho2D(0, 1, 0, 1);
 }
 
-void display()
+void onDisplay()
 {
     float h = sqrt(3) / 4;
 
@@ -47,10 +47,10 @@ int main(int argc, char const *argv[])
     glutCreateWindow("Triangle");
 
     // Drawing presets
-    init();
+    onInitialization();
 
     // Draw
-    glutDisplayFunc(display);
+    glutDisplayFunc(onDisplay);
     // Loop
     glutMainLoop();
 
