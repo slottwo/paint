@@ -1,7 +1,7 @@
 from xml.dom import minidom
 from svg.path import parse_path
 
-doc = minidom.parse('ballons.svg')
+doc = minidom.parse('content.svg')
 for ipath, path in enumerate(doc.getElementsByTagName('path')):
     print('Path', ipath)
     d = path.getAttribute('d')
