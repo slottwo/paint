@@ -29,6 +29,16 @@ float *draw_star(float r, float x_center, float y_center)
         y[k] = r * (BIG_PHI / 2) * sin(i * 2 * PI / 5 + PI / 2);
     }
 
+    // glBegin(GL_POINTS);
+
+    // for (i = 9; i > -1; i--)
+    // {
+    //     glColor3f(i/10.0, i/10.0, i/10.0);
+    //     glVertex2f(x[i] + x_center, y[i] + y_center);
+    // }
+
+    // glEnd();
+
     glBegin(GL_POLYGON);
 
     glColor3f(1, 1, 0);
@@ -44,7 +54,7 @@ void onInitialization()
 {
     glClearColor(238.0 / 255, 28.0 / 255, 37.0 / 255, 1); // Chinese Red
 
-    glPointSize(3);
+    glPointSize(6);
 
     glMatrixMode(GL_PROJECTION);
     gluOrtho2D(0, 3, 0, 2);
