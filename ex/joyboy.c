@@ -68,7 +68,7 @@ void onDisplay()
 
     
 
-    glBegin(GL_LINE_STRIP);
+    // glBegin(GL_LINE_STRIP);
     
 
     glEnd();
