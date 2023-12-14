@@ -6,33 +6,42 @@ Point *createPoint(float x, float y)
     Point *point = (Point *)malloc(sizeof(Point));
     if (point == NULL)
     {
-        printf("Erro: malloc falhou");
-        exit(0);
+        printf("Error: malloc fail");
+        exit(1);
     }
-    point->x = x;
-    point->y = y;
+    point[0] = x;
+    point[0] = y;
     return point;
 }
 
-Line *createLine(float v[2][2])
-{
-    Line *line = (Line *)malloc(sizeof(Line));
-    if (line == NULL)
-    {
-        printf("Erro: malloc falhou");
-        exit(0);
-    }
-    line->vertexes[0] = createPoint(v[0][0], v[0][1]);
-    line->vertexes[1] = createPoint(v[1][0], v[1][1]);
-    return line;
-}
+// Line *createLine(float v[2][2])
+// {
+//     Line *line = (Line *)malloc(sizeof(Line));
+//     if (line == NULL)
+//     {
+//         printf("Error: malloc fail");
+//         exit(1);
+//     }
+//     line->vertexes[0] = createPoint(v[0][0], v[0][1]);
+//     line->vertexes[1] = createPoint(v[1][0], v[1][1]);
+//     return line;
+// }
 
 Polygon *createPolygon(float **, int)
 {
-    Polygon *line = (Polygon *)malloc(sizeof(Polygon));
-    if (line == NULL)
+    Polygon *polygon = (Polygon *)malloc(sizeof(Polygon));
+    if (polygon == NULL)
     {
-        printf("Erro: malloc falhou");
-        exit(0);
+        printf("Error: malloc fail");
+        exit(1);
     }
+
+    return polygon;
 }
+
+void appendPoint(Polygon *, Point *)
+{
+    if (polygon == NULL |
+}
+
+void freePolygon(Polygon *);

@@ -12,7 +12,6 @@
 
 void drawCircle(double r, double x, double y)
 {
-
     glBegin(GL_POLYGON);
     for (float i = 0; i < 2 * PI; i += 0.001)
     {
@@ -29,11 +28,9 @@ void readPoints()
 
     if (file == NULL)
     {
-        printf("Error: fopen fail\n");
+        printf("Erro: fopen falho\n");
         exit(EXIT_FAILURE);
     }
-
-    char data[50];
 
     // char prefix[][10] = {
     //     "Move",
@@ -43,15 +40,16 @@ void readPoints()
 
     char format[][40] = {
         "Move {{%lf, %lf}, {%lf, %lf}}\n",
-        "Line {{%lf, %lf}, {%lf, %lf}}\n",
+        "Line {{%lf, %lf" // }, {%lf, %lf}}\n",
         "Close {{%lf, %lf}, {%lf, %lf}}\n",
         "CubicBezier {{%lf, %lf}, {%lf, %lf}}\n"};
 
     int k = 0;
-    double v[1000][4];
+    double v[1000][2];
 
-    int not_over = fgets(data, sizeof(data), file) != NULL;
-    while (not_over)
+    char data[50];
+    fgets(data, sizeof(data), file);
+    while (data != NULL)
     {
         if (strcmp(data, "PASS\n") == 0)
         {
@@ -61,7 +59,6 @@ void readPoints()
             } while (strcmp(data, "\n") != 0);
 
             fgets(data, sizeof(data), file); // Skip "\n"
-            continue;
         }
 
         // glBegin(GL_LINES);
@@ -88,7 +85,7 @@ void readPoints()
 
             if (strncmp(data, "Line", 4) == 0) // Skip "Move" | "Close"
             {
-                sscanf(data, format[1], &v[k][0], &v[k][1], &v[k][2], &v[k][3]);
+                sscanf(data, format[1], &v[k][0], &v[k][1]);
                 k++;
             }
 
@@ -153,8 +150,9 @@ void onDisplay()
     drawCircle(0.45, 0.5, 0.5);
 
     // Nika
+    
     glColor3f(0, 0, 0);
-    // drawJoyBoy();
+    // drawJoyboy();
 
     // glBegin(GL_LINE_STRIP);
 
@@ -173,9 +171,9 @@ int main(int argc, char const *argv[])
         (SCREEN_WIDTH - W) / 2,
         (SCREEN_HEIGH - H) / 2);
     glutInitWindowSize(W, H);
-    glutCreateWindow("JOY BOY HAS RETURNED!");
+    glutCreateWindow("JOYBOY HAS RETURNED!");
 
-    readPoints();
+    // readPoints();
 
     // Drawing presets
     onInitialization();
