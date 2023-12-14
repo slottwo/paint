@@ -1,5 +1,7 @@
 #include <GL/glut.h>
 #include <math.h>
+#include <stdio.h>
+#include <string.h>
 
 #define SCREEN_WIDTH 1366
 #define SCREEN_HEIGH 768
@@ -17,6 +19,92 @@ void drawCircle(double r, double x, double y)
         glVertex2f(x + r * sin(i), y + r * cos(i));
     }
     glEnd();
+}
+
+void readPoints()
+{
+    FILE *file;
+
+    file = fopen("ex/joyboy", "r");
+
+    if (file == NULL)
+    {
+        printf("Error: fopen fail\n");
+        exit(EXIT_FAILURE);
+    }
+
+    char data[50];
+
+    // char prefix[][10] = {
+    //     "Move",
+    //     "Line",
+    //     "Close",
+    //     "CubicBezier"};
+
+    char format[][40] = {
+        "Move {{%lf, %lf}, {%lf, %lf}}\n",
+        "Line {{%lf, %lf}, {%lf, %lf}}\n",
+        "Close {{%lf, %lf}, {%lf, %lf}}\n",
+        "CubicBezier {{%lf, %lf}, {%lf, %lf}}\n"};
+
+    int k = 0;
+    double v[1000][4];
+
+    int not_over = fgets(data, sizeof(data), file) != NULL;
+    while (not_over)
+    {
+        if (strcmp(data, "PASS\n") == 0)
+        {
+            do
+            {
+                fgets(data, sizeof(data), file);
+            } while (strcmp(data, "\n") != 0);
+
+            fgets(data, sizeof(data), file); // Skip "\n"
+            continue;
+        }
+
+        // glBegin(GL_LINES);
+
+        // fgets(data, sizeof(data), file); // Skip "Move"
+
+        while (strcmp(data, "\n") != 0)
+        {
+
+            // for (int i = 0; i < 4; i++)
+            // {
+            //     if (strncmp(data, prefix[i], strlen(prefix[i]) - 1) == 0)
+            //         {
+            //             sscanf(data, format[i], &v[k][0], &v[k][1], &v[k][2], &v[k][3]);
+            //             k++;
+            //             break;
+            //         }
+            // }
+            // if (i == 4)
+            // {
+            //     printf("Error: bad formatting\n");
+            //     exit(1);
+            // }
+
+            if (strncmp(data, "Line", 4) == 0) // Skip "Move" | "Close"
+            {
+                sscanf(data, format[1], &v[k][0], &v[k][1], &v[k][2], &v[k][3]);
+                k++;
+            }
+
+            fgets(data, sizeof(data), file); // Next line
+
+            // glVertex2fv(v[k]);
+        }
+
+        // glEnd();
+
+        // fgets(data, sizeof(data), file); // Skip "Close"
+
+        fgets(data, sizeof(data), file); // Skip "\n"
+    }
+
+    fclose(file);
 }
 
 void RGB(float r, float g, float b, float *color)
@@ -44,13 +132,13 @@ void onDisplay()
 
     glBegin(GL_POLYGON);
 
-    RGB(19,24,98, color);
+    RGB(19, 24, 98, color);
     glColor3fv(color);
 
     glVertex2d(0, 1);
     glVertex2d(1, 1);
 
-    RGB(46,68,130, color);
+    RGB(46, 68, 130, color);
     glColor3fv(color);
 
     glVertex2d(1, 0);
@@ -65,11 +153,10 @@ void onDisplay()
     drawCircle(0.45, 0.5, 0.5);
 
     // Nika
-
-    
+    glColor3f(0, 0, 0);
+    // drawJoyBoy();
 
     // glBegin(GL_LINE_STRIP);
-    
 
     glEnd();
 
@@ -87,6 +174,8 @@ int main(int argc, char const *argv[])
         (SCREEN_HEIGH - H) / 2);
     glutInitWindowSize(W, H);
     glutCreateWindow("JOY BOY HAS RETURNED!");
+
+    readPoints();
 
     // Drawing presets
     onInitialization();
