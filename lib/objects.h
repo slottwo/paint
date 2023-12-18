@@ -1,4 +1,4 @@
-typedef double[2] Point;
+typedef double *Point;
 
 typedef struct
 {
@@ -12,8 +12,8 @@ typedef struct
     Node *head;
 } Polygon;
 
-Point *createPoint(float, float);
-Polygon *createPolygon(float**, int);
+Point *createPoint(double, double);
+Polygon *createPolygon();
 void appendPoint(Polygon *, Point *);
 void freePolygon(Polygon *);
 
