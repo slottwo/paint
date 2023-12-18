@@ -1,6 +1,14 @@
 #include "matrix.h"
+#include "objects.h"
 
-void multiply(float *A, float *B, float *R)
+/**
+ * @brief Multiplies 3*3 square matrices (R = A * B)
+ *
+ * @param A First double[9] vector
+ * @param B Second double[9] vector
+ * @param R Restulting double[9] vector
+ */
+void multiply(double *A, double *B, double *R)
 {
     for (int i = 0; i < 3; i++)
     {
@@ -12,4 +20,15 @@ void multiply(float *A, float *B, float *R)
             }
         }
     }
+}
+
+/**
+ * @brief Apply transfomation T to point P
+ * 
+ * @param P 
+ * @param T 
+ */
+void transform(Point *P, double *T)
+{
+    /* code */
 }

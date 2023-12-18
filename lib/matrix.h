@@ -1,1 +1,1 @@
-void multiply(float *, float *, float *);
+void multiply(double *, double *, double *);

@@ -14,6 +14,7 @@ typedef struct
 
 Point *createPoint(double, double);
 Polygon *createPolygon();
+Polygon *createFPolygon(double **, int);
 void appendPoint(Polygon *, Point *);
 void freePolygon(Polygon *);
 
