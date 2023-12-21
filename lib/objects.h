@@ -1,4 +1,5 @@
 typedef double *Point;
+typedef Point *Line;
 
 typedef struct
 {
@@ -8,21 +9,13 @@ typedef struct
 
 typedef struct
 {
-    // Point *center;
     Node *head;
 } Polygon;
 
 Point *createPoint(double, double);
+Line *createLine(double **);
 Polygon *createPolygon();
 Polygon *createFPolygon(double **, int);
-void appendPoint(Polygon *, Point *);
+void pushPoint(Polygon *, Point *);
+Point *popPoint(Polygon *);
 void freePolygon(Polygon *);
-
-// typedef Point[2] Line;
-
-// typedef struct
-// {
-//     // Node_Line *head;
-// } Line_Strip;
-
-// Line *createLine(float[2][2]);
