@@ -1,10 +1,10 @@
 typedef double *Point;
 typedef Point *Line;
 
-typedef struct
+typedef struct node
 {
     Point *vertex;
-    Node *next;
+    struct node *next;
 } Node;
 
 typedef struct

@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "lib/objects.h"
+#include "objects.h"
 
 /**
  * @brief Create a Point object
@@ -12,10 +12,7 @@ Point *createPoint(double x, double y)
 {
     Point *point = (Point *)malloc(sizeof(Point));
     if (point == NULL)
-    {
-        printf("Error: malloc fail");
         exit(1);
-    }
 
     *point[0] = x;
     *point[1] = y;
@@ -33,10 +30,7 @@ Line *createLine(double **points)
 {
     Line *line = (Line *)malloc(sizeof(Line));
     if (line == NULL)
-    {
-        printf("Error: malloc fail");
         exit(1);
-    }
 
     for (int i = 0; i < 4; i++)
     {
@@ -58,10 +52,6 @@ Polygon *createPolygon()
 {
     Polygon *polygon = (Polygon *)malloc(sizeof(Polygon));
     if (polygon == NULL)
-    {
-        printf("Error: malloc fail");
-        exit(1);
-    }
 
     polygon->head = NULL;
 
@@ -97,10 +87,7 @@ Node *createNode(Point *vertex)
 {
     Node *node = (Node *)malloc(sizeof(Node));
     if (node == NULL)
-    {
-        printf("Error: malloc fail");
         exit(1);
-    }
 
     node->vertex = vertex;
     node->next = NULL;
