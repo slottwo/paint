@@ -1,9 +1,17 @@
 #!/bin/bash
 
-gcc $1 -o out -lm -lGL -lglut -lGLU
+for lib in lib/*.c; do
+    if [ -f "$lib" ]; then
+        gcc -c "$lib" -o "${lib%.c}.o"
+    fi
+done
 
-if [ $# -gt 1 ]; then
-    ./out "${@:2}"
+if [ ! -d "bin"]; then
+    mkdir "bin";
 fi
 
-rm out
+gcc $1 -o bin/${1%.c}.exe -lm -lGL -lglut -lGLU
+
+if [ $# -gt 1 ]; then
+    ./bin/${1%.c}.exe "${@:2}"
+fi
