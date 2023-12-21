@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "lib/matrix.c"
+#include "../lib/matrix.h"
 
 int main(int argc, char const *argv[])
 {
@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
 
     for (int i = 0; i < 9; i++)
     {
-        printf("%d\n", R[i]);
+        printf("%f\n", R[i]);
     }
 
     return 0;
