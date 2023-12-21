@@ -6,12 +6,18 @@ for lib in lib/*.c; do
     fi
 done
 
-if [ ! -d "bin"]; then
+if [ ! -d "bin" ]; then
     mkdir "bin";
 fi
 
-gcc $1 -o bin/${1%.c}.exe -lm -lGL -lglut -lGLU
+file=$(basename "$1")
+
+gcc $1 -o bin/${file%.c}.exe -lm -lGL -lglut -lGLU
+
+rm lib/*.o
 
 if [ $# -gt 1 ]; then
-    ./bin/${1%.c}.exe "${@:2}"
+    ./bin/${file%.c}.exe "${@:2}"
+else
+    ./bin/${file%.c}.exe
 fi
