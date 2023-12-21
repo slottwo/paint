@@ -6,7 +6,7 @@
  *
  * @param A First double[9] vector
  * @param B Second double[9] vector
- * @param R Restulting double[9] vector
+ * @param R Resulting double[9] vector
  */
 void multiply(double *A, double *B, double *R)
 {
