@@ -9,8 +9,13 @@ int main(int argc, char const *argv[])
 
     for (int i = 0; i < 9; i++)
     {
-        printf("%f\n", R[i]);
+        printf("%.1f%s", A[i], (i%3 == 2) ? "\n" : " ");
     }
+
+    // for (int i = 0; i < 9; i++)
+    // {
+    //     printf("%f\n", R[i]);
+    // }
 
     return 0;
 }
