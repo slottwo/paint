@@ -11,7 +11,7 @@ Point *createPoint(double *coords) // , double *colors)
         return NULL;
     }
 
-    Point *point = (double *)malloc(sizeof(Point));
+    Point *point = (Point *)malloc(sizeof(Point));
     if (point == NULL)
     {
         printf("Point creation error: malloc fail\n");
@@ -40,9 +40,10 @@ Point *createPoint(double *coords) // , double *colors)
     return point;
 }
 
-Point *createPointv(double x, double y) // , double *);
+Point *createPointXY(double x, double y) // , double *colors)
 {
-    Point *point = (double *)malloc(sizeof(Point));
+
+    Point *point = (Point *)malloc(sizeof(Point));
     if (point == NULL)
     {
         printf("Point creation error: malloc fail\n");

@@ -6,6 +6,6 @@ typedef struct point
     // double colors[3];
 } Point;
 
-Point *createPoint(double *);        // , double *);
-Point *createPointv(double, double); // , double *);
+Point *createPoint(double *);         // , double *);
+Point *createPointXY(double, double); // , double *);
 void freePoint(Point *);
