@@ -52,7 +52,7 @@ Polygon *createFPolygon(double **vertexes, int n)
     Polygon *polygon = createPolygon();
 
     for (int i = 0; i < n; i++)
-        pushPoint(polygon, createPoint(vertexes[i]));
+        polygonPush(polygon, createPoint(vertexes[i]));
 
     return polygon;
 }
