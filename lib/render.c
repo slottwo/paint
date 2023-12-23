@@ -10,15 +10,31 @@ int renderPoint(Point *point)
     glEnd();
 }
 
-// int renderPoints(Point **points)
+// int renderPoints(Point **points, int n)
 // {
-//     /* code */
+//     glBegin(GL_POINTS);
+
+//     for (int i = 0; i < n; i++)
+//     {
+//         glVertex2d(points[i]->x, points[i]->y);
+//     }
+
+//     glEnd();
 // }
 
 int renderPoints(Polygon *polygon)
 {
     glBegin(GL_POINTS);
-    // ...
+
+    Node *node = polygon->head;
+    while (node->next != NULL)
+    {
+        double *vertex = getVertex(node);
+        glVertex2dv(vertex);
+        free(vertex);
+        node = node->next;
+    }
+
     glEnd();
 }
 
