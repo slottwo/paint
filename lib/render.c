@@ -6,20 +6,23 @@ int renderPoint(Point *point)
     // if (point == NULL) { ... }
 
     glBegin(GL_POINT);
+
     glVertex2d(point->x, point->y);
+
     glEnd();
+
+    return 0;
 }
 
 // int renderPoints(Point **points, int n)
 // {
 //     glBegin(GL_POINTS);
-
 //     for (int i = 0; i < n; i++)
 //     {
 //         glVertex2d(points[i]->x, points[i]->y);
 //     }
-
 //     glEnd();
+//     return 0;
 // }
 
 int renderPoints(Polygon *polygon)
@@ -36,6 +39,8 @@ int renderPoints(Polygon *polygon)
     }
 
     glEnd();
+
+    return 0;
 }
 
 // int renderLine(Line *);
@@ -54,6 +59,8 @@ int renderLines(Polygon *polygon)
     }
 
     glEnd();
+
+    return 0;
 }
 
 int renderPolygon(Polygon *polygon)
@@ -69,4 +76,6 @@ int renderPolygon(Polygon *polygon)
     glVertex2dv(getVertex(polygon->head));
 
     glEnd();
+
+    return 0;
 }
