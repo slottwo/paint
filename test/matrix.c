@@ -1,21 +1,32 @@
 #include <stdio.h>
 #include "../lib/matrix.h"
 
-int main(int argc, char const *argv[])
+void printM(double *matrix)
 {
-    double A[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    double B[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    double R[9] = {0};
-
     for (int i = 0; i < 9; i++)
     {
-        printf("%.1f%s", A[i], (i%3 == 2) ? "\n" : " ");
+        printf("%.0f%s", matrix[i], (i % 3 == 2) ? "\n" : " ");
     }
+    printf("\n");
+}
 
-    // for (int i = 0; i < 9; i++)
-    // {
-    //     printf("%f\n", R[i]);
-    // }
+int main(int argc, char const *argv[])
+{
+    double I[9] = {1, 0, 0, 0, 1, 0, 0, 0, 1};
+    double t = 0;
+    double R[9] = {cos(t), -sin(t), 0, cos(t), sin(t), 0, 0, 0, 1};
+    double S[9] = {5, 0, 0, 0, 5, 0, 0, 0, 1};
+    double T[9] = {1, 0, -5, 0, 1, 8, 0, 0, 1};
+    double F[9] = {0};
+
+    // printM(R);
+
+    printM(I);
+    printM(T);
+
+    generic_multiply(I, T, F);
+
+    printM(F);
 
     return 0;
 }
