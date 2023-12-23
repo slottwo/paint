@@ -1,3 +1,6 @@
+#ifndef POINT_H
+#define POINT_H
+
 typedef struct
 {
     double x;
@@ -9,3 +12,5 @@ typedef struct
 Point *createPoint(double *);         // , double *);
 Point *createPointXY(double, double); // , double *);
 void freePoint(Point *);
+
+#endif

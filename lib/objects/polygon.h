@@ -1,3 +1,6 @@
+#ifndef POLYGON_H
+#define POLYGON_H
+
 #include "point.h"
 
 typedef struct node
@@ -28,3 +31,5 @@ void freePolygon(Polygon *);
 void freeNode(Node *);
 
 double *getVertex(Node *);
+
+#endif

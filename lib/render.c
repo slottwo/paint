@@ -31,7 +31,9 @@ int renderLines(Polygon *polygon)
     Node *node = polygon->head;
     while (node->next != NULL)
     {
-        glVertex2dv(getVertex(node));
+        double *vertex = getVertex(node);
+        glVertex2dv(vertex);
+        free(vertex);
         node = node->next;
     }
 

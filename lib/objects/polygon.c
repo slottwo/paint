@@ -131,10 +131,9 @@ int polygonLength(Polygon *polygon)
         length++;
         node = node->next;
     }
-    
+
     return length;
 }
-
 
 void freePolygon(Polygon *polygon)
 {
@@ -171,9 +170,13 @@ void freeNode(Node *node)
     node = NULL;
 }
 
+// Remind to free the return later
 double *getVertex(Node *node)
 {
-    double coords[] = {node->vertex->x, node->vertex->x};
+    double *coordinates = (double *)malloc(2 * sizeof(double));
+    
+    coordinates[0] = node->vertex->x;
+    coordinates[1] = node->vertex->y;
 
-    return coords;
+    return coordinates;
 }
