@@ -1,4 +1,4 @@
-#include "objects.h"
+#include "objects/point.h"
 
 double *generic_multiply(double *, double *);
 double *optimized_multiply(double *, double *);
