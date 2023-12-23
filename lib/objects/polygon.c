@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include "polygon.h"
 
@@ -62,14 +63,14 @@ int polygonPush(Polygon *polygon, Point *vertex)
     {
         printf("Polygon Popping Error: NULL polygon received\n");
         exit(1);
-        return NULL;
+        return 0;
     }
 
     if (vertex == NULL)
     {
         printf("Polygon Popping Error: NULL vertex received\n");
         exit(1);
-        return NULL;
+        return 0;
     }
 
     Node *new_node = createNode(vertex);
@@ -97,15 +98,43 @@ Point *polygonPop(Polygon *polygon)
 
     Point *poppedPoint = poppedNode->vertex;
 
-    free(poppedNode);
+    free(poppedNode); // Don't use `freeNode()`!
 
     return poppedPoint;
 }
 
 int polygonIsEmpty(Polygon *polygon)
 {
+    if (polygon == NULL)
+    {
+        printf("Polygon Parsing Error: NULL polygon received\n");
+        exit(1);
+        return -1; // -1 ou zero?
+    }
+
     return polygon->head == NULL;
 }
+
+int polygonLength(Polygon *polygon)
+{
+    if (polygon == NULL)
+    {
+        printf("Polygon Parsing Error: NULL polygon received\n");
+        exit(1);
+        return -1;
+    }
+    int length = 0;
+    Node *node = polygon->head;
+
+    while (node != NULL)
+    {
+        length++;
+        node = node->next;
+    }
+    
+    return length;
+}
+
 
 void freePolygon(Polygon *polygon)
 {
@@ -113,15 +142,33 @@ void freePolygon(Polygon *polygon)
     {
         printf("Polygon Clearance Error: NULL polygon received\n");
         exit(1);
-        return NULL;
+        return;
     }
 
-    /* code */
+    Point *point;
+    while (!polygonIsEmpty(polygon))
+    {
+        point = polygonPop(polygon);
+        freePoint(point);
+    }
+
+    free(polygon);
+    polygon = NULL;
 }
 
+// Inútil
 void freeNode(Node *node)
 {
-    /* code */
+    if (node == NULL)
+    {
+        printf("Node Clearance Error: NULL node received\n");
+        exit(1);
+        return;
+    }
+
+    freePoint(node->vertex);
+    free(node);
+    node = NULL;
 }
 
 double *getVertex(Node *node)

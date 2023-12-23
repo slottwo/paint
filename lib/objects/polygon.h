@@ -6,7 +6,7 @@ typedef struct node
     struct node *next;
 } Node;
 
-typedef struct polygon
+typedef struct
 {
     Node *head;
 } Polygon;
@@ -20,6 +20,8 @@ int polygonPush(Polygon *, Point *);
 Point *polygonPop(Polygon *);
 
 int polygonIsEmpty(Polygon *);
+
+int polygonLength(Polygon *);
 
 void freePolygon(Polygon *);
 

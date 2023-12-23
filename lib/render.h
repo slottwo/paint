@@ -1,5 +1,3 @@
-#include "objects/point.h"
-#include "objects/line.h"
 #include "objects/polygon.h"
 
 int renderPoint(Point *);

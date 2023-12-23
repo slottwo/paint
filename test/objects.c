@@ -1,7 +1,7 @@
-#include "lib/objects.c"
+#include "../lib/objects/polygon.h"
 
 int main(int argc, char const *argv[])
 {
-    /* code */
+    Polygon *p = createPolygon();
     return 0;
 }
