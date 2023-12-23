@@ -11,7 +11,7 @@ typedef struct polygon
     Node *head;
 } Polygon;
 
-Point *createPoint(double, double);
+Polygon *createPolygon();
 
 Polygon *createFPolygon(double **, int);
 
@@ -22,4 +22,3 @@ Point *polygonPop(Polygon *);
 int polygonIsEmpty(Polygon *);
 
 void freePolygon(Polygon *);
-
