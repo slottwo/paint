@@ -118,3 +118,15 @@ void freePolygon(Polygon *polygon)
 
     /* code */
 }
+
+void freeNode(Node *node)
+{
+    /* code */
+}
+
+double *getVertex(Node *node)
+{
+    double coords[] = {node->vertex->x, node->vertex->x};
+
+    return coords;
+}

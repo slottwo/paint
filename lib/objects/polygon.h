@@ -22,3 +22,7 @@ Point *polygonPop(Polygon *);
 int polygonIsEmpty(Polygon *);
 
 void freePolygon(Polygon *);
+
+void freeNode(Node *);
+
+double *getVertex(Node *);
