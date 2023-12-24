@@ -60,8 +60,11 @@ void transform(Point *P, double *T)
     if (P == NULL | T == NULL)
         exit(1);
 
-    *P[0] = *P[0] * T[0] + *P[1] * T[1] + T[2];
-    *P[0] = *P[0] * T[3] + *P[1] * T[4] + T[5];
+    int x = P->x * T[0] + P->y * T[1] + T[2];
+    int y = P->x * T[3] + P->y * T[4] + T[5];
+
+    P->x = x;
+    P->y = y;
 }
 
 double *get_rotate_matrix(double angle)
