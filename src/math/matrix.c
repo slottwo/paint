@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include "matrix.h"
 #include <math.h>
+#include "matrix.h"
 
 /**
  * @brief Multiply two 3*3 square matrices
@@ -11,7 +11,7 @@
  */
 double *generic_multiply(double *A, double *B)
 {
-    if (A == NULL | B == NULL)
+    if ((A == NULL) | (B == NULL))
         exit(1);
 
     double *R = (double *)calloc(9, sizeof(double));

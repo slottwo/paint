@@ -1,7 +1,7 @@
 #include <GL/glut.h>
 #include <math.h>
 
-#include "../lib/input.h"
+#include "io/input.h"
 
 #include "settings.h"
 

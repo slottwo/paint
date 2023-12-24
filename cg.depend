@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1703450221 source:/home/slottwo/GitHub/cg/src/io/events.c
+	"events.h"
+
+1703430256 /home/slottwo/GitHub/cg/src/io/events.h
+
+1703443869 source:/home/slottwo/GitHub/cg/src/io/input.c
+	"input.h"
+
+1703430256 /home/slottwo/GitHub/cg/src/io/input.h
+
+1703450124 source:/home/slottwo/GitHub/cg/src/main.c
+	<GL/glut.h>
+	<math.h>
+	"io/input.h"
+	"settings.h"
+
+1703430256 /home/slottwo/GitHub/cg/src/settings.h
+

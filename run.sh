@@ -4,30 +4,25 @@ if [ ! -d "bin" ]; then
     mkdir -p "bin"
 fi
 
+if [ ! -d "obj" ]; then
+    mkdir -p "obj"
+fi
+
 # Compile custom libs
 
-find lib/ -type f -name '*.c' | while read -r file; do
-    output_file="bin/$(basename "${file%.c}.o")"
+find src/ -type f -name '*.c' | while read -r file; do
+    output_file="obj/$(basename "${file%.c}.o")"
     gcc -c "$file" -o "$output_file" -lm -lGL -lglut -lGLU
 done
 
-# Compile main file
-
-file=$(basename "$1")
-
-if [ ! -d "bin/${1%$file}" ]; then
-    mkdir -p "bin/${1%$file}"
-fi
-
-gcc -c $1 -o "bin/${file%.c}.o" -lm -lGL -lglut -lGLU
-
 # Link everyone
 
-gcc bin/*.o -o "bin/${1%.c}" -lm -lGL -lglut -lGLU
+gcc obj/*.o -o "bin/${1%.c}" -lm -lGL -lglut -lGLU
 
-# Remove object files
+# Remove object files (?)
 
-rm bin/*.o # find . -type f -name "*.o" -delete
+# rm bin/*.o 
+# find . -type f -name "*.o" -delete
 
 # Run
 

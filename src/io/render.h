@@ -1,7 +1,7 @@
 #ifndef RENDER_H
 #define RENDER_H
 
-#include "objects/polygon.h"
+#include "../types/polygon.h"
 
 int renderPoint(Point *);
 // int renderLine(Line *);
