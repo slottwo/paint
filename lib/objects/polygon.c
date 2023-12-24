@@ -227,19 +227,3 @@ void freeNode(Node *node)
     free(node);
     node = NULL;
 }
-
-/**
- * @brief Get the vertex coordinates of a Node object. Remind to free the return later
- *
- * @param node Node object corresponding to a polygon vertex
- * @return double* (x, y)
- */
-double *getVertex(Node *node)
-{
-    double *coordinates = (double *)malloc(2 * sizeof(double));
-
-    coordinates[0] = node->vertex->x;
-    coordinates[1] = node->vertex->y;
-
-    return coordinates;
-}

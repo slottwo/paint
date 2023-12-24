@@ -11,6 +11,7 @@ typedef struct
 
 Point *createPoint(double *);         // , double *);
 Point *createPointXY(double, double); // , double *);
+double *getV(Point *point);
 void freePoint(Point *);
 
 #endif

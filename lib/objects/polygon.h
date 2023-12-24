@@ -30,6 +30,4 @@ void freePolygon(Polygon *);
 
 void freeNode(Node *);
 
-double *getVertex(Node *);
-
 #endif

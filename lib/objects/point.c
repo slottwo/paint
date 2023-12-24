@@ -57,6 +57,27 @@ Point *createPointXY(double x, double y) // , double *colors)
     return point;
 }
 
+/**
+ * @brief Get the point coordinates
+ *
+ * @param point Point pointer
+ * @return double* (x, y)
+ */
+double *getV(Point *point)
+{
+    double *coordinates = (double *)malloc(2 * sizeof(double));
+
+    coordinates[0] = point->x;
+    coordinates[1] = point->y;
+
+    return coordinates;
+}
+
+/**
+ * @brief Free memory allocation of a Point object
+ * 
+ * @param point Point pointer
+ */
 void freePoint(Point *point)
 {
     if (point == NULL)

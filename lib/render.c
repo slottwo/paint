@@ -32,7 +32,7 @@ int renderPoints(Polygon *polygon)
     Node *node = polygon->head;
     while (node->next != NULL)
     {
-        double *vertex = getVertex(node);
+        double *vertex = getV(node->vertex);
         glVertex2dv(vertex);
         free(vertex);
         node = node->next;
@@ -52,7 +52,7 @@ int renderLines(Polygon *polygon)
     Node *node = polygon->head;
     while (node->next != NULL)
     {
-        double *vertex = getVertex(node);
+        double *vertex = getV(node->vertex);
         glVertex2dv(vertex);
         free(vertex);
         node = node->next;
@@ -65,15 +65,21 @@ int renderLines(Polygon *polygon)
 
 int renderPolygon(Polygon *polygon)
 {
+    // if (polygon == NULL) ...
+
+    if (polygonIsEmpty(polygon))
+        return 0;
+    
+
     glBegin(GL_POLYGON);
 
     Node *node = polygon->head;
     while (node != NULL)
     {
-        glVertex2dv(getVertex(node));
+        glVertex2dv(getV(node->vertex));
         node = node->next;
     }
-    glVertex2dv(getVertex(polygon->head));
+    glVertex2dv(getV(polygon->head->vertex));
 
     glEnd();
 
