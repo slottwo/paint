@@ -2,6 +2,12 @@
 #include <stdio.h>
 #include "polygon.h"
 
+/**
+ * @brief Create a Node object
+ *
+ * @param vertex A polygon vertex Point object
+ * @return Node* | NULL
+ */
 Node *createNode(Point *vertex)
 {
     if (vertex == NULL)
@@ -25,6 +31,11 @@ Node *createNode(Point *vertex)
     return node;
 }
 
+/**
+ * @brief Create a empty Polygon object
+ *
+ * @return Polygon* | NULL
+ */
 Polygon *createPolygon()
 {
     Polygon *polygon = (Polygon *)malloc(sizeof(Polygon));
@@ -40,11 +51,18 @@ Polygon *createPolygon()
     return polygon;
 }
 
+/**
+ * @brief Create a filled Polygon object with n vertexes
+ *
+ * @param vertexes Array[n][2] of double values (..., (x, y), ...)
+ * @param n Amount of vertexes
+ * @return Polygon*
+ */
 Polygon *createFPolygon(double **vertexes, int n)
 {
     if (vertexes == NULL)
     {
-        printf("Node Creation Error: NULL vertexes vector received\n");
+        printf("Polygon Creation Error: NULL vertexes vector received\n");
         exit(1);
         return NULL;
     }
@@ -52,11 +70,26 @@ Polygon *createFPolygon(double **vertexes, int n)
     Polygon *polygon = createPolygon();
 
     for (int i = 0; i < n; i++)
-        polygonPush(polygon, createPoint(vertexes[i]));
+    {
+        if (!polygonPush(polygon, createPoint(vertexes[i])))
+        {
+            printf("Polygon Filling Error: polygonPush() fail\n");
+            exit(1);
+            freePolygon(polygon);
+            return NULL;
+        }
+    }
 
     return polygon;
 }
 
+/**
+ * @brief Push a new vertex on top of polygon
+ *
+ * @param polygon Polygon to receiving the push
+ * @param vertex Point to be pushed
+ * @return int
+ */
 int polygonPush(Polygon *polygon, Point *vertex)
 {
     if (polygon == NULL)
@@ -76,8 +109,16 @@ int polygonPush(Polygon *polygon, Point *vertex)
     Node *new_node = createNode(vertex);
     new_node->next = polygon->head;
     polygon->head = new_node;
+
+    return 1;
 }
 
+/**
+ * @brief Removed the last added vertex to the polygon
+ *
+ * @param polygon Polygon object
+ * @return Point* removed vertex | NULL
+ */
 Point *polygonPop(Polygon *polygon)
 {
     if (polygon == NULL)
@@ -103,18 +144,30 @@ Point *polygonPop(Polygon *polygon)
     return poppedPoint;
 }
 
+/**
+ * @brief Returns true if polygon has vertexes
+ *
+ * @param polygon Polygon object
+ * @return int
+ */
 int polygonIsEmpty(Polygon *polygon)
 {
     if (polygon == NULL)
     {
         printf("Polygon Parsing Error: NULL polygon received\n");
         exit(1);
-        return -1; // -1 ou zero?
+        return -1;
     }
 
     return polygon->head == NULL;
 }
 
+/**
+ * @brief Get the amount of vertexes on the polygon
+ *
+ * @param polygon Polygon object
+ * @return int
+ */
 int polygonLength(Polygon *polygon)
 {
     if (polygon == NULL)
@@ -135,6 +188,11 @@ int polygonLength(Polygon *polygon)
     return length;
 }
 
+/**
+ * @brief
+ *
+ * @param polygon Polygon object
+ */
 void freePolygon(Polygon *polygon)
 {
     if (polygon == NULL)
@@ -170,11 +228,16 @@ void freeNode(Node *node)
     node = NULL;
 }
 
-// Remind to free the return later
+/**
+ * @brief Get the vertex coordinates of a Node object. Remind to free the return later
+ *
+ * @param node Node object corresponding to a polygon vertex
+ * @return double* (x, y)
+ */
 double *getVertex(Node *node)
 {
     double *coordinates = (double *)malloc(2 * sizeof(double));
-    
+
     coordinates[0] = node->vertex->x;
     coordinates[1] = node->vertex->y;
 
