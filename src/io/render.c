@@ -1,9 +1,15 @@
 #include <GL/freeglut.h>
 #include "render.h"
 
+/**
+ * @brief
+ *
+ * @param polygon
+ * @return int
+ */
 int renderPoint(Point *point)
 {
-    // if (point == NULL) { ... }
+    // if (point == NULL) { ... return 0; }
 
     glBegin(GL_POINT);
 
@@ -11,7 +17,7 @@ int renderPoint(Point *point)
 
     glEnd();
 
-    return 0;
+    return 1;
 }
 
 // int renderPoints(Point **points, int n)
@@ -22,9 +28,15 @@ int renderPoint(Point *point)
 //         glVertex2d(points[i]->x, points[i]->y);
 //     }
 //     glEnd();
-//     return 0;
+//     return 1;
 // }
 
+/**
+ * @brief
+ *
+ * @param polygon
+ * @return int
+ */
 int renderPoints(Polygon *polygon)
 {
     glBegin(GL_POINTS);
@@ -40,11 +52,17 @@ int renderPoints(Polygon *polygon)
 
     glEnd();
 
-    return 0;
+    return 1;
 }
 
 // int renderLine(Line *);
 
+/**
+ * @brief
+ *
+ * @param polygon
+ * @return int
+ */
 int renderLines(Polygon *polygon)
 {
     glBegin(GL_LINE_STRIP);
@@ -60,16 +78,15 @@ int renderLines(Polygon *polygon)
 
     glEnd();
 
-    return 0;
+    return 1;
 }
 
 int renderPolygon(Polygon *polygon)
 {
-    // if (polygon == NULL) ...
+    // if (polygon == NULL) ... return 0;
 
     if (polygonIsEmpty(polygon))
-        return 0;
-    
+        return 1;
 
     glBegin(GL_POLYGON);
 
@@ -83,5 +100,5 @@ int renderPolygon(Polygon *polygon)
 
     glEnd();
 
-    return 0;
+    return 1;
 }

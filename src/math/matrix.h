@@ -1,7 +1,7 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include "objects/point.h"
+#include "../types/point.h"
 
 double *generic_multiply(double *, double *);
 double *optimized_multiply(double *, double *);

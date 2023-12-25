@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="paint" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/cg" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/cg" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="src/io/events.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/io/events.h" />
+		<Unit filename="src/io/input.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/io/input.h" />
+		<Unit filename="src/io/render.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/io/render.h" />
+		<Unit filename="src/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/math/matrix.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/math/matrix.h" />
+		<Unit filename="src/settings.h" />
+		<Unit filename="src/types/line.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/types/line.h" />
+		<Unit filename="src/types/point.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/types/point.h" />
+		<Unit filename="src/types/polygon.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/types/polygon.h" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

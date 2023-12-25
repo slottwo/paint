@@ -4,35 +4,29 @@ if [ ! -d "bin" ]; then
     mkdir -p "bin"
 fi
 
-# Compile custom libs
-
-find lib/ -type f -name '*.c' | while read -r file; do
-    output_file="bin/$(basename "${file%.c}.o")"
-    gcc -c "$file" -o "$output_file" -lm -lGL -lglut -lGLU
-done
-
-# Compile main file
-
-file=$(basename "$1")
-
-if [ ! -d "bin/${1%$file}" ]; then
-    mkdir -p "bin/${1%$file}"
+if [ ! -d "obj" ]; then
+    mkdir -p "obj"
 fi
 
-gcc -c $1 -o "bin/${file%.c}.o" -lm -lGL -lglut -lGLU
+# Compile C files
 
-# Link everyone
+find src/ -type f -name '*.c' | while read -r file; do
+    gcc -c "$file" -o "obj/$(basename "${file%.c}.o")" -lm -lGL -lglut -lGLU
+done
 
-gcc bin/*.o -o "bin/${1%.c}" -lm -lGL -lglut -lGLU
+# Link objects
 
-# Remove object files
+gcc obj/*.o -o "bin/paint.exe" -lm -lGL -lglut -lGLU
 
-rm bin/*.o # find . -type f -name "*.o" -delete
+# Remove object files (?)
+
+# rm bin/*.o 
+# find . -type f -name "*.o" -delete
 
 # Run
 
 if [ $# -gt 1 ]; then
-    "./bin/${1%.c}" "${@:2}"
+    "./bin/paint.exe" "${@:1}"
 else
-    "./bin/${1%.c}"
+    "./bin/paint.exe"
 fi

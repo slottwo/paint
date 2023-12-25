@@ -1,0 +1,51 @@
+# depslib dependency file v1.0
+1703450221 source:/home/slottwo/GitHub/cg/src/io/events.c
+	"events.h"
+
+1703430256 /home/slottwo/GitHub/cg/src/io/events.h
+
+1703443869 source:/home/slottwo/GitHub/cg/src/io/input.c
+	"input.h"
+
+1703430256 /home/slottwo/GitHub/cg/src/io/input.h
+
+1703477403 source:/home/slottwo/GitHub/cg/src/main.c
+	<GL/glut.h>
+	<math.h>
+	"io/input.h"
+	"settings.h"
+
+1703430256 /home/slottwo/GitHub/cg/src/settings.h
+
+1703430256 source:/home/slottwo/GitHub/cg/src/io/render.c
+	<GL/freeglut.h>
+	"render.h"
+
+1703450290 /home/slottwo/GitHub/cg/src/io/render.h
+	"../types/polygon.h"
+
+1703430256 /home/slottwo/GitHub/cg/src/types/polygon.h
+	"point.h"
+
+1703430256 /home/slottwo/GitHub/cg/src/types/point.h
+
+1703430256 source:/home/slottwo/GitHub/cg/src/types/line.c
+
+1703430256 source:/home/slottwo/GitHub/cg/src/types/point.c
+	<stdlib.h>
+	<stdio.h>
+	"point.h"
+
+1703430256 source:/home/slottwo/GitHub/cg/src/types/polygon.c
+	<stdlib.h>
+	<stdio.h>
+	"polygon.h"
+
+1703450481 source:/home/slottwo/GitHub/cg/src/math/matrix.c
+	<stdlib.h>
+	<math.h>
+	"matrix.h"
+
+1703450315 /home/slottwo/GitHub/cg/src/math/matrix.h
+	"../types/point.h"
+
