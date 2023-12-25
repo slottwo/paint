@@ -87,7 +87,7 @@ int renderLines(polygon *polygon)
     return 1;
 }
 
-int renderpolygon(polygon *polygon)
+int renderPolygon(polygon *polygon)
 {
     if(polygon == NULL){
         printf("Error: Polygon Head is NULL");

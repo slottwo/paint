@@ -36,20 +36,22 @@ Node *createNode(Point *vertex)
  *
  * @return polygon* | NULL
  */
-polygon *createpolygon()
+
+polygon *createPolygon()
 {
-    polygon *aux = (polygon *)malloc(sizeof(polygon));
-    if (aux == NULL)
+    polygon *new_polygon = (polygon *)malloc(sizeof(polygon));
+    if (new_polygon == NULL)
     {
         printf("Polygon Creation Error: Allocation\n");
         exit(1);
         return NULL;
     }
 
-    aux->head = NULL;
+    new_polygon->head = NULL;
 
-    return aux;
+    return new_polygon;
 }
+
 
 /**
  * @brief Create a filled polygon object with n vertexes
@@ -58,7 +60,7 @@ polygon *createpolygon()
  * @param n Amount of vertexes
  * @return polygon*
  */
-/*polygon *createFpolygon(double **vertexes, int n)
+polygon *createFPolygon(double **vertexes, int n)
 {
     if (vertexes == NULL)
     {
@@ -67,7 +69,7 @@ polygon *createpolygon()
         return NULL;
     }
 
-    //polygon *polygon = createpolygon();
+    polygon *polygon = createPolygon();
 
     for (int i = 0; i < n; i++)
     {
@@ -81,7 +83,7 @@ polygon *createpolygon()
     }
 
     return polygon;
-}*/
+}
 
 /**
  * @brief Push a new vertex on top of polygon
@@ -213,7 +215,7 @@ void freepolygon(polygon *polygon)
     polygon = NULL;
 }
 
-// Inútil
+// Inï¿½til
 void freeNode(Node *node)
 {
     if (node == NULL)
