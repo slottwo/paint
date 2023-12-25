@@ -81,7 +81,7 @@ int renderLines(polygon *polygon)
     return 1;
 }
 
-int renderpolygon(polygon *polygon)
+int renderPolygon(polygon *polygon)
 {
     // if (polygon == NULL) ... return 0;
 

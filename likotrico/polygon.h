@@ -14,9 +14,9 @@ typedef struct
     Node *head;
 } polygon;
 
-polygon *createpolygon();
+polygon *createPolygon();
 
-polygon *createFpolygon(double **, int);
+polygon *createFPolygon(double **, int);
 
 int polygonPush(polygon *, Point *);
 
