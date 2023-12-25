@@ -8,16 +8,15 @@ if [ ! -d "obj" ]; then
     mkdir -p "obj"
 fi
 
-# Compile custom libs
+# Compile C files
 
 find src/ -type f -name '*.c' | while read -r file; do
-    output_file="obj/$(basename "${file%.c}.o")"
-    gcc -c "$file" -o "$output_file" -lm -lGL -lglut -lGLU
+    gcc -c "$file" -o "obj/$(basename "${file%.c}.o")" -lm -lGL -lglut -lGLU
 done
 
-# Link everyone
+# Link objects
 
-gcc obj/*.o -o "bin/${1%.c}" -lm -lGL -lglut -lGLU
+gcc obj/*.o -o "bin/paint.exe" -lm -lGL -lglut -lGLU
 
 # Remove object files (?)
 
@@ -27,7 +26,7 @@ gcc obj/*.o -o "bin/${1%.c}" -lm -lGL -lglut -lGLU
 # Run
 
 if [ $# -gt 1 ]; then
-    "./bin/${1%.c}" "${@:2}"
+    "./bin/paint.exe" "${@:1}"
 else
-    "./bin/${1%.c}"
+    "./bin/paint.exe"
 fi

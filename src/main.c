@@ -28,7 +28,6 @@ void onDisplay()
 
 int main(int argc, char const *argv[])
 {
-
     // GLUT Config
     glutInit(&argc, (char **)argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
