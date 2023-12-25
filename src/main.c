@@ -7,7 +7,7 @@
 
 void onInitialization()
 {
-    glClearColor(0, 0, 0, 0);
+    glClearColor(1, 1, 1, 0);
 
     // Add here later the memory stacks initialization of the rendered objects
 
