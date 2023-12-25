@@ -36,7 +36,20 @@ Node *createNode(Point *vertex)
  *
  * @return polygon* | NULL
  */
+polygon *createpolygon()
+{
+    polygon *aux = (polygon *)malloc(sizeof(polygon));
+    if (aux == NULL)
+    {
+        printf("Polygon Creation Error: Allocation\n");
+        exit(1);
+        return NULL;
+    }
 
+    aux->head = NULL;
+
+    return aux;
+}
 
 /**
  * @brief Create a filled polygon object with n vertexes

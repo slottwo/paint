@@ -1,4 +1,5 @@
 #include <GL/freeglut.h>
+#include <stdio.h>
 #include "render.h"
 
 /**
@@ -10,11 +11,9 @@
 int renderPoint(Point *point)
 {
     // if (point == NULL) { ... return 0; }
-
-    glBegin(GL_POINT);
-
-    glVertex2d(point->x, point->y);
-
+    glColor3f(1.0, 0.0, 0.0);
+    glBegin(GL_POINTS);
+        glVertex2d(point->x, point->y);
     glEnd();
 
     return 1;
@@ -37,7 +36,7 @@ int renderPoint(Point *point)
  * @param polygon
  * @return int
  */
-int renderPoints(polygon *polygon)
+/*int renderPoints(polygon *polygon)
 {
     glBegin(GL_POINTS);
 
@@ -53,7 +52,7 @@ int renderPoints(polygon *polygon)
     glEnd();
 
     return 1;
-}
+}*/
 
 // int renderLine(Line *);
 
@@ -65,16 +64,23 @@ int renderPoints(polygon *polygon)
  */
 int renderLines(polygon *polygon)
 {
+    int polygonSize = polygonLength(polygon);
+    if(polygonSize == 1){
+        renderPoint(polygon->head->vertex);
+        return 1;
+    }
+
     glBegin(GL_LINE_STRIP);
 
     Node *node = polygon->head;
-    while (node->next != NULL)
+    while (node != NULL)
     {
         double *vertex = getV(node->vertex);
         glVertex2dv(vertex);
         free(vertex);
         node = node->next;
     }
+        glVertex2dv(getV(polygon->head->vertex));
 
     glEnd();
 
@@ -83,20 +89,33 @@ int renderLines(polygon *polygon)
 
 int renderpolygon(polygon *polygon)
 {
-    // if (polygon == NULL) ... return 0;
+    if(polygon == NULL){
+        printf("Error: Polygon Head is NULL");
+        exit(1);
+    }
 
-    if (polygonIsEmpty(polygon))
+    if(polygonIsEmpty(polygon)) return 1;
+
+    int polygonSize = polygonLength(polygon);
+    if( polygonSize == 1){
+        renderPoint(polygon->head->vertex);
         return 1;
+    }
+    if(polygonSize == 2){
+        renderLines(polygon);
+        return 1;
+    }
 
     glBegin(GL_POLYGON);
 
     Node *node = polygon->head;
     while (node != NULL)
     {
-        glVertex2dv(getV(node->vertex));
+        double *vertex = getV(node->vertex);
+        glVertex2f(vertex[0], vertex[1]);
+        free(vertex);
         node = node->next;
     }
-    glVertex2dv(getV(polygon->head->vertex));
 
     glEnd();
 

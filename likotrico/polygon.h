@@ -14,6 +14,9 @@ typedef struct
     Node *head;
 } polygon;
 
+//NEW
+Node *createNode(Point *);
+
 polygon *createpolygon();
 
 polygon *createFpolygon(double **, int);
