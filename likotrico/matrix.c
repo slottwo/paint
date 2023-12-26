@@ -57,7 +57,7 @@ double *optimized_multiply(double *A, double *B)
  */
 void transform(Point *P, double *T)
 {
-    if (P == NULL | T == NULL) exit(1);
+    if ((P == NULL) | (T == NULL)) exit(1);
 
     int x = P->x * T[0] + P->y * T[1] + T[2];
     int y = P->x * T[3] + P->y * T[4] + T[5];

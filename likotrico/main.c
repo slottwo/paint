@@ -1,12 +1,10 @@
 #include <windows.h>
-#include <stdio.h>
 #include <GL/glut.h>
-#include <math.h>
-
-#include "input.h"
-#include "render.h"
+#include <stdio.h>
 
 #include "settings.h"
+#include "render.h"
+#include "input.h"
 
 void onInitialization()
 {
