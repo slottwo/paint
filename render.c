@@ -121,3 +121,4 @@ int renderPolygon(polygon *polygon)
 
     return 1;
 }
+

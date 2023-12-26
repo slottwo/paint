@@ -1,10 +1,12 @@
 #include <windows.h>
-#include <GL/glut.h>
 #include <stdio.h>
+#include <GL/glut.h>
+#include <math.h>
+
+#include "input.h"
+#include "render.h"
 
 #include "settings.h"
-#include "render.h"
-#include "input.h"
 
 void onInitialization()
 {
@@ -18,19 +20,21 @@ void onInitialization()
 
 void onDisplay(void)
 {
-    //keyOperations(); // Perform configured tasks for each key
+    keyOperations(); // Perform configured tasks for each key
+    keySpecialOperations();
     glClear(GL_COLOR_BUFFER_BIT);
     // Run render fuctions for each object
     glColor3f(1.0, 0.0, 0.0);
 
-    polygon *p = createpolygon();
+    polygon *p = createPolygon();
     polygonPush(p, createPointXY(50, 50));
     polygonPush(p, createPointXY(200, 50));
     polygonPush(p, createPointXY(200, 10));
 
     printf("%d\n", polygonLength(p));
     renderLines(p);
-    //renderpolygon(p);
+
+    //renderPolygon(p);
     //renderPoint(createPointXY(100, 100));
     //glFlush();
     glutSwapBuffers();
@@ -50,10 +54,13 @@ int main(int argc, char **argv)
 
     // Draw
     glutDisplayFunc(onDisplay);
+    glutMouseFunc(onMouseClick);
 
     // Input
-    //glutKeyboardFunc(keyPressed);
-    //glutKeyboardUpFunc(keyReleased);
+    glutKeyboardFunc(keyPressed);
+    glutKeyboardUpFunc(keyReleased);
+    glutSpecialFunc(keySpecial);
+    glutSpecialUpFunc(keySpecialUp);
 
     // Loop
     glutMainLoop();
