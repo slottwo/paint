@@ -1,5 +1,5 @@
 bin
 obj
-*.cbp
-*.depend
-*.layout
+paint.cbp
+paint.depend
+paint.layout
