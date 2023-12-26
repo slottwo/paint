@@ -1,0 +1,161 @@
+# depslib dependency file v1.0
+1703514341 source:c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\meudeusmeajuda\events.c
+	"events.h"
+
+1703527761 
+
+1703514374 c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\meudeusmeajuda\events.h
+
+1703514425 source:c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\meudeusmeajuda\input.c
+	"input.h"
+
+1703514424 c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\meudeusmeajuda\input.h
+
+1703514204 source:c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\meudeusmeajuda\line.c
+
+1703516526 source:c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\meudeusmeajuda\main.c
+	<windows.h>
+	<GL/glut.h>
+	<math.h>
+	"input.h"
+	"settings.h"
+
+1703531435 h"
+
+1703514558 source:c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\meudeusmeajuda\point.c
+	<stdlib.h>
+	<stdio.h>
+	"point.h"
+
+1703514569 c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\meudeusmeajuda\point.h
+
+1703514605 source:c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\meudeusmeajuda\polygon.c
+	<stdlib.h>
+	<stdio.h>
+	"polygon.h"
+
+1703527253 "
+
+1703514618 c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\meudeusmeajuda\polygon.h
+	"point.h"
+
+1703514321 source:c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\meudeusmeajuda\matrix.c
+	<stdlib.h>
+	<math.h>
+	"matrix.h"
+
+1703514664 c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\meudeusmeajuda\matrix.h
+	"point.h"
+
+1703514445 source:c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\meudeusmeajuda\render.c
+	<GL/freeglut.h>
+	"render.h"
+
+1703514670 c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\meudeusmeajuda\render.h
+	"polygon.h"
+
+1702206843 source:c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\atividade 3 - arquivos c\bandeira.c
+	<windows.h>
+	<GL/glut.h>
+	<stdio.h>
+
+1703514755 c:\users\user\desktop\coisas facu cc\6� semestre\computa��o gr�fica\meudeusmeajuda\settings.h
+
+1703514341 source:c:\users\user\desktop\projetocg\paint\likotrico\events.c
+	"events.h"
+
+1703514374 c:\users\user\desktop\projetocg\paint\likotrico\events.h
+
+1703514425 source:c:\users\user\desktop\projetocg\paint\likotrico\input.c
+	"input.h"
+
+1703514424 c:\users\user\desktop\projetocg\paint\likotrico\input.h
+
+1703514204 source:c:\users\user\desktop\projetocg\paint\likotrico\line.c
+
+1703514321 source:c:\users\user\desktop\projetocg\paint\likotrico\matrix.c
+	<stdlib.h>
+	<math.h>
+	"matrix.h"
+
+1703514664 c:\users\user\desktop\projetocg\paint\likotrico\matrix.h
+	"point.h"
+
+1703514569 c:\users\user\desktop\projetocg\paint\likotrico\point.h
+
+1703514558 source:c:\users\user\desktop\projetocg\paint\likotrico\point.c
+	<stdlib.h>
+	<stdio.h>
+	"point.h"
+
+1703527526 source:c:\users\user\desktop\projetocg\paint\likotrico\polygon.c
+	<stdlib.h>
+	<stdio.h>
+	"polygon.h"
+
+1703527761 c:\users\user\desktop\projetocg\paint\likotrico\polygon.h
+	"point.h"
+
+1703531422 source:c:\users\user\desktop\projetocg\paint\likotrico\render.c
+	<GL/freeglut.h>
+	<stdio.h>
+	"render.h"
+
+1703527253 c:\users\user\desktop\projetocg\paint\likotrico\render.h
+	"polygon.h"
+
+1703531435 source:c:\users\user\desktop\projetocg\paint\likotrico\main.c
+	<windows.h>
+	<stdio.h>
+	<GL/glut.h>
+	<math.h>
+	"input.h"
+	"render.h"
+	"settings.h"
+
+1703514755 c:\users\user\desktop\projetocg\paint\likotrico\settings.h
+
+1703529118 source:/home/slottwo/GitHub/paint/likotrico/events.c
+	"events.h"
+
+1703529118 /home/slottwo/GitHub/paint/likotrico/events.h
+
+1703529118 source:/home/slottwo/GitHub/paint/likotrico/input.c
+	"input.h"
+
+1703529118 /home/slottwo/GitHub/paint/likotrico/input.h
+
+1703529118 source:/home/slottwo/GitHub/paint/likotrico/line.c
+
+1703593647 source:/home/slottwo/GitHub/paint/likotrico/main.c
+	<GL/glut.h>
+	<stdio.h>
+	"settings.h"
+	"render.h"
+	"input.h"
+
+1703529118 /home/slottwo/GitHub/paint/likotrico/settings.h
+
+1703593043 /home/slottwo/GitHub/paint/likotrico/render.h
+	"polygon.h"
+
+1703593043 /home/slottwo/GitHub/paint/likotrico/polygon.h
+	"point.h"
+
+1703529118 /home/slottwo/GitHub/paint/likotrico/point.h
+
+1703529118 source:/home/slottwo/GitHub/paint/likotrico/point.c
+	<stdlib.h>
+	<stdio.h>
+	"point.h"
+
+1703593374 source:/home/slottwo/GitHub/paint/likotrico/polygon.c
+	<stdlib.h>
+	<stdio.h>
+	"polygon.h"
+
+1703593374 source:/home/slottwo/GitHub/paint/likotrico/render.c
+	<GL/freeglut.h>
+	<stdio.h>
+	"render.h"
+
