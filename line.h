@@ -10,9 +10,9 @@ typedef struct
 } Line;
 
 Line *createLine();
-Line *createFLine(double *);
-int setBeginLine(double, double);
-int setEndLine(double, double);
+Line *createFLine(double **);
+int setBeginLine(Line *, double, double);
+int setEndLine(Line *, double, double);
 void freeLine(Line *);
 
 #endif
