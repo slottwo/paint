@@ -48,6 +48,7 @@ void onMouseClick(int button, int state, int x, int y){
             double iplison = y;
             renderPoint(createPointXY(xis, iplison));
             //glutPostRedisplay();
+
         }
     }
 

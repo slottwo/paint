@@ -159,3 +159,70 @@
 	<stdio.h>
 	"render.h"
 
+1703686988 source:c:\users\user\desktop\projetocg\paint\events.c
+	"events.h"
+
+1703686978 c:\users\user\desktop\projetocg\paint\events.h
+
+1703686484 source:c:\users\user\desktop\projetocg\paint\input.c
+	"input.h"
+	<GL/glut.h>
+	<stdio.h>
+
+1703599086 c:\users\user\desktop\projetocg\paint\input.h
+
+1703514204 source:c:\users\user\desktop\projetocg\paint\line.c
+
+1703514321 source:c:\users\user\desktop\projetocg\paint\matrix.c
+	<stdlib.h>
+	<math.h>
+	"matrix.h"
+
+1703514664 c:\users\user\desktop\projetocg\paint\matrix.h
+	"point.h"
+
+1703514569 c:\users\user\desktop\projetocg\paint\point.h
+
+1703514558 source:c:\users\user\desktop\projetocg\paint\point.c
+	<stdlib.h>
+	<stdio.h>
+	"point.h"
+
+1703531982 source:c:\users\user\desktop\projetocg\paint\polygon.c
+	<stdlib.h>
+	<stdio.h>
+	"polygon.h"
+
+1703532076 c:\users\user\desktop\projetocg\paint\polygon.h
+	"point.h"
+
+1703531851 source:c:\users\user\desktop\projetocg\paint\render.c
+	<GL/freeglut.h>
+	<stdio.h>
+	"render.h"
+
+1703531851 c:\users\user\desktop\projetocg\paint\render.h
+	"polygon.h"
+
+1703686518 source:c:\users\user\desktop\projetocg\paint\main.c
+	<windows.h>
+	<stdio.h>
+	<GL/glut.h>
+	<math.h>
+	"input.h"
+	"render.h"
+	"settings.h"
+
+1703514755 c:\users\user\desktop\projetocg\paint\settings.h
+
+1703688614 source:c:\users\user\desktop\projetocg\paint\data.c
+	"data.h"
+	"stdlib.h"
+
+1703688590 c:\users\user\desktop\projetocg\paint\data.h
+	"line.h"
+	"polygon.h"
+
+1703688492 c:\users\user\desktop\projetocg\paint\line.h
+	"point.h"
+
