@@ -1,6 +1,7 @@
 #include "input.h"
 #include <GL/glut.h>
 #include <stdio.h>
+#include "render.h"
 
 int KEYS[256] = {0};
 int keySpecialStates[256] = {0};
@@ -37,7 +38,6 @@ void keySpecialOperations(void) {
     }
 }
 
-// if necessary, create private functions for a specific key
 void onMouseClick(int button, int state, int x, int y){
     if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
         printf("x:%d y:%d\n", x, y);

@@ -1,11 +1,9 @@
 #include <windows.h>
 #include <stdio.h>
 #include <GL/glut.h>
-#include <math.h>
 
 #include "input.h"
 #include "render.h"
-
 #include "settings.h"
 
 void onInitialization()
@@ -23,7 +21,9 @@ void onDisplay(void)
     keyOperations(); // Perform configured tasks for each key
     keySpecialOperations();
     glClear(GL_COLOR_BUFFER_BIT);
+
     // Run render fuctions for each object
+    
     glColor3f(1.0, 0.0, 0.0);
 
     polygon *p = createPolygon();
@@ -36,7 +36,7 @@ void onDisplay(void)
 
     //renderPolygon(p);
     //renderPoint(createPointXY(100, 100));
-    //glFlush();
+    
     glutSwapBuffers();
 }
 
@@ -49,7 +49,7 @@ int main(int argc, char **argv)
     glutInitWindowSize(400, 300);
     glutCreateWindow("Paint");
 
-    // Drawing presets
+    // Drawing settings
     onInitialization();
 
     // Draw
