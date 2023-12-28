@@ -22,12 +22,12 @@ int checkPoint(double px, double py, int mx, int my, int t){
  * @param int coords x and y from mouse click
  * @return memory address of existing point vector
  */
-Point *selectPoint(int x, int y){
+Point *selectPoint(int x, int y, int t){
     //GLOBAL VECTOR "all_points"
     int i;
     for(i = 0; i < 1000; i++){
         if(all_points[i] != NULL){
-            if(checkPoint(all_points[i]->x, all_points[i]->y, x, y, 10)){
+            if(checkPoint(all_points[i]->x, all_points[i]->y, x, y, t)){
                 Point *aux = all_points[i];
                 return aux;
             }
@@ -37,7 +37,12 @@ Point *selectPoint(int x, int y){
 }
 
 
-
+/**
+ * @brief Checks if a line was selected by mouse click.
+ *
+ * @param Line line with two vertex. Int mx and my, the coords of mouse click and int t the tolerance of mouse click.
+ * @return 1 for true and 0 to false
+ */
 int checkLine(Line *line, int mx, int my, int t){
     //CASO TRIVIAL DE SELEÇÃO DE LINHA
     //PEGANDO OS VÉRTICES
@@ -64,4 +69,68 @@ int checkLine(Line *line, int mx, int my, int t){
     if((begin_point_Left && end_point_Left) || (begin_point_Right && end_point_Right) || (begin_point_Down && end_point_Down) || (begin_point_Up && end_point_Up)) return 0;
 
     //CASOS NÃO TRIVIAIS
+    return checkLineAfterNonTrivial(begin_point->x, begin_point->y, end_point->x, end_point->y, mx, my, t);
+
+
+}
+
+/**
+ * @brief The non-trivial cases of selecting a line, checking whether it was selected.
+ *
+ * @param double begin_x and begin_y for the begin point. end_x and end_y for end point. mx and my coords of mouse click. t the tolerance.
+ * @return 1 for true and 0 for false.
+ */
+int checkLineAfterNonTrivial(double begin_x, double begin_y, double end_x, double end_y, int mx, int my, int t){
+
+    int xmin = mx - t, xmax = mx + t, ymin = my - t, ymax = my + t;
+    int x0 = begin_x, y0 = begin_y, x1 = end_x, y1 = end_x;
+
+    if(begin_x < xmin){//Está na esquerda
+        x0 = xmin;
+        y0 = y0 + ((xmin - x0)*(y1 - y0)/(x1 - x0));
+    }
+    else if(begin_x > xmax){//Está na direita
+        x0 = xmax;
+        y0 = y0 + ((xmax - x0)*(y1 - y0)/(x1 - x0));
+    }
+    else if(begin_y < ymin){//Está abaixo
+        y0 = ymin;
+        x0 = x0 + ((ymin - y0)*(x1 - x0)/(y1 - y0));
+    }
+    else if(begin_y > ymax){//Está acima
+        y0 = ymax;
+        x0 = x0 + ((ymax - y0)*(x1 - x0)/(y1 - y0));
+    }
+
+    int begin_point_Left = 0, begin_point_Right = 0, begin_point_Up = 0, begin_point_Down = 0;
+    int end_point_Left = 0, end_point_Right = 0, end_point_Up = 0, end_point_Down =0;
+    //BEGIN POINT
+    if(x0 < xmin) begin_point_Left = 1;
+    if(x0 > xmax) begin_point_Right = 1;
+    if(y0 < ymin) begin_point_Down = 1;
+    if(y0 > ymax) begin_point_Up = 1;
+    //END POINT
+    if(x1 < xmin) end_point_Left = 1;
+    if(x1 > xmax) end_point_Right = 1;
+    if(y1 < ymin) end_point_Down = 1;
+    if(y1 > ymax) end_point_Up = 1;
+
+    if(begin_point_Left == 0 && begin_point_Right == 0 && begin_point_Down == 0 && begin_point_Up == 0) return 1;
+    if(end_point_Left == 0 && end_point_Right == 0 && end_point_Down == 0 && end_point_Up == 0) return 1;
+
+    return 0;
+}
+
+Line *selectLine(int x, int y, int t){
+    //VETOR GLOBAL DE LINHAS "all_lines"
+    int i;
+    for(i = 0; i < 1000; i++){
+        if(all_lines[i] != NULL){
+            if(checkLine(all_lines[i], x, y, t)){
+                Line *aux = all_lines[i];
+                return aux;
+            }
+        }
+    }
+    return NULL;
 }

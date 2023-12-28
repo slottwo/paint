@@ -6,6 +6,8 @@
 #include "data.h"
 
 int checkPoint(double, double, int, int, int);
-Point *selectPoint(int, int);
-
+Point *selectPoint(int, int, int);
+int checkLine(Line *, int, int, int);
+int checkLineAfterNonTrivial(double, double, double, double, int, int, int);
+Line *selectLine(int, int, int);
 #endif

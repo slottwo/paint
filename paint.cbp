@@ -36,6 +36,10 @@
 			<Add library="glu32" />
 			<Add library="gdi32" />
 		</Linker>
+		<Unit filename="data.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="data.h" />
 		<Unit filename="events.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -67,6 +71,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="render.h" />
+		<Unit filename="selection.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="selection.h" />
 		<Unit filename="settings.h" />
 		<Extensions>
 			<code_completion />
