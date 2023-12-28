@@ -121,6 +121,12 @@ int checkLineAfterNonTrivial(double begin_x, double begin_y, double end_x, doubl
     return 0;
 }
 
+/**
+ * @brief Select an existing line
+ *
+ * @param int coords x and y from mouse click
+ * @return memory address of existing line vector
+ */
 Line *selectLine(int x, int y, int t){
     //VETOR GLOBAL DE LINHAS "all_lines"
     int i;
@@ -133,4 +139,48 @@ Line *selectLine(int x, int y, int t){
         }
     }
     return NULL;
+}
+
+int checkEdgePolygonNoNTrivialCases(Point *p1, Point *p2, int mx, int my){
+
+    double xi = p1->x + ((my - p1->y)*(p2->x - p1->x)/(p2->y - p1->y));
+
+    if(xi > mx) return 1;
+
+    return 0;
+}
+
+int checkEdgePolygonSpecialCase(Point *p1, Point *p2, int mx, int my){
+
+    /*CODE*/
+
+    return 0;
+}
+
+int checkEdgePolygonCases(Point *p1, Point *p2, int mx, int my){
+
+    //CASO ESPECIAL DO ALGORITMO DO TIRO
+    //if(p1->y == p2->y)
+    //TRIVIAL CASES
+    if(p1->y > my && p2->y > my) return 0;
+    if(p1->y < my && p2->y < my) return 0;
+    if(p1->x < mx && p2->x < mx) return 0;
+    if((p1->x > mx && p2->x > mx) && ((p1->y > my && p2->y < my) || (p1->y < my && p2->y > my))) return 1;
+
+    //NONTRIVIAL CASES
+    return checkEdgePolygonNoNTrivialCases(p1, p2, mx, my);
+}
+
+int checkPolygon(polygon *p, int mx, int my){
+    int count = 0;
+    //CASOS TRIVIAIS
+    Node *aux = p->head;
+    while(aux->next != NULL){
+        count += checkEdgePolygonCases(aux->vertex, aux->next->vertex, mx, my);
+        aux = aux->next;
+    }
+    count += checkEdgePolygonCases(aux->vertex, p->head->vertex, mx, my);
+
+    if(count % 2 == 0) return 0;
+    else return 1;
 }

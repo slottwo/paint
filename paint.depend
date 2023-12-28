@@ -228,11 +228,11 @@
 1703691967 c:\users\user\desktop\projetocg\paint\line.h
 	"point.h"
 
-1703770180 source:c:\users\user\desktop\projetocg\paint\selection.c
+1703772722 source:c:\users\user\desktop\projetocg\paint\selection.c
 	"selection.h"
 	<stdlib.h>
 
-1703770260 c:\users\user\desktop\projetocg\paint\selection.h
+1703772805 c:\users\user\desktop\projetocg\paint\selection.h
 	"point.h"
 	"line.h"
 	"data.h"

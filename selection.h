@@ -10,4 +10,10 @@ Point *selectPoint(int, int, int);
 int checkLine(Line *, int, int, int);
 int checkLineAfterNonTrivial(double, double, double, double, int, int, int);
 Line *selectLine(int, int, int);
+
+int checkEdgePolygonNoNTrivialCases(Point *, Point *, int, int);
+int checkEdgePolygonSpecialCase(Point *, Point *, int, int);
+int checkEdgePolygonCases(Point *, Point *, int, int);
+int checkPolygon(polygon *, int, int);
+
 #endif
