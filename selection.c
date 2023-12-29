@@ -141,6 +141,12 @@ Line *selectLine(int x, int y, int t){
     return NULL;
 }
 
+/**
+ * @brief Checks the non-trivial cases of the analyzed edge for the polygon selection algorithm.
+ *
+ * @param The two points that define the edge. The coords mx and my from mouse click.
+ * @return 1 for count the edge and 0 for no count.
+ */
 int checkEdgePolygonNoNTrivialCases(Point *p1, Point *p2, int mx, int my){
 
     double xi = p1->x + ((my - p1->y)*(p2->x - p1->x)/(p2->y - p1->y));
@@ -150,6 +156,12 @@ int checkEdgePolygonNoNTrivialCases(Point *p1, Point *p2, int mx, int my){
     return 0;
 }
 
+/**
+ * @brief Checks the special cases of the analyzed edge for the polygon selection algorithm.
+ *
+ * @param The two points that define the edge. The coords mx and my from mouse click.
+ * @return 1 for count the edge and 0 for no count.
+ */
 int checkEdgePolygonSpecialCase(Point *p1, Point *p2, int mx, int my){
 
     /*CODE*/
@@ -157,6 +169,12 @@ int checkEdgePolygonSpecialCase(Point *p1, Point *p2, int mx, int my){
     return 0;
 }
 
+/**
+ * @brief Checks the analyzed edge cases for the polygon selection algorithm.
+ *
+ * @param The two points that define the edge. The coords mx and my from mouse click.
+ * @return 1 for count the edge and 0 for no count.
+ */
 int checkEdgePolygonCases(Point *p1, Point *p2, int mx, int my){
 
     //CASO ESPECIAL DO ALGORITMO DO TIRO
@@ -171,9 +189,14 @@ int checkEdgePolygonCases(Point *p1, Point *p2, int mx, int my){
     return checkEdgePolygonNoNTrivialCases(p1, p2, mx, my);
 }
 
+/**
+ * @brief Check if the polygon was selected using the shot algorithm.
+ *
+ * @param The polygon p. The coords mx and my from mouse click.
+ * @return 1 for true and 0 for false.
+ */
 int checkPolygon(polygon *p, int mx, int my){
     int count = 0;
-    //CASOS TRIVIAIS
     Node *aux = p->head;
     while(aux->next != NULL){
         count += checkEdgePolygonCases(aux->vertex, aux->next->vertex, mx, my);
@@ -183,4 +206,24 @@ int checkPolygon(polygon *p, int mx, int my){
 
     if(count % 2 == 0) return 0;
     else return 1;
+}
+
+/**
+ * @brief Select an existing polygon.
+ *
+ * @param int coords x and y from mouse click.
+ * @return memory address of existing polygon vector
+ */
+polygon *selectPolygon(int x, int y){
+    //VETOR GLOBAL DE POLÍGONOS "all_polygons"
+    int i;
+    for(i = 0; i < 1000; i++){
+        if(all_polygons[i] != NULL){
+            if(checkPolygon(all_polygons[i], x, y)){
+                polygon *aux = all_polygons[i];
+                return aux;
+            }
+        }
+    }
+    return NULL;
 }
