@@ -18,13 +18,26 @@ void onInitialization()
 
 void onDisplay(void)
 {
+
+    double matrix[9];
+    matrix[0] = 433.0/500.0;
+    matrix[1] = -1.0/2.0;
+    matrix[2] = 253.0/125.0;
+    matrix[3] = 1.0/2.0;
+    matrix[4] = 433.0/500.0;
+    matrix[5] = -133.0/150.0;
+    matrix[6] = 0.0;
+    matrix[7] = 0.0;
+    matrix[8] = 1.0;
+
+
     keyOperations(); // Perform configured tasks for each key
     keySpecialOperations();
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Run render fuctions for each object
-    
     glColor3f(1.0, 0.0, 0.0);
+    /*glColor3f(1.0, 0.0, 0.0);
 
     polygon *p = createPolygon();
     polygonPush(p, createPointXY(50, 50));
@@ -32,11 +45,14 @@ void onDisplay(void)
     polygonPush(p, createPointXY(200, 10));
 
     printf("%d\n", polygonLength(p));
-    renderLines(p);
+    renderLines(p);*/
+    Point *p = createPointXY(50,50);
+    //renderPoint(p);
+    //renderPointTransformation(p, matrix);
+    glBegin(GL_POINTS);
+        glVertex2i(50, 50);
+    glEnd();
 
-    //renderPolygon(p);
-    //renderPoint(createPointXY(100, 100));
-    
     glutSwapBuffers();
 }
 

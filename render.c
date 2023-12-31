@@ -1,6 +1,7 @@
 #include <GL/freeglut.h>
 #include <stdio.h>
 #include "render.h"
+#include "matrix.h"
 
 /**
  * @brief
@@ -120,5 +121,15 @@ int renderPolygon(polygon *polygon)
     glEnd();
 
     return 1;
+}
+
+void renderPointTransformation(Point *point, double *T){
+    printf("%f %f", point->x, point->y);
+    printf("\n");
+    transform(point, T);
+    printf("%f %f", point->x, point->y);
+    glBegin(GL_POINTS);
+        glVertex2d(point->x, point->y);
+    glEnd();
 }
 

@@ -57,6 +57,13 @@ double *optimized_multiply(double *A, double *B)
  */
 void transform(Point *P, double *T)
 {
+    /*printf("T[0]: %f\n", T[0]);
+    printf("T[1]: %f\n", T[1]);
+    printf("T[2]: %f\n", T[2]);
+    printf("T[3]: %f\n", T[3]);
+    printf("T[4]: %f\n", T[4]);
+    printf("T[5]: %f\n", T[5]);*/
+
     if (P == NULL | T == NULL) exit(1);
 
     int x = P->x * T[0] + P->y * T[1] + T[2];
