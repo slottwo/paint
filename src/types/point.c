@@ -22,21 +22,6 @@ Point *createPoint(double *coords) // , double *colors)
     point->x = coords[0];
     point->y = coords[1];
 
-    // if (colors == NULL)
-    // {
-    //     point->is_colored = 0;
-    //     point->colors[0] = 0;
-    //     point->colors[1] = 0;
-    //     point->colors[2] = 0;
-    // }
-    // else
-    // {
-    //     point->is_colored = 1;
-    //     point->colors[0] = colors[0];
-    //     point->colors[1] = colors[1];
-    //     point->colors[2] = colors[2];
-    // }
-
     return point;
 }
 
