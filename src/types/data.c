@@ -1,10 +1,11 @@
 #include "data.h"
 #include "stdlib.h"
 
-Point *all_points[1000] = {NULL};
-Line *all_lines[1000] = {NULL};
-Polygon *all_polygons[1000] = {NULL};
-Polygon *all_line_strips[1000] = {NULL};
-Point *selected_point = NULL;
-Line *selected_point = NULL;
-Polygon *selected_point = NULL;
+Point *CURRENT_POINT = NULL;
+Line *CURRENT_LINE = NULL;
+Polygon *CURRENT_POLYGON = NULL;
+
+Point *POINTS[1000] = {NULL};
+Line *LINES[1000] = {NULL};
+Polygon *POLYGONS[1000] = {NULL};
+Polygon *LINE_STRIPS[1000] = {NULL};
