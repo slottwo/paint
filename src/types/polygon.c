@@ -213,7 +213,7 @@ void freePolygon(Polygon *polygon)
     polygon = NULL;
 }
 
-// Inútil
+// Useless
 void freeNode(Node *node)
 {
     if (node == NULL)

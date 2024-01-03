@@ -28,6 +28,4 @@ int polygonLength(Polygon *);
 
 void freePolygon(Polygon *);
 
-void freeNode(Node *);
-
 #endif
