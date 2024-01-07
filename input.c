@@ -1,5 +1,6 @@
 #include "input.h"
-#include <GL/glut.h>
+//#include <GL/glut.h>
+#include <GL/freeglut.h>
 #include <stdio.h>
 #include "render.h"
 
@@ -45,9 +46,12 @@ void onMouseClick(int button, int state, int x, int y){
         printf("%d\n", KEYS['a']);
         if(KEYS['a'] == 1){
             double xis = x;
-            double iplison = y;
+            double iplison = 300 - y;
             renderPoint(createPointXY(xis, iplison));
-            //glutPostRedisplay();
+
+            //glutSwapBuffers();
+            glutPostOverlayRedisplay();
+
 
         }
     }

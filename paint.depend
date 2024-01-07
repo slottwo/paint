@@ -164,9 +164,9 @@
 
 1703686978 c:\users\user\desktop\projetocg\paint\events.h
 
-1703689593 source:c:\users\user\desktop\projetocg\paint\input.c
+1704555888 source:c:\users\user\desktop\projetocg\paint\input.c
 	"input.h"
-	<GL/glut.h>
+	<GL/freeglut.h>
 	<stdio.h>
 	"render.h"
 
@@ -199,16 +199,17 @@
 1703532076 c:\users\user\desktop\projetocg\paint\polygon.h
 	"point.h"
 
-1704028967 source:c:\users\user\desktop\projetocg\paint\render.c
+1704031882 source:c:\users\user\desktop\projetocg\paint\render.c
 	<GL/freeglut.h>
 	<stdio.h>
 	"render.h"
 	"matrix.h"
 
-1703531851 c:\users\user\desktop\projetocg\paint\render.h
+1704031795 c:\users\user\desktop\projetocg\paint\render.h
 	"polygon.h"
+	"line.h"
 
-1704028941 source:c:\users\user\desktop\projetocg\paint\main.c
+1704555434 source:c:\users\user\desktop\projetocg\paint\main.c
 	<windows.h>
 	<stdio.h>
 	<GL/glut.h>

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <GL/glut.h>
 
+
 #include "input.h"
 #include "render.h"
 #include "settings.h"
@@ -13,7 +14,7 @@ void onInitialization()
     // Add here later the memory stacks initialization of the rendered objects
 
     glMatrixMode(GL_PROJECTION);
-    gluOrtho2D(0, 200, 0, 150);
+    gluOrtho2D(0, 400, 0, 300);
 }
 
 void onDisplay(void)
@@ -46,6 +47,7 @@ void onDisplay(void)
 
     printf("%d\n", polygonLength(p));
     renderLines(p);*/
+    glPointSize(10);
     Point *p = createPointXY(50,50);
     //renderPoint(p);
     //renderPointTransformation(p, matrix);

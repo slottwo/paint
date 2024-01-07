@@ -88,6 +88,19 @@ int renderLines(polygon *polygon)
     return 1;
 }
 
+int renderLine(Line *line){
+    if(line == NULL) return 0;
+    if(line->begin == NULL || line->end == NULL) return 0;
+    if(line->begin->x < 0 || line->begin->y || line->end->x < 0 || line->end->y < 0); return 0;
+
+    glBegin(GL_LINES);
+        glVertex2d(line->begin->x, line->begin->y);
+        glVertex2d(line->end->x, line->end->y);
+    glEnd();
+
+    return 1;
+}
+
 int renderPolygon(polygon *polygon)
 {
     if(polygon == NULL){
@@ -103,7 +116,10 @@ int renderPolygon(polygon *polygon)
         return 1;
     }
     if(polygonSize == 2){
-        renderLines(polygon);
+        Line *line;
+        line->begin = polygon->head->vertex;
+        line->end = polygon->head->next->vertex;
+        renderLine(line);
         return 1;
     }
 
@@ -133,3 +149,36 @@ void renderPointTransformation(Point *point, double *T){
     glEnd();
 }
 
+int renderLineTransformation(Line *line, double *T){
+    if(line == NULL) return 0;
+    if(line->begin == NULL || line->end == NULL) return 0;
+    if(line->begin->x < 0 || line->begin->y || line->end->x < 0 || line->end->y < 0); return 0;
+    if(T == NULL) return 0;
+
+    transform(line->begin, T);
+    transform(line->end, T);
+
+    renderLine(line);
+
+    return 1;
+}
+
+int renderPolygonTransformation(polygon *p, double *T){
+
+    if(p == NULL){
+        printf("Error: Polygon Head is NULL");
+        exit(1);
+    }
+    if(polygonIsEmpty(p)) return 1;
+    if(T == NULL) return 0;
+
+    Node *aux = p->head;
+    while(aux!= NULL){
+        transform(aux->vertex, T);
+        aux = aux->next;
+    }
+
+    renderPolygon(p);
+
+    return 1;
+}
