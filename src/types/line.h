@@ -5,14 +5,16 @@
 
 typedef struct
 {
-    Point *begin;
+    Point *start;
     Point *end;
 } Line;
 
-Line *createLine();
-Line *createFLine(double *);
-int setBeginLine(double, double);
-int setEndLine(double, double);
+Line *createLineP(Point *, Point*);
+Line *createLineV(double **);
+
+int setLineStart(Line *, double, double);
+int setLineEnd(Line *, double, double);
+
 void freeLine(Line *);
 
 #endif

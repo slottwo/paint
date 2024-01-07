@@ -7,9 +7,11 @@ typedef struct
     double y;
 } Point;
 
-Point *createPoint(double *);
+Point *createPointV(double *);
 Point *createPointXY(double, double);
-double *getV(Point *point);
+
+double *getV(Point *Point);
+
 void freePoint(Point *);
 
 #endif
