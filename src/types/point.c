@@ -14,7 +14,7 @@ Point *createPointV(double *coords)
     Point *new_point = (Point *)malloc(sizeof(Point));
     if (new_point == NULL)
     {
-        printf("Point creation error: malloc fail\n");
+        printf("Point Creation Error: malloc fail\n");
         exit(1);
         return NULL;
     }

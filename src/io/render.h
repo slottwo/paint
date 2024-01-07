@@ -7,7 +7,9 @@
 
 int renderPoint(Point *);
 int renderLine(Line *);
-int renderLines(Poly *);
+int renderPolyline(Poly *);
 int renderPolygon(Poly *);
+
+int renderData();
 
 #endif

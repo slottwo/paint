@@ -1,52 +1,45 @@
-#include <GL/freeglut.h>
 #include "render.h"
+
+#include "../types/data.h"
+
+#include <GL/freeglut.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 /**
  * @brief
  *
- * @param Poly
+ * @param point
  * @return int
  */
-int renderPoint(Point *Point)
+int renderPoint(Point *point)
 {
-    // if (Point == NULL) { ... return 0; }
+    // if (point == NULL) { ... return 0; }
 
     glBegin(GL_POINT);
 
-    glVertex2d(Point->x, Point->y);
+    glVertex2d(point->x, point->y);
 
     glEnd();
 
     return 1;
 }
 
-// int renderPoints(Point **points, int n)
-// {
-//     glBegin(GL_POINTS);
-//     for (int i = 0; i < n; i++)
-//     {
-//         glVertex2d(points[i]->x, points[i]->y);
-//     }
-//     glEnd();
-//     return 1;
-// }
-
 /**
  * @brief
  *
- * @param Poly
+ * @param poly
  * @return int
  */
-int renderPoints(Poly *Poly)
+int renderPoints(NodePoint *node)
 {
+    // if (node == NULL) { ... return 0; }
+
     glBegin(GL_POINTS);
 
-    Node *node = Poly->head;
     while (node->next != NULL)
     {
-        double *vertex = getV(node->vertex);
-        glVertex2dv(vertex);
-        free(vertex);
+        glVertex2d(node->obj->x, node->obj->y);
         node = node->next;
     }
 
@@ -55,24 +48,61 @@ int renderPoints(Poly *Poly)
     return 1;
 }
 
-// int renderLine(Line *);
+int renderLine(Line *line)
+{
+    // if (line == NULL) { ... return 0; }
+
+    glBegin(GL_LINE);
+
+    glVertex2d(line->start->x, line->start->y);
+    glVertex2d(line->end->x, line->end->y);
+
+    glEnd();
+
+    return 1;
+}
+
+int renderLines(NodeLine *node)
+{
+    // if (node == NULL) { ... return 0; }
+
+    Line *line;
+    while (node->next != NULL)
+    {
+        line = node->obj;
+
+        renderLine(line);
+
+        node = node->next;
+    }
+
+    return 1;
+}
 
 /**
  * @brief
  *
- * @param Poly
+ * @param poly
  * @return int
  */
-int renderLines(Poly *Poly)
+int renderPolyline(Poly *poly)
 {
+    if (poly == NULL)
+    {
+        printf("Render Polyline Error: NULL poly received\n");
+        exit(1);
+        return 0;
+    }
+
+    if (polyLength(poly) < 2)
+        return 0;
+
     glBegin(GL_LINE_STRIP);
 
-    Node *node = Poly->head;
+    NodePoint *node = poly->head;
     while (node->next != NULL)
     {
-        double *vertex = getV(node->vertex);
-        glVertex2dv(vertex);
-        free(vertex);
+        glVertex2d(node->obj->x, node->obj->y);
         node = node->next;
     }
 
@@ -81,24 +111,75 @@ int renderLines(Poly *Poly)
     return 1;
 }
 
-int renderPolygon(Poly *Poly)
+int renderPolygon(Poly *poly)
 {
-    // if (Poly == NULL) ... return 0;
+    if (poly == NULL)
+    {
+        printf("Render Polygon Error: NULL poly received\n");
+        exit(1);
+        return 0;
+    }
 
-    if (polyIsEmpty(Poly))
-        return 1;
+    // switch (polyLength(poly))
+    // {
+    // case 0:
+    //     return 1;
+    //     break;
+
+    // case 1:
+    //     renderPoint(poly->head->obj);
+    //     return 1;
+    //     break;
+
+    // case 2:
+    //     renderPolyline(poly);
+    //     return 1;
+    //     break;
+
+    // default:
+    //     break;
+    // }
+
+    if (polyLength(poly) < 3)
+        return 0;
 
     glBegin(GL_POLYGON);
 
-    Node *node = Poly->head;
-    while (node != NULL)
+    NodePoint *node = poly->head;
+    while (node->next != NULL)
     {
-        glVertex2dv(getV(node->vertex));
+        glVertex2d(node->obj->x, node->obj->y);
         node = node->next;
     }
-    glVertex2dv(getV(Poly->head->vertex));
 
     glEnd();
+
+    return 1;
+}
+
+int renderData()
+{
+    // Render Points
+    renderPoints(DATA.point_head);
+
+    // Render Lines
+    renderLines(DATA.line_head);
+
+    // Render Polygons
+    NodePoly *node = DATA.polygon_head;
+    while (node->next != NULL)
+    {
+        renderPolygon(node->obj);
+        node = node->next;
+    }
+
+    // Render Polylines
+    NodePoly *node = DATA.polyline_head;
+    while (node->next != NULL)
+    {
+        renderPolyline(node->obj);
+        node = node->next;
+    }
 
     return 1;
 }
