@@ -1,10 +1,11 @@
-#include "input.h"
 #include <GL/glut.h>
 #include <stdio.h>
+
+#include "input.h"
 #include "render.h"
 
 int KEYS[256] = {0};
-int keySpecialStates[256] = {0};
+int SP_KEYS[256] = {0};
 
 void keyPressed(unsigned char key, int x, int y)
 {
@@ -24,34 +25,18 @@ void keyOperations()
     }
 }
 
-void keySpecial (int key, int x, int y) {
-
+void keySpecialPressed(int key, int x, int y)
+{
 }
 
-void keySpecialUp (int key, int x, int y) {
-
+void keySpecialReleased(int key, int x, int y)
+{
 }
 
-void keySpecialOperations(void) {
-    if (keySpecialStates[GLUT_KEY_LEFT]) {
-        printf("Esquerda");
-    }
+void keySpecialOperations(void)
+{
 }
 
-void onMouseClick(int button, int state, int x, int y){
-    if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
-        printf("x:%d y:%d\n", x, y);
-        printf("%d\n", 'a');
-        printf("%d\n", KEYS['a']);
-        if(KEYS['a'] == 1){
-            double xis = x;
-            double iplison = y;
-            renderPoint(createPointXY(xis, iplison));
-            //glutPostRedisplay();
-
-        }
-    }
-
+void onMouseClick(int button, int state, int x, int y)
+{
 }
-
-

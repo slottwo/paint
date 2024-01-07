@@ -6,30 +6,23 @@
 #include <GL/glut.h>
 
 #include "settings.h"
-#include "render.h"
-#include "input.h"
 
 void onInitialization()
 {
     glClearColor(1, 1, 1, 0);
 
+    // Add here later the memory stacks initialization of the rendered objects
+
     glMatrixMode(GL_PROJECTION);
-    gluOrtho2D(ORTHO_SIZE);
+    gluOrtho2D(0, 1, 0, 1);
 }
 
-void onDisplay(void)
+void onDisplay()
 {
-    glutReshapeWindow(W, H); // Fixed screen size
-
-    // Perform configured tasks for each key
-    keyOperations();
-    keySpecialOperations();
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glColor3f(1.0, 0.0, 0.0);
-
-    // ...
+    // Run render fuctions for each object
 
     glutSwapBuffers();
 }
@@ -45,18 +38,15 @@ int main(int argc, char const *argv[])
     glutInitWindowSize(W, H);
     glutCreateWindow("Paint");
 
-    // Drawing settings
+    // Drawing presets
     onInitialization();
 
     // Draw
     glutDisplayFunc(onDisplay);
-    glutMouseFunc(onMouseClick);
 
     // Input
-    glutKeyboardFunc(keyPressed);
-    glutKeyboardUpFunc(keyReleased);
-    glutSpecialFunc(keySpecialPressed);
-    glutSpecialUpFunc(keySpecialUpReleased);
+    // glutKeyboardFunc(keyPressed);
+    // glutKeyboardUpFunc(keyReleased);
 
     // Loop
     glutMainLoop();
