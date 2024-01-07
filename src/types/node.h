@@ -8,7 +8,6 @@ typedef struct Poly Poly; // Forward declaration
 
 typedef struct NodePoint
 {
-    // int id;
     Point *obj;
     struct NodePoint *prior;
     struct NodePoint *next;
@@ -16,7 +15,6 @@ typedef struct NodePoint
 
 typedef struct NodeLine
 {
-    // int id;
     Line *obj;
     struct NodeLine *prior;
     struct NodeLine *next;
@@ -24,7 +22,6 @@ typedef struct NodeLine
 
 typedef struct NodePoly
 {
-    // int id;
     Poly *obj;
     struct NodePoly *prior;
     struct NodePoly *next;

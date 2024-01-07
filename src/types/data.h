@@ -13,7 +13,8 @@ struct data
 
 extern struct data DATA;
 
-enum object_type {
+enum object_type
+{
     none_type = 0,
     point_type,
     line_type,
@@ -43,5 +44,10 @@ int polylineDataRemove(NodePoly *);
 
 int polygonDataPush(Poly *);
 int polygonDataRemove(NodePoly *);
+
+int pointIsInDATA(NodePoint *);
+int lineIsInDATA(NodeLine *);
+int polylineIsInDATA(NodePoly *);
+int polygonIsInDATA(NodePoly *);
 
 #endif
