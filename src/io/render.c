@@ -165,19 +165,19 @@ int renderData()
     // Render Lines
     renderLines(DATA.line_head);
 
-    // Render Polygons
-    NodePoly *node = DATA.polygon_head;
-    while (node->next != NULL)
-    {
-        renderPolygon(node->obj);
-        node = node->next;
-    }
-
     // Render Polylines
     NodePoly *node = DATA.polyline_head;
     while (node->next != NULL)
     {
         renderPolyline(node->obj);
+        node = node->next;
+    }
+
+    // Render Polygons
+    NodePoly *node = DATA.polygon_head;
+    while (node->next != NULL)
+    {
+        renderPolygon(node->obj);
         node = node->next;
     }
 
