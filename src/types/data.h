@@ -1,16 +1,38 @@
 #ifndef DATA_H
 #define DATA_H
 
-#include "line.h"
-#include "polygon.h"
+#include "node.h"
 
-extern Point *CURRENT_POINT;
-extern Line *CURRENT_LINE;
-extern Polygon *CURRENT_POLYGON;
+struct data
+{
+    NodePoint *point_head;
+    NodeLine *line_head;
+    NodePoly *polygon_head;
+    NodePoly *polyline_head;
+};
 
-extern Point *POINTS[1000];
-extern Line *LINES[1000];
-extern Polygon *POLYGONS[1000];
-extern Polygon *LINE_STRIPS[1000];
+extern struct data DATA;
+
+struct current_node
+{
+    NodePoint *current_point;
+    NodeLine *current_line;
+    NodePoly *current_polygon;
+    NodePoly *current_polyline;
+};
+
+extern struct current_node SELECTED;
+
+int pointDataPush(Point *);
+int pointDataRemove(NodePoint *);
+
+int lineDataPush(Line *);
+int lineDataRemove(NodeLine *);
+
+int polygonDataPush(Poly *);
+int polygonDataRemove(NodePoly *);
+
+int polylineDataPush(Poly *);
+int polylineDataRemove(NodePoly *);
 
 #endif

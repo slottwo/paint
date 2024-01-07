@@ -5,6 +5,6 @@
 
 int renderPoint(Point *);
 // int renderLine(Line *);
-int renderLines(Polygon *);
-int renderPolygon(Polygon *);
+int renderLines(Poly *);
+int renderPolygon(Poly *);
 #endif

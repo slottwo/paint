@@ -4,16 +4,16 @@
 /**
  * @brief
  *
- * @param polygon
+ * @param Poly
  * @return int
  */
-int renderPoint(Point *point)
+int renderPoint(Point *Point)
 {
-    // if (point == NULL) { ... return 0; }
+    // if (Point == NULL) { ... return 0; }
 
     glBegin(GL_POINT);
 
-    glVertex2d(point->x, point->y);
+    glVertex2d(Point->x, Point->y);
 
     glEnd();
 
@@ -34,14 +34,14 @@ int renderPoint(Point *point)
 /**
  * @brief
  *
- * @param polygon
+ * @param Poly
  * @return int
  */
-int renderPoints(Polygon *polygon)
+int renderPoints(Poly *Poly)
 {
     glBegin(GL_POINTS);
 
-    Node *node = polygon->head;
+    Node *node = Poly->head;
     while (node->next != NULL)
     {
         double *vertex = getV(node->vertex);
@@ -60,14 +60,14 @@ int renderPoints(Polygon *polygon)
 /**
  * @brief
  *
- * @param polygon
+ * @param Poly
  * @return int
  */
-int renderLines(Polygon *polygon)
+int renderLines(Poly *Poly)
 {
     glBegin(GL_LINE_STRIP);
 
-    Node *node = polygon->head;
+    Node *node = Poly->head;
     while (node->next != NULL)
     {
         double *vertex = getV(node->vertex);
@@ -81,22 +81,22 @@ int renderLines(Polygon *polygon)
     return 1;
 }
 
-int renderPolygon(Polygon *polygon)
+int renderPolygon(Poly *Poly)
 {
-    // if (polygon == NULL) ... return 0;
+    // if (Poly == NULL) ... return 0;
 
-    if (polygonIsEmpty(polygon))
+    if (polyIsEmpty(Poly))
         return 1;
 
     glBegin(GL_POLYGON);
 
-    Node *node = polygon->head;
+    Node *node = Poly->head;
     while (node != NULL)
     {
         glVertex2dv(getV(node->vertex));
         node = node->next;
     }
-    glVertex2dv(getV(polygon->head->vertex));
+    glVertex2dv(getV(Poly->head->vertex));
 
     glEnd();
 

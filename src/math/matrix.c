@@ -29,7 +29,7 @@ double *generic_multiply(double *A, double *B)
 // 0 0 1   0 0 1      0    |    0    |    1
 
 /**
- * @brief Multiply transformation matrices optimally
+ * @brief Multiply transformation matrices optimally (no 3th line calculation)
  *
  * @param A First double[9] vector
  * @param B Second double[9] vector
@@ -50,7 +50,7 @@ double *optimized_multiply(double *A, double *B)
 }
 
 /**
- * @brief Apply transformation T to point P
+ * @brief Apply transformation T to Point P
  *
  * @param P Point to be transformed (double[2])
  * @param T Transformation matrix (double[9])
