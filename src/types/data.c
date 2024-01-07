@@ -126,7 +126,7 @@ int polylineDataPush(Poly *poly)
     DATA.polyline_head = new_node;
 
     SELECTED.current_type = polyline_type;
-    SELECTED.current_line = new_node;
+    SELECTED.current_polyline = new_node;
 
     return 1;
 }
@@ -177,7 +177,7 @@ int polygonDataPush(Poly *poly)
     DATA.polygon_head = new_node;
 
     SELECTED.current_type = polygon_type;
-    SELECTED.current_line = new_node;
+    SELECTED.current_polygon = new_node;
 
     return 1;
 }
@@ -225,7 +225,7 @@ int pointIsInDATA(NodePoint *node)
 
 int lineIsInDATA(NodeLine *node)
 {
-    NodeLine *parse = DATA.point_head;
+    NodeLine *parse = DATA.line_head;
     while (parse != NULL)
     {
         if (parse == node)
@@ -238,7 +238,7 @@ int lineIsInDATA(NodeLine *node)
 
 int polylineIsInDATA(NodePoly *node)
 {
-    NodePoly *parse = DATA.point_head;
+    NodePoly *parse = DATA.polyline_head;
     while (parse != NULL)
     {
         if (parse == node)
@@ -251,7 +251,7 @@ int polylineIsInDATA(NodePoly *node)
 
 int polygonIsInDATA(NodePoly *node)
 {
-    NodePoly *parse = DATA.point_head;
+    NodePoly *parse = DATA.polygon_head;
     while (parse != NULL)
     {
         if (parse == node)
