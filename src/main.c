@@ -1,7 +1,8 @@
-#include <GL/glut.h>
-#include <math.h>
+#if defined(__WIN32__) || defined(_WIN32) || defined(__CYGWIN__) || defined(__MINGW32__) || defined(__BORLANDC__)
+#include <windows.h>
+#endif
 
-#include "io/input.h"
+#include <GL/glut.h>
 
 #include "settings.h"
 
@@ -17,7 +18,7 @@ void onInitialization()
 
 void onDisplay()
 {
-    keyOperations(); // Perform configured tasks for each key
+    // keyOperations(); // Perform configured tasks for each key
 
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -44,8 +45,8 @@ int main(int argc, char const *argv[])
     glutDisplayFunc(onDisplay);
 
     // Input
-    glutKeyboardFunc(keyPressed);
-    glutKeyboardUpFunc(keyReleased);
+    // glutKeyboardFunc(keyPressed);
+    // glutKeyboardUpFunc(keyReleased);
 
     // Loop
     glutMainLoop();
