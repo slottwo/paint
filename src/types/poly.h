@@ -1,9 +1,10 @@
-#ifndef POLYGON_H
-#define POLYGON_H
+#ifndef POLY_H
+#define POLY_H
 
+#include "point.h"
 #include "node.h"
 
-typedef struct
+typedef struct Poly
 {
     NodePoint *head;
 } Poly;

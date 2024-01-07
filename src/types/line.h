@@ -3,7 +3,7 @@
 
 #include "point.h"
 
-typedef struct
+typedef struct Line
 {
     Point *start;
     Point *end;

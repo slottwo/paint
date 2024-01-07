@@ -1,9 +1,10 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include "line.h"
 #include "point.h"
-#include "poly.h"
+#include "line.h"
+
+typedef struct Poly Poly;
 
 typedef struct NodePoint
 {
@@ -32,5 +33,7 @@ typedef struct NodePoly
 NodePoint *createNodePoint(Point *);
 NodeLine *createNodeLine(Line *);
 NodePoly *createNodePoly(Poly *);
+
+#include "poly.h"
 
 #endif
