@@ -14,10 +14,20 @@ void keyReleased(unsigned char key, int x, int y)
 
 void keyOperations()
 {
-    // if (KEYS['a'])
-    // {
-    //     /* code */
-    // }
 }
 
-// if necessary, create private functions for a specific key
+void keySpecialPressed(int key_code, int x, int y)
+{
+}
+
+void keySpecialReleased(int key_code, int x, int y)
+{
+}
+
+void keySpecialOperations()
+{
+}
+
+void onMouseClick(int, int, int, int)
+{
+}
