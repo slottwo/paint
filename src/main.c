@@ -2,6 +2,7 @@
 #include <windows.h>
 #endif
 
+#include <GL/freeglut.h>
 #include <GL/glut.h>
 
 #include "settings.h"

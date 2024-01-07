@@ -4,7 +4,7 @@
 #include "point.h"
 #include "line.h"
 
-typedef struct Poly Poly;
+typedef struct Poly Poly; // Forward declaration
 
 typedef struct NodePoint
 {
