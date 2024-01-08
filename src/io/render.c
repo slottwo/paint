@@ -22,6 +22,7 @@ int renderPoint(Point *point)
     glBegin(GL_POINT);
 
     glVertex2d(point->x, point->y);
+    printf("Ponto (%.2f, %.2f) renderizado!\n", point->x, point->y);
 
     glEnd();
 
@@ -43,7 +44,7 @@ int renderPoints(NodePoint *node)
 
     glBegin(GL_POINTS);
 
-    while (node->next != NULL)
+    while (node != NULL)
     {
         if (node->obj == NULL)
         {
@@ -52,6 +53,7 @@ int renderPoints(NodePoint *node)
         }
 
         glVertex2d(node->obj->x, node->obj->y);
+
         node = node->next;
     }
 
@@ -206,25 +208,34 @@ int renderPolygon(Poly *poly)
 }
 
 /**
- * @brief 
- * 
- * @return int 
+ * @brief
+ *
+ * @return int
  */
 int renderData()
 {
     int out = 1;
 
     // Render Points
+
+    glColor3d(0, 0, 0);
+
     if (DATA.point_head)
         out &= renderPoints(DATA.point_head);
 
     // Render Lines
+
+    glColor3d(1, 0, 0);
+
     if (DATA.line_head)
         out &= renderLines(DATA.line_head);
 
     NodePoly *node;
 
     // Render Polylines
+
+    glColor3d(0, 1, 0);
+
     node = DATA.polyline_head;
     while (node != NULL)
     {
@@ -233,6 +244,9 @@ int renderData()
     }
 
     // Render Polygons
+
+    glColor3d(0, 0, 1);
+
     node = DATA.polygon_head;
     while (node != NULL)
     {
