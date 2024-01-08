@@ -1,10 +1,20 @@
 #ifndef RENDER_H
 #define RENDER_H
 
-#include "polygon.h"
+#include "point.h"
+#include "line.h"
+#include "poly.h"
 
 int renderPoint(Point *);
-// int renderLine(Line *);
-int renderLines(polygon *);
-int renderPolygon(polygon *);
+int renderLine(Line *);
+int renderPolyline(Poly *);
+int renderPolygon(Poly *);
+
+// int renderPoints(NodePoint *);
+// int renderLines(NodeLine *);
+// int renderPolylines(NodePoly *);
+// int renderPolygons(NodePoly *);
+
+int renderData();
+
 #endif
