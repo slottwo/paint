@@ -6,12 +6,12 @@
 #include <GL/glut.h>
 
 #include "settings.h"
+#include "render.h"
+#include "input.h"
 
 void onInitialization()
 {
     glClearColor(1, 1, 1, 0);
-
-    // Add here later the memory stacks initialization of the rendered objects
 
     glMatrixMode(GL_PROJECTION);
     gluOrtho2D(0, 1, 0, 1);
@@ -19,11 +19,18 @@ void onInitialization()
 
 void onDisplay()
 {
-    // keyOperations(); // Perform configured tasks for each key
+    // Perform configured tasks for each key
+    keyOperations();
+    keySpecialOperations();
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // Run render fuctions for each object
+    // Render each object in DATA
+    if (renderData() == 0)
+    {
+        printf("Render DATA Error\n");
+        exit(1);
+    }
 
     glutSwapBuffers();
 }
@@ -46,8 +53,10 @@ int main(int argc, char const *argv[])
     glutDisplayFunc(onDisplay);
 
     // Input
-    // glutKeyboardFunc(keyPressed);
-    // glutKeyboardUpFunc(keyReleased);
+    glutKeyboardFunc(keyPressed);
+    glutKeyboardUpFunc(keyReleased);
+    glutSpecialFunc(keySpecialPressed);
+    glutSpecialFunc(keySpecialReleased);
 
     // Loop
     glutMainLoop();

@@ -16,11 +16,11 @@ void keyOperations()
 {
 }
 
-void keySpecialPressed(int key_code, int x, int y)
+void keySpecialPressed(int key, int x, int y)
 {
 }
 
-void keySpecialReleased(int key_code, int x, int y)
+void keySpecialReleased(int key, int x, int y)
 {
 }
 
