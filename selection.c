@@ -1,15 +1,22 @@
-#include "selection.h"
 #include <stdlib.h>
+
+#include "selection.h"
 
 /**
  * @brief Checks whether a point is present in a tolerance area
  *
  * @param float px and py from point. float mx and my from mouse click and a integer t of tolerance range
- * @return int 1 for true and 0 for false
+ * @return double 1 for true and 0 for false
  */
-int checkPoint(double px, double py, int mx, int my, int t){
-    if(mx <= px + t && mx >= px - t){
-        if(my <= py + t && my >= py - t){
+int checkPoint(Point *point, double mx, double my, double t)
+{
+    double px = point->x;
+    double py = point->y;
+
+    if (mx <= px + t && mx >= px - t)
+    {
+        if (my <= py + t && my >= py - t)
+        {
             return 1;
         }
     }
@@ -19,104 +26,128 @@ int checkPoint(double px, double py, int mx, int my, int t){
 /**
  * @brief Select an existing point
  *
- * @param int coords x and y from mouse click
+ * @param double coords x and y from mouse click
  * @return memory address of existing point vector
  */
-Point *selectPoint(int x, int y, int t){
-    //GLOBAL VECTOR "all_points"
-    int i;
-    for(i = 0; i < 1000; i++){
-        if(all_points[i] != NULL){
-            if(checkPoint(all_points[i]->x, all_points[i]->y, x, y, t)){
-                Point *aux = all_points[i];
-                return aux;
-            }
-        }
+NodePoint *selectPoint(double x, double y, double t)
+{
+    // GLOBAL "DATA"
+    NodePoint *node_point = DATA.point_head;
+    while (node_point != NULL)
+    {
+        if (checkPoint(node_point->obj, x, y, t))
+            return node_point;
     }
+    
     return NULL;
 }
-
 
 /**
  * @brief Checks if a line was selected by mouse click.
  *
- * @param Line line with two vertex. Int mx and my, the coords of mouse click and int t the tolerance of mouse click.
+ * @param Line line with two vertex. Int mx and my, the coords of mouse click and double t the tolerance of mouse click.
  * @return 1 for true and 0 to false
  */
-int checkLine(Line *line, int mx, int my, int t){
-    //CASO TRIVIAL DE SELEÇÃO DE LINHA
-    //PEGANDO OS VÉRTICES
-    Point *begin_point = line->begin;
+int checkLine(Line *line, double mx, double my, double t)
+{
+    // CASO TRIVIAL DE SELEÃ‡ÃƒO DE LINHA
+    // PEGANDO OS VÃ‰RTICES
+    Point *begin_point = line->start;
     Point *end_point = line->end;
-    //SETANDO AS ESTRUTURAS DE COMPARAÇÃO UTILIZADAS
-    int begin_point_Left = 0, begin_point_Right = 0, begin_point_Up = 0, begin_point_Down = 0;
-    int end_point_Left = 0, end_point_Right = 0, end_point_Up = 0, end_point_Down =0;
-    //FAZENDO AS ESTRUTURAS DOS VÉRTICES
-    //BEGIN POINT
-    if(begin_point->x < mx - t) begin_point_Left = 1;
-    if(begin_point->x > mx + t) begin_point_Right = 1;
-    if(begin_point->y < my - t) begin_point_Down = 1;
-    if(begin_point->y > my + t) begin_point_Up = 1;
-    //END POINT
-    if(end_point->x < mx - t) end_point_Left = 1;
-    if(end_point->x > mx + t) end_point_Right = 1;
-    if(end_point->y < my - t) end_point_Down = 1;
-    if(end_point->y > my + t) end_point_Up = 1;
-    //CASO UM VÉRTICE TENHA 0000
-    if(begin_point_Left == 0 && begin_point_Right == 0 && begin_point_Down == 0 && begin_point_Up == 0) return 1;
-    if(end_point_Left == 0 && end_point_Right == 0 && end_point_Down == 0 && end_point_Up == 0) return 1;
-    //ELIMINANDO SE ESTÃO TOTALMENTE EM UM ÚNICA DIREÇÃO
-    if((begin_point_Left && end_point_Left) || (begin_point_Right && end_point_Right) || (begin_point_Down && end_point_Down) || (begin_point_Up && end_point_Up)) return 0;
+    // SETANDO AS ESTRUTURAS DE COMPARAÃ‡ÃƒO UTILIZADAS
+    double begin_point_Left = 0, begin_point_Right = 0, begin_point_Up = 0, begin_point_Down = 0;
+    double end_point_Left = 0, end_point_Right = 0, end_point_Up = 0, end_point_Down = 0;
+    // FAZENDO AS ESTRUTURAS DOS VÃ‰RTICES
+    // START POINT
+    if (begin_point->x < mx - t)
+        begin_point_Left = 1;
+    if (begin_point->x > mx + t)
+        begin_point_Right = 1;
+    if (begin_point->y < my - t)
+        begin_point_Down = 1;
+    if (begin_point->y > my + t)
+        begin_point_Up = 1;
+    // END POINT
+    if (end_point->x < mx - t)
+        end_point_Left = 1;
+    if (end_point->x > mx + t)
+        end_point_Right = 1;
+    if (end_point->y < my - t)
+        end_point_Down = 1;
+    if (end_point->y > my + t)
+        end_point_Up = 1;
+    // CASO UM VÃ‰RTICE TENHA 0000
+    if (begin_point_Left == 0 && begin_point_Right == 0 && begin_point_Down == 0 && begin_point_Up == 0)
+        return 1;
+    if (end_point_Left == 0 && end_point_Right == 0 && end_point_Down == 0 && end_point_Up == 0)
+        return 1;
+    // ELIMINANDO SE ESTÃƒO TOTALMENTE EM UM ÃšNICA DIREÃ‡ÃƒO
+    if ((begin_point_Left && end_point_Left) || (begin_point_Right && end_point_Right) || (begin_point_Down && end_point_Down) || (begin_point_Up && end_point_Up))
+        return 0;
 
-    //CASOS NÃO TRIVIAIS
-    return checkLineAfterNonTrivial(begin_point->x, begin_point->y, end_point->x, end_point->y, mx, my, t);
-
-
+    // CASOS NÃƒO TRIVIAIS
+    return checkLineAfterNonTrivial(line, mx, my, t);
 }
 
 /**
  * @brief The non-trivial cases of selecting a line, checking whether it was selected.
  *
- * @param double begin_x and begin_y for the begin point. end_x and end_y for end point. mx and my coords of mouse click. t the tolerance.
+ * @param double begin_x and begin_y for the start point. end_x and end_y for end point. mx and my coords of mouse click. t the tolerance.
  * @return 1 for true and 0 for false.
  */
-int checkLineAfterNonTrivial(double begin_x, double begin_y, double end_x, double end_y, int mx, int my, int t){
+int checkLineAfterNonTrivial(Line *line, double mx, double my, double t)
+{
 
-    int xmin = mx - t, xmax = mx + t, ymin = my - t, ymax = my + t;
-    int x0 = begin_x, y0 = begin_y, x1 = end_x, y1 = end_x;
+    double xmin = mx - t, xmax = mx + t, ymin = my - t, ymax = my + t;
+    double x0 = line->start->x, y0 = line->start->y;
+    double x1 = line->end->x, y1 = line->end->y;
 
-    if(begin_x < xmin){//Está na esquerda
+    if (line->start->x < xmin)
+    { // Estï¿½ na esquerda
         x0 = xmin;
-        y0 = y0 + ((xmin - x0)*(y1 - y0)/(x1 - x0));
+        y0 = y0 + ((xmin - x0) * (y1 - y0) / (x1 - x0));
     }
-    else if(begin_x > xmax){//Está na direita
+    else if (line->start->x > xmax)
+    { // Estï¿½ na direita
         x0 = xmax;
-        y0 = y0 + ((xmax - x0)*(y1 - y0)/(x1 - x0));
+        y0 = y0 + ((xmax - x0) * (y1 - y0) / (x1 - x0));
     }
-    else if(begin_y < ymin){//Está abaixo
+    else if (line->start->y < ymin)
+    { // Estï¿½ abaixo
         y0 = ymin;
-        x0 = x0 + ((ymin - y0)*(x1 - x0)/(y1 - y0));
+        x0 = x0 + ((ymin - y0) * (x1 - x0) / (y1 - y0));
     }
-    else if(begin_y > ymax){//Está acima
+    else if (line->start->y > ymax)
+    { // Estï¿½ acima
         y0 = ymax;
-        x0 = x0 + ((ymax - y0)*(x1 - x0)/(y1 - y0));
+        x0 = x0 + ((ymax - y0) * (x1 - x0) / (y1 - y0));
     }
 
-    int begin_point_Left = 0, begin_point_Right = 0, begin_point_Up = 0, begin_point_Down = 0;
-    int end_point_Left = 0, end_point_Right = 0, end_point_Up = 0, end_point_Down =0;
-    //BEGIN POINT
-    if(x0 < xmin) begin_point_Left = 1;
-    if(x0 > xmax) begin_point_Right = 1;
-    if(y0 < ymin) begin_point_Down = 1;
-    if(y0 > ymax) begin_point_Up = 1;
-    //END POINT
-    if(x1 < xmin) end_point_Left = 1;
-    if(x1 > xmax) end_point_Right = 1;
-    if(y1 < ymin) end_point_Down = 1;
-    if(y1 > ymax) end_point_Up = 1;
+    double begin_point_Left = 0, begin_point_Right = 0, begin_point_Up = 0, begin_point_Down = 0;
+    double end_point_Left = 0, end_point_Right = 0, end_point_Up = 0, end_point_Down = 0;
+    // START POINT
+    if (x0 < xmin)
+        begin_point_Left = 1;
+    if (x0 > xmax)
+        begin_point_Right = 1;
+    if (y0 < ymin)
+        begin_point_Down = 1;
+    if (y0 > ymax)
+        begin_point_Up = 1;
+    // END POINT
+    if (x1 < xmin)
+        end_point_Left = 1;
+    if (x1 > xmax)
+        end_point_Right = 1;
+    if (y1 < ymin)
+        end_point_Down = 1;
+    if (y1 > ymax)
+        end_point_Up = 1;
 
-    if(begin_point_Left == 0 && begin_point_Right == 0 && begin_point_Down == 0 && begin_point_Up == 0) return 1;
-    if(end_point_Left == 0 && end_point_Right == 0 && end_point_Down == 0 && end_point_Up == 0) return 1;
+    if (begin_point_Left == 0 && begin_point_Right == 0 && begin_point_Down == 0 && begin_point_Up == 0)
+        return 1;
+    if (end_point_Left == 0 && end_point_Right == 0 && end_point_Down == 0 && end_point_Up == 0)
+        return 1;
 
     return 0;
 }
@@ -124,20 +155,19 @@ int checkLineAfterNonTrivial(double begin_x, double begin_y, double end_x, doubl
 /**
  * @brief Select an existing line
  *
- * @param int coords x and y from mouse click
+ * @param double coords x and y from mouse click
  * @return memory address of existing line vector
  */
-Line *selectLine(int x, int y, int t){
-    //VETOR GLOBAL DE LINHAS "all_lines"
-    int i;
-    for(i = 0; i < 1000; i++){
-        if(all_lines[i] != NULL){
-            if(checkLine(all_lines[i], x, y, t)){
-                Line *aux = all_lines[i];
-                return aux;
-            }
-        }
+NodeLine *selectLine(double x, double y, double t)
+{
+    // GLOBAL "DATA"
+    NodeLine *node_line = DATA.line_head;
+    while (node_line != NULL)
+    {
+        if (checkLine(node_line->obj, x, y, t))
+            return node_line;
     }
+
     return NULL;
 }
 
@@ -147,11 +177,13 @@ Line *selectLine(int x, int y, int t){
  * @param The two points that define the edge. The coords mx and my from mouse click.
  * @return 1 for count the edge and 0 for no count.
  */
-int checkEdgePolygonNoNTrivialCases(Point *p1, Point *p2, int mx, int my){
+int checkEdgePolygonNoNTrivialCases(Point *p1, Point *p2, double mx, double my)
+{
 
-    double xi = p1->x + ((my - p1->y)*(p2->x - p1->x)/(p2->y - p1->y));
+    double xi = p1->x + ((my - p1->y) * (p2->x - p1->x) / (p2->y - p1->y));
 
-    if(xi > mx) return 1;
+    if (xi > mx)
+        return 1;
 
     return 0;
 }
@@ -162,7 +194,8 @@ int checkEdgePolygonNoNTrivialCases(Point *p1, Point *p2, int mx, int my){
  * @param The two points that define the edge. The coords mx and my from mouse click.
  * @return 1 for count the edge and 0 for no count.
  */
-int checkEdgePolygonSpecialCase(Point *p1, Point *p2, int mx, int my){
+int checkEdgePolygonSpecialCase(Point *p1, Point *p2, double mx, double my)
+{
 
     /*CODE*/
 
@@ -175,17 +208,22 @@ int checkEdgePolygonSpecialCase(Point *p1, Point *p2, int mx, int my){
  * @param The two points that define the edge. The coords mx and my from mouse click.
  * @return 1 for count the edge and 0 for no count.
  */
-int checkEdgePolygonCases(Point *p1, Point *p2, int mx, int my){
+int checkEdgePolygonCases(Point *p1, Point *p2, double mx, double my)
+{
 
-    //CASO ESPECIAL DO ALGORITMO DO TIRO
-    //if(p1->y == p2->y)
-    //TRIVIAL CASES
-    if(p1->y > my && p2->y > my) return 0;
-    if(p1->y < my && p2->y < my) return 0;
-    if(p1->x < mx && p2->x < mx) return 0;
-    if((p1->x > mx && p2->x > mx) && ((p1->y > my && p2->y < my) || (p1->y < my && p2->y > my))) return 1;
+    // CASO ESPECIAL DO ALGORITMO DO TIRO
+    // if(p1->y == p2->y)
+    // TRIVIAL CASES
+    if (p1->y > my && p2->y > my)
+        return 0;
+    if (p1->y < my && p2->y < my)
+        return 0;
+    if (p1->x < mx && p2->x < mx)
+        return 0;
+    if ((p1->x > mx && p2->x > mx) && ((p1->y > my && p2->y < my) || (p1->y < my && p2->y > my)))
+        return 1;
 
-    //NONTRIVIAL CASES
+    // NONTRIVIAL CASES
     return checkEdgePolygonNoNTrivialCases(p1, p2, mx, my);
 }
 
@@ -195,35 +233,38 @@ int checkEdgePolygonCases(Point *p1, Point *p2, int mx, int my){
  * @param The polygon p. The coords mx and my from mouse click.
  * @return 1 for true and 0 for false.
  */
-int checkPolygon(polygon *p, int mx, int my){
+int checkPoly(Poly *p, double mx, double my)
+{
     int count = 0;
-    Node *aux = p->head;
-    while(aux->next != NULL){
-        count += checkEdgePolygonCases(aux->vertex, aux->next->vertex, mx, my);
+    NodePoint *aux = p->head;
+    while (aux->next != NULL)
+    {
+        count += checkEdgePolygonCases(aux->obj, aux->next->obj, mx, my);
         aux = aux->next;
     }
-    count += checkEdgePolygonCases(aux->vertex, p->head->vertex, mx, my);
+    count += checkEdgePolygonCases(aux->obj, p->head->obj, mx, my);
 
-    if(count % 2 == 0) return 0;
-    else return 1;
+    if (count % 2 == 0)
+        return 0;
+    else
+        return 1;
 }
 
 /**
  * @brief Select an existing polygon.
  *
- * @param int coords x and y from mouse click.
+ * @param double coords x and y from mouse click.
  * @return memory address of existing polygon vector
  */
-polygon *selectPolygon(int x, int y){
-    //VETOR GLOBAL DE POLÍGONOS "all_polygons"
-    int i;
-    for(i = 0; i < 1000; i++){
-        if(all_polygons[i] != NULL){
-            if(checkPolygon(all_polygons[i], x, y)){
-                polygon *aux = all_polygons[i];
-                return aux;
-            }
-        }
+Poly *selectPolygon(double x, double y)
+{
+    // GLOBAL "DATA"
+    NodeLine *node_line = DATA.line_head;
+    while (node_line != NULL)
+    {
+        if (checkPoly(node_line->obj, x, y))
+            return node_line;
     }
+
     return NULL;
 }
