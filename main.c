@@ -17,10 +17,8 @@ void onInitialization()
     gluOrtho2D(ORTHO_SIZE);
 }
 
-void onDisplay(void)
+void onDisplay()
 {
-    glutReshapeWindow(W, H); // Fixed screen size
-
     // Perform configured tasks for each key
     keyOperations();
     keySpecialOperations();
@@ -29,7 +27,12 @@ void onDisplay(void)
 
     glColor3f(1.0, 0.0, 0.0);
 
-    // ...
+    // Render each object in DATA
+    if (renderData() == 0)
+    {
+        printf("Render DATA Error\n");
+        exit(1);
+    }
 
     glutSwapBuffers();
 }
@@ -56,7 +59,7 @@ int main(int argc, char const *argv[])
     glutKeyboardFunc(keyPressed);
     glutKeyboardUpFunc(keyReleased);
     glutSpecialFunc(keySpecialPressed);
-    glutSpecialUpFunc(keySpecialUpReleased);
+    glutSpecialUpFunc(keySpecialReleased);
 
     // Loop
     glutMainLoop();

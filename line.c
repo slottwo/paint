@@ -1,48 +1,60 @@
-#include "line.h"
 #include <stdlib.h>
+#include <stdio.h>
+
+#include "line.h"
 
 Line *createLine()
 {
-    Line *line = (Line *)malloc(sizeof(Line));
-    if (line == NULL)
+    Line *new_line = (Line *)malloc(sizeof(Line));
+    if (new_line == NULL)
     {
         exit(1);
     }
 
-    line->begin = NULL;
-    line->end = NULL;
+    new_line->start = NULL;
+    new_line->end = NULL;
 
-    return line;
+    return new_line;
 }
 
-Line *createFLine(double **coords)
+Line *createLineP(Point *start, Point *end)
 {
-    Line *line = createLine();
+    Line *new_line = createLine();
 
-    line->begin = createPoint(coords[0]);
-    line->end = createPoint(coords[1]);
+    new_line->start = start;
+    new_line->end = end;
 
-    return line;
+    return new_line;
 }
 
-int setBeginLine(Line *line, double x, double y)
+Line *createLineV(double **coords)
+{
+    Line *new_line = createLine();
+
+    new_line->start = createPointV(coords[0]);
+    new_line->end = createPointV(coords[1]);
+
+    return new_line;
+}
+
+int setLineStart(Line *line, double x, double y)
 {
     if (line == NULL)
         return 0;
 
-    if (line->begin == NULL)
+    if (line->start == NULL)
     {
-        line->begin = createPointXY(x, y);
+        line->start = createPointXY(x, y);
         return 1;
     }
 
-    line->begin->x = x;
-    line->begin->y = y;
+    line->start->x = x;
+    line->start->y = y;
 
     return 1;
 }
 
-int setEndLine(Line *line, double x, double y)
+int setLineEnd(Line *line, double x, double y)
 {
     if (line == NULL)
         return 0;
@@ -64,9 +76,9 @@ void freeLine(Line *line)
     if (line == NULL)
         return;
 
-    if (line->begin != NULL)
+    if (line->start != NULL)
     {
-        freePoint(line->begin);
+        freePoint(line->start);
     }
 
     if (line->end != NULL)
@@ -77,4 +89,3 @@ void freeLine(Line *line)
     free(line);
     line = NULL;
 }
-
