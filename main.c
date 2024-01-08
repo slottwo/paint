@@ -4,6 +4,8 @@
 
 #include <GL/freeglut.h>
 #include <GL/glut.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 #include "settings.h"
 #include "render.h"

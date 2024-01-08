@@ -1,5 +1,3 @@
 bin
 obj
-paint.cbp
-paint.depend
-paint.layout
+*.o

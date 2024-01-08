@@ -16,6 +16,6 @@ int checkEdgePolygonNoNTrivialCases(Point *, Point *, double, double);
 int checkEdgePolygonSpecialCase(Point *, Point *, double, double);
 int checkEdgePolygonCases(Point *, Point *, double, double);
 int checkPoly(Poly *, double, double);
-Poly *selectPolygon(double, double);
+NodePoly *selectPolygon(double, double);
 
 #endif

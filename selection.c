@@ -256,14 +256,14 @@ int checkPoly(Poly *p, double mx, double my)
  * @param double coords x and y from mouse click.
  * @return memory address of existing polygon vector
  */
-Poly *selectPolygon(double x, double y)
+NodePoly *selectPolygon(double x, double y)
 {
     // GLOBAL "DATA"
-    NodeLine *node_line = DATA.line_head;
-    while (node_line != NULL)
+    NodePoly *node_poly = DATA.polygon_head;
+    while (node_poly != NULL)
     {
-        if (checkPoly(node_line->obj, x, y))
-            return node_line;
+        if (checkPoly(node_poly->obj, x, y))
+            return node_poly;
     }
 
     return NULL;
