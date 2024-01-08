@@ -8,15 +8,22 @@
 #include <stdio.h>
 
 #include "settings.h"
+#include "types/data.h"
 #include "io/render.h"
 #include "io/input.h"
+
+double TOL = 2.5;
+double CANVAS_SIZE[4] = {ORTHO_SIZE};
 
 void onInitialization()
 {
     glClearColor(1, 1, 1, 0);
+    glPointSize(TOL * 2);
+
+    pointDataPush(createPointXY(CANVAS_SIZE[1] / 2, CANVAS_SIZE[3] / 2));
 
     glMatrixMode(GL_PROJECTION);
-    gluOrtho2D(0, 1, 0, 1);
+    gluOrtho2D(ORTHO_SIZE);
 }
 
 void onDisplay()
@@ -28,6 +35,7 @@ void onDisplay()
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Render each object in DATA
+
     if (renderData() == 0)
     {
         printf("Render DATA Error\n");
