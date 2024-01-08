@@ -10,6 +10,11 @@ int renderLine(Line *);
 int renderPolyline(Poly *);
 int renderPolygon(Poly *);
 
+// int renderPoints(NodePoint *);
+// int renderLines(NodeLine *);
+// int renderPolylines(NodePoly *);
+// int renderPolygons(NodePoly *);
+
 int renderData();
 
 #endif

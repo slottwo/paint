@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+
 #include "point.h"
 
 Point *createPointV(double *coords)
@@ -22,10 +23,27 @@ Point *createPointV(double *coords)
     new_point->x = coords[0];
     new_point->y = coords[1];
 
+    /*
+    if (colors == NULL)
+    {
+        point->is_colored = 0;
+        point->colors[0] = 0;
+        point->colors[1] = 0;
+        point->colors[2] = 0;
+    }
+    else
+    {
+        point->is_colored = 1;
+        point->colors[0] = colors[0];
+        point->colors[1] = colors[1];
+        point->colors[2] = colors[2];
+    }
+    */
+
     return new_point;
 }
 
-Point *createPointXY(double x, double y) // , double *colors)
+Point *createPointXY(double x, double y)
 {
 
     Point *new_point = (Point *)malloc(sizeof(Point));

@@ -5,6 +5,8 @@ typedef struct Point
 {
     double x;
     double y;
+    // int is_colored;
+    // double colors[3];
 } Point;
 
 Point *createPointV(double *);

@@ -1,5 +1,7 @@
-#include "line.h"
 #include <stdlib.h>
+#include <stdio.h>
+
+#include "line.h"
 
 Line *createLine()
 {
@@ -15,7 +17,7 @@ Line *createLine()
     return new_line;
 }
 
-Line *createLineP(Point *start, Point*end)
+Line *createLineP(Point *start, Point *end)
 {
     Line *new_line = createLine();
 

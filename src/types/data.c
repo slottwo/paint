@@ -1,4 +1,5 @@
 #include <stdlib.h>
+
 #include "data.h"
 
 struct data DATA = {NULL, NULL, NULL, NULL};

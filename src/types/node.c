@@ -1,7 +1,7 @@
-#include "node.h"
-
 #include <stdlib.h>
 #include <stdio.h>
+
+#include "node.h"
 
 NodePoint *createNodePoint(Point *obj)
 {

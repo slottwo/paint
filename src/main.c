@@ -4,10 +4,12 @@
 
 #include <GL/freeglut.h>
 #include <GL/glut.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 #include "settings.h"
-#include "render.h"
-#include "input.h"
+#include "io/render.h"
+#include "io/input.h"
 
 void onInitialization()
 {

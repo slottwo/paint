@@ -1,7 +1,7 @@
-#include "poly.h"
-
 #include <stdlib.h>
 #include <stdio.h>
+
+#include "poly.h"
 
 /**
  * @brief Create a empty Poly object (double linked list)
