@@ -282,3 +282,34 @@ NodePoly *selectPolygon(double x, double y)
 
     return NULL;
 }
+
+
+int checkPolyline(NodePoly *poly, double mx, double my, double t)
+{
+    NodePoint *aux = poly->obj->head;
+    Line *line;
+    while(aux->next != NULL)
+    {
+        line = createLineP(aux->obj, aux->next->obj);
+        if(checkLine(line, mx, my, t)) return 1;
+        aux = aux->next;
+    }
+    line = createLineP(aux->obj, poly->obj->head->obj);
+    if(checkLine(line, mx, my, t)) return 1;
+
+    return 0;
+}
+
+
+NodePoly *selectPolyline(double mx, double my, double t)
+{
+    NodePoly *node_poly = DATA.polyline_head;
+    while(node_poly != NULL)
+    {
+        if(checkPolyline(node_poly, mx, my, t)) return node_poly;
+        node_poly = node_poly->next;
+    }
+
+    return NULL;
+}
+

@@ -1,6 +1,6 @@
 #include "render.h"
 
-#include "../types/data.h"
+#include "data.h"
 
 #include <GL/freeglut.h>
 #include <stdlib.h>

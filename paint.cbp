@@ -71,10 +71,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="poly.h" />
-		<Unit filename="polygon.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="polygon.h" />
 		<Unit filename="render.c">
 			<Option compilerVar="CC" />
 		</Unit>

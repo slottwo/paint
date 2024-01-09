@@ -18,4 +18,7 @@ int checkEdgePolygonCases(Point *, Point *, double, double);
 int checkPoly(Poly *, double, double);
 NodePoly *selectPolygon(double, double);
 
+NodePoly *selectPolyline(double, double, double);
+int checkPolyline(NodePoly *, double, double, double);
+
 #endif

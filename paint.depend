@@ -162,7 +162,7 @@
 1703689593 source:c:\users\user\desktop\projetocg\paint\events.c
 	"events.h"
 
-1704717977 c:\users\user\desktop\projetocg\paint\events.h
+1704803880 c:\users\user\desktop\projetocg\paint\events.h
 
 1704555888 source:c:\users\user\desktop\projetocg\paint\input.c
 	"input.h"
@@ -172,21 +172,21 @@
 
 1703689579 c:\users\user\desktop\projetocg\paint\input.h
 
-1703690272 source:c:\users\user\desktop\projetocg\paint\line.c
+1704803880 source:c:\users\user\desktop\projetocg\paint\line.c
 	"line.h"
 	<stdlib.h>
 
-1704029325 source:c:\users\user\desktop\projetocg\paint\matrix.c
+1704803880 source:c:\users\user\desktop\projetocg\paint\matrix.c
 	<stdlib.h>
 	<math.h>
 	"matrix.h"
 
-1703514664 c:\users\user\desktop\projetocg\paint\matrix.h
+1704717927 c:\users\user\desktop\projetocg\paint\matrix.h
 	"point.h"
 
-1704718348 c:\users\user\desktop\projetocg\paint\point.h
+1704803880 c:\users\user\desktop\projetocg\paint\point.h
 
-1703514558 source:c:\users\user\desktop\projetocg\paint\point.c
+1704803880 source:c:\users\user\desktop\projetocg\paint\point.c
 	<stdlib.h>
 	<stdio.h>
 	"point.h"
@@ -199,13 +199,14 @@
 1703532076 c:\users\user\desktop\projetocg\paint\polygon.h
 	"point.h"
 
-1704031882 source:c:\users\user\desktop\projetocg\paint\render.c
-	<GL/freeglut.h>
-	<stdio.h>
+1704820865 source:c:\users\user\desktop\projetocg\paint\render.c
 	"render.h"
-	"matrix.h"
+	"data.h"
+	<GL/freeglut.h>
+	<stdlib.h>
+	<stdio.h>
 
-1704718078 c:\users\user\desktop\projetocg\paint\render.h
+1704803880 c:\users\user\desktop\projetocg\paint\render.h
 	"point.h"
 	"line.h"
 	"poly.h"
@@ -220,21 +221,21 @@
 
 1703514755 c:\users\user\desktop\projetocg\paint\settings.h
 
-1703689593 source:c:\users\user\desktop\projetocg\paint\data.c
+1704804056 source:c:\users\user\desktop\projetocg\paint\data.c
+	<stdlib.h>
 	"data.h"
-	"stdlib.h"
 
-1704718162 c:\users\user\desktop\projetocg\paint\data.h
+1704804076 c:\users\user\desktop\projetocg\paint\data.h
 	"node.h"
 
-1704718226 c:\users\user\desktop\projetocg\paint\line.h
+1704803880 c:\users\user\desktop\projetocg\paint\line.h
 	"point.h"
 
-1703859304 source:c:\users\user\desktop\projetocg\paint\selection.c
-	"selection.h"
+1704821490 source:c:\users\user\desktop\projetocg\paint\selection.c
 	<stdlib.h>
+	"selection.h"
 
-1703858630 c:\users\user\desktop\projetocg\paint\selection.h
+1704821065 c:\users\user\desktop\projetocg\paint\selection.h
 	"point.h"
 	"line.h"
 	"data.h"
@@ -247,4 +248,14 @@
 	"point.h"
 	"line.h"
 	"poly.h"
+
+1704718257 source:c:\users\user\desktop\projetocg\paint\node.c
+	"node.h"
+	<stdlib.h>
+	<stdio.h>
+
+1704717850 source:c:\users\user\desktop\projetocg\paint\poly.c
+	"poly.h"
+	<stdlib.h>
+	<stdio.h>
 
