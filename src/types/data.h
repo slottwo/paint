@@ -24,11 +24,11 @@ enum object_type
 
 struct current_node
 {
-    int current_type;
-    NodePoint *current_point;
-    NodeLine *current_line;
-    NodePoly *current_polyline;
-    NodePoly *current_polygon;
+    enum object_type type;
+    NodePoint *point;
+    NodeLine *line;
+    NodePoly *polyline;
+    NodePoly *polygon;
 };
 
 extern struct current_node SELECTED;

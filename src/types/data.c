@@ -22,10 +22,11 @@ int pointDataPush(Point *point)
     }
 
     new_node->next = DATA.point_head;
+    DATA.point_head->prior = new_node;
     DATA.point_head = new_node;
 
-    SELECTED.current_type = point_type;
-    SELECTED.current_point = new_node;
+    SELECTED.type = point_type;
+    SELECTED.point = new_node;
 
     return 1;
 }
@@ -51,8 +52,8 @@ int pointDataRemove(NodePoint *node)
     free(node);
     node = NULL;
 
-    SELECTED.current_type = 0;
-    SELECTED.current_point = NULL;
+    SELECTED.type = none_type;
+    SELECTED.point = NULL;
 
     return 1;
 }
@@ -73,10 +74,11 @@ int lineDataPush(Line *line)
     }
 
     new_node->next = DATA.line_head;
+    DATA.line_head->prior = new_node;
     DATA.line_head = new_node;
 
-    SELECTED.current_type = line_type;
-    SELECTED.current_line = new_node;
+    SELECTED.type = line_type;
+    SELECTED.line = new_node;
 
     return 1;
 }
@@ -102,8 +104,8 @@ int lineDataRemove(NodeLine *node)
     free(node);
     node = NULL;
 
-    SELECTED.current_type = 0;
-    SELECTED.current_line = NULL;
+    SELECTED.type = none_type;
+    SELECTED.line = NULL;
 
     return 1;
 }
@@ -124,10 +126,11 @@ int polylineDataPush(Poly *poly)
     }
 
     new_node->next = DATA.polyline_head;
+    DATA.polyline_head->prior = new_node;
     DATA.polyline_head = new_node;
 
-    SELECTED.current_type = polyline_type;
-    SELECTED.current_polyline = new_node;
+    SELECTED.type = polyline_type;
+    SELECTED.polyline = new_node;
 
     return 1;
 }
@@ -153,8 +156,8 @@ int polylineDataRemove(NodePoly *node)
     free(node);
     node = NULL;
 
-    SELECTED.current_type = 0;
-    SELECTED.current_polyline = NULL;
+    SELECTED.type = none_type;
+    SELECTED.polyline = NULL;
 
     return 1;
 }
@@ -175,10 +178,11 @@ int polygonDataPush(Poly *poly)
     }
 
     new_node->next = DATA.polygon_head;
+    DATA.polygon_head->prior = new_node;
     DATA.polygon_head = new_node;
 
-    SELECTED.current_type = polygon_type;
-    SELECTED.current_polygon = new_node;
+    SELECTED.type = polygon_type;
+    SELECTED.polygon = new_node;
 
     return 1;
 }
@@ -205,8 +209,8 @@ int polygonDataRemove(NodePoly *node)
     free(node);
     node = NULL;
 
-    SELECTED.current_type = 0;
-    SELECTED.current_polygon = NULL;
+    SELECTED.type = none_type;
+    SELECTED.polygon = NULL;
 
     return 1;
 }
