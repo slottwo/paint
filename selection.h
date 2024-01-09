@@ -5,17 +5,17 @@
 #include "line.h"
 #include "data.h"
 
-int checkPoint(double, double, int, int, int);
-Point *selectPoint(int, int, int);
+int checkPoint(Point *, double, double, double);
+NodePoint *selectPoint(double, double, double);
 
-int checkLine(Line *, int, int, int);
-int checkLineAfterNonTrivial(double, double, double, double, int, int, int);
-Line *selectLine(int, int, int);
+int checkLine(Line *, double, double, double);
+int checkLineAfterNonTrivial(Line *, double, double, double);
+NodeLine *selectLine(double, double, double);
 
-int checkEdgePolygonNoNTrivialCases(Point *, Point *, int, int);
-int checkEdgePolygonSpecialCase(Point *, Point *, int, int);
-int checkEdgePolygonCases(Point *, Point *, int, int);
-int checkPolygon(polygon *, int, int);
-polygon *selectPolygon(int, int);
+int checkEdgePolygonNoNTrivialCases(Point *, Point *, double, double);
+int checkEdgePolygonSpecialCase(Point *, Point *, Point *);
+int checkEdgePolygonCases(Point *, Point *, double, double);
+int checkPoly(Poly *, double, double);
+NodePoly *selectPolygon(double, double);
 
 #endif

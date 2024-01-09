@@ -162,7 +162,7 @@
 1703689593 source:c:\users\user\desktop\projetocg\paint\events.c
 	"events.h"
 
-1703686978 c:\users\user\desktop\projetocg\paint\events.h
+1704717977 c:\users\user\desktop\projetocg\paint\events.h
 
 1704555888 source:c:\users\user\desktop\projetocg\paint\input.c
 	"input.h"
@@ -184,7 +184,7 @@
 1703514664 c:\users\user\desktop\projetocg\paint\matrix.h
 	"point.h"
 
-1703514569 c:\users\user\desktop\projetocg\paint\point.h
+1704718348 c:\users\user\desktop\projetocg\paint\point.h
 
 1703514558 source:c:\users\user\desktop\projetocg\paint\point.c
 	<stdlib.h>
@@ -205,9 +205,10 @@
 	"render.h"
 	"matrix.h"
 
-1704031795 c:\users\user\desktop\projetocg\paint\render.h
-	"polygon.h"
+1704718078 c:\users\user\desktop\projetocg\paint\render.h
+	"point.h"
 	"line.h"
+	"poly.h"
 
 1704555434 source:c:\users\user\desktop\projetocg\paint\main.c
 	<windows.h>
@@ -223,11 +224,10 @@
 	"data.h"
 	"stdlib.h"
 
-1703689593 c:\users\user\desktop\projetocg\paint\data.h
-	"line.h"
-	"polygon.h"
+1704718162 c:\users\user\desktop\projetocg\paint\data.h
+	"node.h"
 
-1703691967 c:\users\user\desktop\projetocg\paint\line.h
+1704718226 c:\users\user\desktop\projetocg\paint\line.h
 	"point.h"
 
 1703859304 source:c:\users\user\desktop\projetocg\paint\selection.c
@@ -238,4 +238,13 @@
 	"point.h"
 	"line.h"
 	"data.h"
+
+1704717829 c:\users\user\desktop\projetocg\paint\poly.h
+	"point.h"
+	"node.h"
+
+1704718267 c:\users\user\desktop\projetocg\paint\node.h
+	"point.h"
+	"line.h"
+	"poly.h"
 

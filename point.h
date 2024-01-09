@@ -1,17 +1,17 @@
 #ifndef POINT_H
 #define POINT_H
 
-typedef struct
+typedef struct Point
 {
     double x;
     double y;
-    // int is_colored;
-    // double colors[3];
 } Point;
 
-Point *createPoint(double *);         // , double *);
-Point *createPointXY(double, double); // , double *);
-double *getV(Point *point);
+Point *createPointV(double *);
+Point *createPointXY(double, double);
+
+double *getV(Point *Point);
+
 void freePoint(Point *);
 
 #endif

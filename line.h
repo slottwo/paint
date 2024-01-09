@@ -3,16 +3,18 @@
 
 #include "point.h"
 
-typedef struct
+typedef struct Line
 {
-    Point *begin;
+    Point *start;
     Point *end;
 } Line;
 
-Line *createLine();
-Line *createFLine(double **);
-int setBeginLine(Line *, double, double);
-int setEndLine(Line *, double, double);
+Line *createLineP(Point *, Point*);
+Line *createLineV(double **);
+
+int setLineStart(Line *, double, double);
+int setLineEnd(Line *, double, double);
+
 void freeLine(Line *);
 
 #endif

@@ -59,10 +59,18 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="matrix.h" />
+		<Unit filename="node.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="node.h" />
 		<Unit filename="point.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="point.h" />
+		<Unit filename="poly.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="poly.h" />
 		<Unit filename="polygon.c">
 			<Option compilerVar="CC" />
 		</Unit>

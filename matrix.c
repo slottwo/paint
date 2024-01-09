@@ -29,7 +29,7 @@ double *generic_multiply(double *A, double *B)
 // 0 0 1   0 0 1      0    |    0    |    1
 
 /**
- * @brief Multiply transformation matrices optimally
+ * @brief Multiply transformation matrices optimally (no 3th line calculation)
  *
  * @param A First double[9] vector
  * @param B Second double[9] vector
@@ -50,21 +50,15 @@ double *optimized_multiply(double *A, double *B)
 }
 
 /**
- * @brief Apply transformation T to point P
+ * @brief Apply transformation T to Point P
  *
  * @param P Point to be transformed (double[2])
  * @param T Transformation matrix (double[9])
  */
 void transform(Point *P, double *T)
 {
-    /*printf("T[0]: %f\n", T[0]);
-    printf("T[1]: %f\n", T[1]);
-    printf("T[2]: %f\n", T[2]);
-    printf("T[3]: %f\n", T[3]);
-    printf("T[4]: %f\n", T[4]);
-    printf("T[5]: %f\n", T[5]);*/
-
-    if (P == NULL | T == NULL) exit(1);
+    if (P == NULL | T == NULL)
+        exit(1);
 
     int x = P->x * T[0] + P->y * T[1] + T[2];
     int y = P->x * T[3] + P->y * T[4] + T[5];
@@ -101,4 +95,3 @@ double *get_translate_matrix(double x, double y)
     R[8] = 1;
     return R;
 }
-

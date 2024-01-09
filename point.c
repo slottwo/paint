@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "point.h"
 
-Point *createPoint(double *coords) // , double *colors)
+Point *createPointV(double *coords)
 {
     if (coords == NULL)
     {
@@ -11,54 +11,39 @@ Point *createPoint(double *coords) // , double *colors)
         return NULL;
     }
 
-    Point *point = (Point *)malloc(sizeof(Point));
-    if (point == NULL)
+    Point *new_point = (Point *)malloc(sizeof(Point));
+    if (new_point == NULL)
     {
-        printf("Point creation error: malloc fail\n");
+        printf("Point Creation Error: malloc fail\n");
         exit(1);
         return NULL;
     }
 
-    point->x = coords[0];
-    point->y = coords[1];
+    new_point->x = coords[0];
+    new_point->y = coords[1];
 
-    // if (colors == NULL)
-    // {
-    //     point->is_colored = 0;
-    //     point->colors[0] = 0;
-    //     point->colors[1] = 0;
-    //     point->colors[2] = 0;
-    // }
-    // else
-    // {
-    //     point->is_colored = 1;
-    //     point->colors[0] = colors[0];
-    //     point->colors[1] = colors[1];
-    //     point->colors[2] = colors[2];
-    // }
-
-    return point;
+    return new_point;
 }
 
 Point *createPointXY(double x, double y) // , double *colors)
 {
 
-    Point *point = (Point *)malloc(sizeof(Point));
-    if (point == NULL)
+    Point *new_point = (Point *)malloc(sizeof(Point));
+    if (new_point == NULL)
     {
         printf("Point creation error: malloc fail\n");
         exit(1);
         return NULL;
     }
 
-    point->x = x;
-    point->y = y;
+    new_point->x = x;
+    new_point->y = y;
 
-    return point;
+    return new_point;
 }
 
 /**
- * @brief Get the point coordinates
+ * @brief Get the Point coordinates
  *
  * @param point Point pointer
  * @return double* (x, y)
@@ -86,7 +71,7 @@ void freePoint(Point *point)
         exit(1);
     }
 
-    // free(point->colors);
+    // free(Point->colors);
     free(point);
 
     point = NULL;
