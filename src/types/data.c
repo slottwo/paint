@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "data.h"
 
@@ -21,9 +22,16 @@ int pointDataPush(Point *point)
         return 0;
     }
 
-    new_node->next = DATA.point_head;
-    DATA.point_head->prior = new_node;
-    DATA.point_head = new_node;
+    if (DATA.point_head == NULL)
+    {
+        DATA.point_head = new_node;
+    }
+    else
+    {
+        new_node->next = DATA.point_head;
+        DATA.point_head->prior = new_node;
+        DATA.point_head = new_node;
+    }
 
     SELECTED.type = point_type;
     SELECTED.point = new_node;
@@ -73,9 +81,16 @@ int lineDataPush(Line *line)
         return 0;
     }
 
-    new_node->next = DATA.line_head;
-    DATA.line_head->prior = new_node;
-    DATA.line_head = new_node;
+    if (DATA.line_head == NULL)
+    {
+        DATA.line_head = new_node;
+    }
+    else
+    {
+        new_node->next = DATA.line_head;
+        DATA.line_head->prior = new_node;
+        DATA.line_head = new_node;
+    }
 
     SELECTED.type = line_type;
     SELECTED.line = new_node;
@@ -125,9 +140,16 @@ int polylineDataPush(Poly *poly)
         return 0;
     }
 
-    new_node->next = DATA.polyline_head;
-    DATA.polyline_head->prior = new_node;
-    DATA.polyline_head = new_node;
+    if (DATA.polyline_head == NULL)
+    {
+        DATA.polyline_head = new_node;
+    }
+    else
+    {
+        new_node->next = DATA.polyline_head;
+        DATA.polyline_head->prior = new_node;
+        DATA.polyline_head = new_node;
+    }
 
     SELECTED.type = polyline_type;
     SELECTED.polyline = new_node;
@@ -176,10 +198,16 @@ int polygonDataPush(Poly *poly)
         /* code */
         return 0;
     }
-
-    new_node->next = DATA.polygon_head;
-    DATA.polygon_head->prior = new_node;
-    DATA.polygon_head = new_node;
+    if (DATA.polygon_head == NULL)
+    {
+        DATA.polygon_head = new_node;
+    }
+    else
+    {
+        new_node->next = DATA.polygon_head;
+        DATA.polygon_head->prior = new_node;
+        DATA.polygon_head = new_node;
+    }
 
     SELECTED.type = polygon_type;
     SELECTED.polygon = new_node;

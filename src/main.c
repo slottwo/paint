@@ -21,6 +21,11 @@ void onInitialization()
     glPointSize(TOL * 2);
 
     pointDataPush(createPointXY(CANVAS_SIZE[1] / 2, CANVAS_SIZE[3] / 2));
+    pointDataPush(createPointXY(CANVAS_SIZE[1] / 2 + 0.3, CANVAS_SIZE[3] / 2));
+    pointDataPush(createPointXY(CANVAS_SIZE[1] / 2, CANVAS_SIZE[3] / 2 + 0.3));
+    pointDataPush(createPointXY(CANVAS_SIZE[1] / 2, 0.3));
+    pointDataRemove(DATA.point_head);
+    pointDataRemove(DATA.point_head->next);
 
     glMatrixMode(GL_PROJECTION);
     gluOrtho2D(ORTHO_SIZE);
