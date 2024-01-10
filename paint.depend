@@ -164,8 +164,9 @@
 
 1704803880 c:\users\user\desktop\projetocg\paint\events.h
 
-1704555888 source:c:\users\user\desktop\projetocg\paint\input.c
+1704895628 source:c:\users\user\desktop\projetocg\paint\input.c
 	"input.h"
+	<math.h>
 	<GL/freeglut.h>
 	<stdio.h>
 	"render.h"
@@ -258,4 +259,6 @@
 	"poly.h"
 	<stdlib.h>
 	<stdio.h>
+
+1704895303 source:c:\users\user\desktop\projetocg\paint\geometry.c
 
