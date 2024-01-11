@@ -212,13 +212,14 @@
 	"line.h"
 	"poly.h"
 
-1704555434 source:c:\users\user\desktop\projetocg\paint\main.c
+1704978525 source:c:\users\user\desktop\projetocg\paint\main.c
 	<windows.h>
 	<stdio.h>
 	<GL/glut.h>
 	"input.h"
 	"render.h"
 	"settings.h"
+	"load.h"
 
 1703514755 c:\users\user\desktop\projetocg\paint\settings.h
 
@@ -260,5 +261,17 @@
 	<stdlib.h>
 	<stdio.h>
 
-1704895303 source:c:\users\user\desktop\projetocg\paint\geometry.c
+1704978435 source:c:\users\user\desktop\projetocg\paint\geometry.c
+	<math.h>
+	<stdlib.h>
+	"geometry.h"
+
+1704980793 source:c:\users\user\desktop\projetocg\paint\load.c
+	<stdio.h>
+	<string.h>
+
+1704897457 c:\users\user\desktop\projetocg\paint\geometry.h
+	"poly.h"
+
+1704980816 c:\users\user\desktop\projetocg\paint\load.h
 

@@ -53,7 +53,7 @@ double *centerPolygon(Poly *poly)
 double anglePoly(double x1, double y1, double x2, double y2, Poly *poly)
 {
     double *center_point;
-    center_point = (double)malloc(sizeof(double)*2);
+    center_point = (double*)malloc(sizeof(double)*2);
     center_point = centerPolygon(poly);
 
     double distance_p1_p2, distance_p1_c, distance_p2_c;
@@ -92,7 +92,7 @@ double *centerLine(Line *line)
 double *angleLine(double x1, double y1, double x2, double y2, Line *line)
 {
     double *center_point;
-    center_point = (double)malloc(sizeof(double)*2);
+    center_point = (double*)malloc(sizeof(double)*2);
     center_point = centerLine(line);
 
     double distance_p1_p2, distance_p1_c, distance_p2_c;
@@ -102,5 +102,9 @@ double *angleLine(double x1, double y1, double x2, double y2, Line *line)
 
     double num = pow(distance_p1_p2, 2) - pow(distance_p1_c, 2) - pow(distance_p2_c, 2) + 2*distance_p1_c*distance_p2_c;
 
-    return acos(num);
+    double *result;
+    result = (double*)malloc(sizeof(double));
+    result[0] = acos(num);
+
+    return result;
 }

@@ -44,6 +44,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="events.h" />
+		<Unit filename="geometry.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="geometry.h" />
 		<Unit filename="input.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -6,6 +6,7 @@
 #include "input.h"
 #include "render.h"
 #include "settings.h"
+#include "load.h"
 
 void onInitialization()
 {
@@ -19,7 +20,7 @@ void onInitialization()
 
 void onDisplay(void)
 {
-
+    loadArquive("arquive.txt");
     double matrix[9];
     matrix[0] = 433.0/500.0;
     matrix[1] = -1.0/2.0;
