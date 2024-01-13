@@ -144,7 +144,7 @@ int renderPolyline(Poly *poly)
     glBegin(GL_LINE_STRIP);
 
     NodePoint *node = poly->head;
-    while (node->next != NULL)
+    while (node != NULL)
     {
         glVertex2d(node->obj->x, node->obj->y);
         node = node->next;
