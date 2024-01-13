@@ -86,14 +86,9 @@ int polyPush(Poly *poly, Point *vertex)
         return 1;
     }
 
-    // NodePoint *last_node = poly->head;
-    // while (last_node->next != NULL)
-    // {
-    //     last_node = last_node->next;
-    // }
-
     new_node->next = poly->head;
     poly->head->prior = new_node;
+    poly->head = new_node;
 
     return 1;
 }

@@ -175,17 +175,14 @@ int renderPolygon(Poly *poly)
     // case 0:
     //     return 1;
     //     break;
-
     // case 1:
     //     renderPoint(poly->head->obj);
     //     return 1;
     //     break;
-
     // case 2:
     //     renderPolyline(poly);
     //     return 1;
     //     break;
-
     // default:
     //     break;
     // }
@@ -196,7 +193,7 @@ int renderPolygon(Poly *poly)
     glBegin(GL_POLYGON);
 
     NodePoint *node = poly->head;
-    while (node->next != NULL)
+    while (node != NULL)
     {
         glVertex2d(node->obj->x, node->obj->y);
         node = node->next;

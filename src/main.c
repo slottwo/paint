@@ -20,7 +20,16 @@ void onInitialization()
     glClearColor(1, 1, 1, 0);
     glPointSize(TOL * 2);
 
+    pointDataPush(createPointXY(0.5, 0.5));
+
     lineDataPush(createLineP(createPointXY(0.25, 0.5), createPointXY(0.5, 0.75)));
+
+    Poly *p = createPoly();
+    polyPush(p, createPointXY(0.5, 0.5));
+    polyPush(p, createPointXY(0.25, 0.5));
+    polyPush(p, createPointXY(0.25, 0.25));
+
+    polygonDataPush(p);
 
     glMatrixMode(GL_PROJECTION);
     gluOrtho2D(ORTHO_SIZE);
