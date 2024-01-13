@@ -117,14 +117,24 @@ int loadPolyline(char *campo)
 {
     campo = strtok(NULL, DELIMITER);
     int i, num_points = atoi(campo);
+    double x, y;
+
+    Poly *p = createPoly();
 
     for(i = 0; i < num_points; i++)
     {
         campo = strtok(NULL, DELIMITER);
         printf("x%d: %s\t", i+1, campo);
+        x = atoi(campo);
+
         campo = strtok(NULL, DELIMITER);
         printf("y%d: %s\n", i+1, campo);
+        y = atoi(campo);
+
+        polyPush(p, createPointXY(x, y));
     }
+
+    polylineDataPush(p);
 
     return 1;
 }

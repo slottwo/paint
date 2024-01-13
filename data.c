@@ -213,6 +213,7 @@ int polygonDataPush(Poly *poly)
     SELECTED.type = polygon_type;
     SELECTED.polygon = new_node;
 
+    printf("ok ate aqui\n");
     return 1;
 }
 

@@ -1,6 +1,5 @@
 #include "input.h"
 #include <math.h>
-//#include <GL/glut.h>
 #include <GL/freeglut.h>
 #include <stdio.h>
 #include "render.h"

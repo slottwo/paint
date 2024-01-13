@@ -15,15 +15,6 @@ void onInitialization()
 
     loadArquive("arquive.txt");
 
-    Poly *p = createPoly();
-    polyPush(p, createPointXY(60, 60));
-    polyPush(p, createPointXY(70, 70));
-    polyPush(p, createPointXY(80, 80));
-    polygonDataPush(p);
-
-    lineDataPush(createLineP(createPointXY(50,50), createPointXY(100, 50)));
-
-
     glMatrixMode(GL_PROJECTION);
     gluOrtho2D(0, 400, 0, 300);
 }
@@ -42,6 +33,12 @@ void onDisplay(void)
     glColor3f(1.0, 0.0, 0.0);
     glPointSize(10);
     renderData();
+
+    /*glBegin(GL_POLYGON);
+        glVertex2i(60, 60);
+        glVertex2i(70, 70);
+        glVertex2i(80, 80);
+    glEnd();*/
 
     glutSwapBuffers();
 }

@@ -75,7 +75,7 @@ int renderLine(Line *line)
         return 0;
     }
 
-    glBegin(GL_LINE);
+    glBegin(GL_LINES);
 
     glVertex2d(line->start->x, line->start->y);
     glVertex2d(line->end->x, line->end->y);
@@ -100,9 +100,9 @@ int renderLines(NodeLine *node)
 
     Line *line;
 
-    glBegin(GL_LINE);
+    glBegin(GL_LINES);
 
-    while (node->next != NULL)
+    while (node != NULL)
     {
         line = node->obj;
 
@@ -144,7 +144,7 @@ int renderPolyline(Poly *poly)
     glBegin(GL_LINE_STRIP);
 
     NodePoint *node = poly->head;
-    while (node->next != NULL)
+    while (node!= NULL)
     {
         glVertex2d(node->obj->x, node->obj->y);
         node = node->next;
@@ -175,17 +175,14 @@ int renderPolygon(Poly *poly)
     // case 0:
     //     return 1;
     //     break;
-
     // case 1:
     //     renderPoint(poly->head->obj);
     //     return 1;
     //     break;
-
     // case 2:
     //     renderPolyline(poly);
     //     return 1;
     //     break;
-
     // default:
     //     break;
     // }
@@ -196,7 +193,7 @@ int renderPolygon(Poly *poly)
     glBegin(GL_POLYGON);
 
     NodePoint *node = poly->head;
-    while (node->next != NULL)
+    while (node != NULL)
     {
         glVertex2d(node->obj->x, node->obj->y);
         node = node->next;
