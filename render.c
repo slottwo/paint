@@ -1,10 +1,10 @@
-#include "render.h"
-
-#include "data.h"
-
 #include <GL/freeglut.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+#include "render.h"
+
+#include "data.h"
 
 /**
  * @brief
@@ -14,11 +14,15 @@
  */
 int renderPoint(Point *point)
 {
-    // if (point == NULL) { ... return 0; }
+    if (point == NULL)
+    {
+        return 0;
+    }
 
     glBegin(GL_POINT);
 
     glVertex2d(point->x, point->y);
+    printf("Ponto (%.2f, %.2f) renderizado!\n", point->x, point->y);
 
     glEnd();
 
@@ -33,13 +37,23 @@ int renderPoint(Point *point)
  */
 int renderPoints(NodePoint *node)
 {
-    // if (node == NULL) { ... return 0; }
+    if (node == NULL)
+    {
+        return 0;
+    }
 
     glBegin(GL_POINTS);
 
-    while (node->next != NULL)
+    while (node != NULL)
     {
+        if (node->obj == NULL)
+        {
+            exit(1);
+            return 0;
+        }
+
         glVertex2d(node->obj->x, node->obj->y);
+
         node = node->next;
     }
 
@@ -48,9 +62,18 @@ int renderPoints(NodePoint *node)
     return 1;
 }
 
+/**
+ * @brief
+ *
+ * @param line
+ * @return int
+ */
 int renderLine(Line *line)
 {
-    // if (line == NULL) { ... return 0; }
+    if (line == NULL)
+    {
+        return 0;
+    }
 
     glBegin(GL_LINE);
 
@@ -62,19 +85,40 @@ int renderLine(Line *line)
     return 1;
 }
 
+/**
+ * @brief
+ *
+ * @param node
+ * @return int
+ */
 int renderLines(NodeLine *node)
 {
-    // if (node == NULL) { ... return 0; }
+    if (node == NULL)
+    {
+        return 0;
+    }
 
     Line *line;
+
+    glBegin(GL_LINE);
+
     while (node->next != NULL)
     {
         line = node->obj;
 
-        renderLine(line);
+        if (line == NULL)
+        {
+            exit(1);
+            return 1;
+        }
+
+        glVertex2d(line->start->x, line->start->y);
+        glVertex2d(line->end->x, line->end->y);
 
         node = node->next;
     }
+
+    glEnd();
 
     return 1;
 }
@@ -111,6 +155,12 @@ int renderPolyline(Poly *poly)
     return 1;
 }
 
+/**
+ * @brief
+ *
+ * @param poly
+ * @return int
+ */
 int renderPolygon(Poly *poly)
 {
     if (poly == NULL)
@@ -157,31 +207,52 @@ int renderPolygon(Poly *poly)
     return 1;
 }
 
+/**
+ * @brief
+ *
+ * @return int
+ */
 int renderData()
 {
+    int out = 1;
+
     // Render Points
-    renderPoints(DATA.point_head);
+
+    glColor3d(0, 0, 0);
+
+    if (DATA.point_head)
+        out &= renderPoints(DATA.point_head);
 
     // Render Lines
-    renderLines(DATA.line_head);
+
+    glColor3d(1, 0, 0);
+
+    if (DATA.line_head)
+        out &= renderLines(DATA.line_head);
 
     NodePoly *node;
 
     // Render Polylines
+
+    glColor3d(0, 1, 0);
+
     node = DATA.polyline_head;
-    while (node->next != NULL)
+    while (node != NULL)
     {
-        renderPolyline(node->obj);
+        out &= renderPolyline(node->obj);
         node = node->next;
     }
 
     // Render Polygons
+
+    glColor3d(0, 0, 1);
+
     node = DATA.polygon_head;
-    while (node->next != NULL)
+    while (node != NULL)
     {
-        renderPolygon(node->obj);
+        out &= renderPolygon(node->obj);
         node = node->next;
     }
 
-    return 1;
+    return out;
 }
