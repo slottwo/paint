@@ -75,7 +75,7 @@ int renderLine(Line *line)
         return 0;
     }
 
-    glBegin(GL_LINE);
+    glBegin(GL_LINES);
 
     glVertex2d(line->start->x, line->start->y);
     glVertex2d(line->end->x, line->end->y);
@@ -100,9 +100,9 @@ int renderLines(NodeLine *node)
 
     Line *line;
 
-    glBegin(GL_LINE);
+    glBegin(GL_LINES);
 
-    while (node->next != NULL)
+    while (node != NULL)
     {
         line = node->obj;
 
