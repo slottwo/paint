@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include "render.h"
 
+//teste
+#include "save.h"
+
 int KEYS[256] = {0};
 int keySpecialStates[256] = {0};
 
@@ -45,11 +48,13 @@ void onMouseClick(int button, int state, int x, int y){
         printf("%d\n", 'a');
         printf("%d\n", KEYS['a']);
         if(KEYS['a'] == 1){
+            printf("ok");
             double xis = x;
             double iplison = 300 - y;
-            renderPoint(createPointXY(xis, iplison));
-            //glutSwapBuffers();
-            glutPostOverlayRedisplay();
+            pointDataPush(createPointXY(xis, iplison));
+            saveArquive("arquive.txt");
+            glutPostRedisplay();
+            //glutPostOverlayRedisplay();
 
 
         }

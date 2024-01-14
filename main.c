@@ -2,18 +2,26 @@
 #include <stdio.h>
 #include <GL/glut.h>
 
-
+#include "poly.h"
 #include "input.h"
 #include "render.h"
 #include "settings.h"
 #include "load.h"
-#include "poly.h"
+#include "save.h"
+
 
 void onInitialization()
 {
     glClearColor(1, 1, 1, 0);
 
     loadArquive("arquive.txt");
+    //saveArquive("arquive.txt");
+
+    Poly *p = createPoly();
+    polyPush(p, createPointXY(20, 280));
+    polyPush(p, createPointXY(20, 70));
+    polyPush(p, createPointXY(100, 70));
+    polylineDataPush(p);
 
     glMatrixMode(GL_PROJECTION);
     gluOrtho2D(0, 400, 0, 300);
