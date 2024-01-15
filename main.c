@@ -17,11 +17,14 @@ void onInitialization()
     loadArquive("arquive.txt");
     //saveArquive("arquive.txt");
 
-    Poly *p = createPoly();
+    /*Poly *p = createPoly();
     polyPush(p, createPointXY(20, 280));
     polyPush(p, createPointXY(20, 70));
     polyPush(p, createPointXY(100, 70));
-    polylineDataPush(p);
+    polylineDataPush(p);*/
+
+    /*Line *l = createLineP(createPointXY(30,150), createPointXY(60, 200));
+    lineDataPush(l);*/
 
     glMatrixMode(GL_PROJECTION);
     gluOrtho2D(0, 400, 0, 300);

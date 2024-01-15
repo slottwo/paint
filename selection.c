@@ -58,11 +58,15 @@ int checkLine(Line *line, double mx, double my, double t)
     // SETANDO AS ESTRUTURAS DE COMPARAÇÃO UTILIZADAS
     double begin_point_Left = 0, begin_point_Right = 0, begin_point_Up = 0, begin_point_Down = 0;
     double end_point_Left = 0, end_point_Right = 0, end_point_Up = 0, end_point_Down = 0;
+    /*printf("Start Point\n");
+    printf("%.1f %.1f %.1f %.1f\n", begin_point_Left, begin_point_Right, begin_point_Down, begin_point_Up);
+    printf("End Point\n");
+    printf("%.1f %.1f %.1f %.1f\n", end_point_Left, end_point_Right, end_point_Down, end_point_Up);*/
     // FAZENDO AS ESTRUTURAS DOS VÉRTICES
     // START POINT
     if (begin_point->x < mx - t)
         begin_point_Left = 1;
-    if (begin_point->x > mx + t)
+    if (begin_point->x > mx + t) //aqui
         begin_point_Right = 1;
     if (begin_point->y < my - t)
         begin_point_Down = 1;
@@ -75,16 +79,29 @@ int checkLine(Line *line, double mx, double my, double t)
         end_point_Right = 1;
     if (end_point->y < my - t)
         end_point_Down = 1;
-    if (end_point->y > my + t)
+    if (end_point->y > my + t) //aqui
         end_point_Up = 1;
     // CASO UM VÉRTICE TENHA 0000
     if (begin_point_Left == 0 && begin_point_Right == 0 && begin_point_Down == 0 && begin_point_Up == 0)
+    {
+        //printf("CASO 0000\n");
         return 1;
+    }
     if (end_point_Left == 0 && end_point_Right == 0 && end_point_Down == 0 && end_point_Up == 0)
+    {
+        //printf("CASO 0000\n");
         return 1;
+    }
     // ELIMINANDO SE ESTÃO TOTALMENTE EM UM ÚNICA DIREÇÃO
     if ((begin_point_Left && end_point_Left) || (begin_point_Right && end_point_Right) || (begin_point_Down && end_point_Down) || (begin_point_Up && end_point_Up))
+    {
+        //printf("AMBOS EM UMA DIRECAO\n");
         return 0;
+    }
+    /*printf("Start Point\n");
+    printf("%.1f %.1f %.1f %.1f\n", begin_point_Left, begin_point_Right, begin_point_Down, begin_point_Up);
+    printf("End Point\n");
+    printf("%.1f %.1f %.1f %.1f\n", end_point_Left, end_point_Right, end_point_Down, end_point_Up);*/
 
     // CASOS NÃO TRIVIAIS
     return checkLineAfterNonTrivial(line, mx, my, t);
@@ -98,7 +115,8 @@ int checkLine(Line *line, double mx, double my, double t)
  */
 int checkLineAfterNonTrivial(Line *line, double mx, double my, double t)
 {
-
+    /*printf("CASO NAO TRIVIAL\n");
+    printf("number: %.2f\n", line->start->x);*/
     double xmin = mx - t, xmax = mx + t, ymin = my - t, ymax = my + t;
     double x0 = line->start->x, y0 = line->start->y;
     double x1 = line->end->x, y1 = line->end->y;
@@ -145,10 +163,16 @@ int checkLineAfterNonTrivial(Line *line, double mx, double my, double t)
     if (y1 > ymax)
         end_point_Up = 1;
 
+    /*printf("Start Point\n");
+    printf("%.1f %.1f %.1f %.1f\n", begin_point_Left, begin_point_Right, begin_point_Down, begin_point_Up);
+    printf("End Point\n");
+    printf("%.1f %.1f %.1f %.1f\n", end_point_Left, end_point_Right, end_point_Down, end_point_Up);*/
+
     if (begin_point_Left == 0 && begin_point_Right == 0 && begin_point_Down == 0 && begin_point_Up == 0)
         return 1;
     if (end_point_Left == 0 && end_point_Right == 0 && end_point_Down == 0 && end_point_Up == 0)
         return 1;
+
 
     return 0;
 }
@@ -181,7 +205,7 @@ NodeLine *selectLine(double x, double y, double t)
  */
 int checkEdgePolygonNoNTrivialCases(Point *p1, Point *p2, double mx, double my)
 {
-
+    //printf("POLY: CASO NAO TRIVIAL\n");
     double xi = p1->x + ((my - p1->y) * (p2->x - p1->x) / (p2->y - p1->y));
 
     if (xi > mx)
@@ -198,7 +222,7 @@ int checkEdgePolygonNoNTrivialCases(Point *p1, Point *p2, double mx, double my)
  */
 int checkEdgePolygonSpecialCase(Point *atual, Point *ant, Point *next)
 {
-
+    //printf("POLY: CASO ESPECIAL\n");
     if((atual->y > ant->y && atual->y < next->y) || (atual->y < ant->y && atual->y > next->y)) return 1;
 
     return 0;
@@ -214,13 +238,25 @@ int checkEdgePolygonCases(Point *p1, Point *p2, double mx, double my)
 {
     // TRIVIAL CASES
     if (p1->y > my && p2->y > my)
+    {
+        //printf("Caso 1 trivial\n");
         return 0;
+    }
     if (p1->y < my && p2->y < my)
+    {
+        //printf("Caso 2 trivial\n");
         return 0;
+    }
     if (p1->x < mx && p2->x < mx)
+    {
+        //printf("Caso 3 trivial\n");
         return 0;
+    }
     if ((p1->x > mx && p2->x > mx) && ((p1->y > my && p2->y < my) || (p1->y < my && p2->y > my)))
+    {
+        //printf("Caso 4 trivial\n");
         return 1;
+    }
 
     // NONTRIVIAL CASES
     return checkEdgePolygonNoNTrivialCases(p1, p2, mx, my);
@@ -251,7 +287,7 @@ int checkPoly(Poly *p, double mx, double my)
     }
     //ANALISANDO O PRIMEIRO PONTO
     if(p->head->obj->y == my && p->head->obj->x > mx) count += checkEdgePolygonSpecialCase(p->head->obj, aux->obj, p->head->next->obj);
-    else checkEdgePolygonCases(p->head->obj, p->head->next->obj, mx, my);
+    else count += checkEdgePolygonCases(p->head->obj, p->head->next->obj, mx, my);
 
     //ANALISANDO O ÚLTIMO PONTO
     if(aux->obj->y == my && aux->obj->x > mx) count += checkEdgePolygonSpecialCase(aux->obj, ant->obj, p->head->obj);
