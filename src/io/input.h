@@ -1,7 +1,8 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#define CUSTOM_KEY_ESC 27
+#define KEY_ENTER 13
+#define KEY_ESC 27
 
 extern int KEYS[256];
 extern int SP_KEYS[256];
