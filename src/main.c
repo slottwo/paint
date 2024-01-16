@@ -73,10 +73,14 @@ int main(int argc, char const *argv[])
 
     // Input
     glutMouseFunc(onMouseClick);
+    
     glutKeyboardFunc(keyPressed);
     glutKeyboardUpFunc(keyReleased);
+    
     glutSpecialFunc(keySpecialPressed);
     glutSpecialFunc(keySpecialReleased);
+
+    glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
 
     // Loop
     glutMainLoop();
