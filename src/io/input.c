@@ -28,6 +28,7 @@ void keySpecialOperations()
 {
 }
 
-void onMouseClick(int, int, int, int)
+void onMouseClick(int button, int state, int x, int y)
 {
+    
 }

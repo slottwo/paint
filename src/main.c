@@ -72,6 +72,7 @@ int main(int argc, char const *argv[])
     glutDisplayFunc(onDisplay);
 
     // Input
+    glutMouseFunc(onMouseClick);
     glutKeyboardFunc(keyPressed);
     glutKeyboardUpFunc(keyReleased);
     glutSpecialFunc(keySpecialPressed);
