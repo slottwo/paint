@@ -58,10 +58,6 @@ int checkLine(Line *line, double mx, double my, double t)
     // SETANDO AS ESTRUTURAS DE COMPARAÇÃO UTILIZADAS
     double begin_point_Left = 0, begin_point_Right = 0, begin_point_Up = 0, begin_point_Down = 0;
     double end_point_Left = 0, end_point_Right = 0, end_point_Up = 0, end_point_Down = 0;
-    /*printf("Start Point\n");
-    printf("%.1f %.1f %.1f %.1f\n", begin_point_Left, begin_point_Right, begin_point_Down, begin_point_Up);
-    printf("End Point\n");
-    printf("%.1f %.1f %.1f %.1f\n", end_point_Left, end_point_Right, end_point_Down, end_point_Up);*/
     // FAZENDO AS ESTRUTURAS DOS VÉRTICES
     // START POINT
     if (begin_point->x < mx - t)
@@ -98,10 +94,6 @@ int checkLine(Line *line, double mx, double my, double t)
         //printf("AMBOS EM UMA DIRECAO\n");
         return 0;
     }
-    /*printf("Start Point\n");
-    printf("%.1f %.1f %.1f %.1f\n", begin_point_Left, begin_point_Right, begin_point_Down, begin_point_Up);
-    printf("End Point\n");
-    printf("%.1f %.1f %.1f %.1f\n", end_point_Left, end_point_Right, end_point_Down, end_point_Up);*/
 
     // CASOS NÃO TRIVIAIS
     return checkLineAfterNonTrivial(line, mx, my, t);
@@ -115,35 +107,41 @@ int checkLine(Line *line, double mx, double my, double t)
  */
 int checkLineAfterNonTrivial(Line *line, double mx, double my, double t)
 {
-    /*printf("CASO NAO TRIVIAL\n");
-    printf("number: %.2f\n", line->start->x);*/
+
     double xmin = mx - t, xmax = mx + t, ymin = my - t, ymax = my + t;
+
     double x0 = line->start->x, y0 = line->start->y;
     double x1 = line->end->x, y1 = line->end->y;
 
+    double m;
+    if(x0 != x1) m = (y1 - y0) / (x1 - x0);
+    else m = 0;
+
+
     if (line->start->x < xmin)
     { // Est� na esquerda
+        y0 = y0 + ((xmin - x0) * m);
         x0 = xmin;
-        y0 = y0 + ((xmin - x0) * (y1 - y0) / (x1 - x0));
     }
     else if (line->start->x > xmax)
     { // Est� na direita
+        y0 = y0 + ((xmax - x0) * m);
         x0 = xmax;
-        y0 = y0 + ((xmax - x0) * (y1 - y0) / (x1 - x0));
     }
-    else if (line->start->y < ymin)
+    if (line->start->y < ymin)
     { // Est� abaixo
+        x0 = x0 + ((ymin - y0) * m);
         y0 = ymin;
-        x0 = x0 + ((ymin - y0) * (x1 - x0) / (y1 - y0));
     }
     else if (line->start->y > ymax)
     { // Est� acima
+        x0 = x0 + ((ymax - y0) * m);
         y0 = ymax;
-        x0 = x0 + ((ymax - y0) * (x1 - x0) / (y1 - y0));
+
     }
 
     double begin_point_Left = 0, begin_point_Right = 0, begin_point_Up = 0, begin_point_Down = 0;
-    double end_point_Left = 0, end_point_Right = 0, end_point_Up = 0, end_point_Down = 0;
+
     // START POINT
     if (x0 < xmin)
         begin_point_Left = 1;
@@ -153,26 +151,11 @@ int checkLineAfterNonTrivial(Line *line, double mx, double my, double t)
         begin_point_Down = 1;
     if (y0 > ymax)
         begin_point_Up = 1;
-    // END POINT
-    if (x1 < xmin)
-        end_point_Left = 1;
-    if (x1 > xmax)
-        end_point_Right = 1;
-    if (y1 < ymin)
-        end_point_Down = 1;
-    if (y1 > ymax)
-        end_point_Up = 1;
-
-    /*printf("Start Point\n");
-    printf("%.1f %.1f %.1f %.1f\n", begin_point_Left, begin_point_Right, begin_point_Down, begin_point_Up);
-    printf("End Point\n");
-    printf("%.1f %.1f %.1f %.1f\n", end_point_Left, end_point_Right, end_point_Down, end_point_Up);*/
 
     if (begin_point_Left == 0 && begin_point_Right == 0 && begin_point_Down == 0 && begin_point_Up == 0)
+    {
         return 1;
-    if (end_point_Left == 0 && end_point_Right == 0 && end_point_Down == 0 && end_point_Up == 0)
-        return 1;
-
+    }
 
     return 0;
 }
@@ -330,8 +313,8 @@ int checkPolyline(NodePoly *poly, double mx, double my, double t)
         if(checkLine(line, mx, my, t)) return 1;
         aux = aux->next;
     }
-    line = createLineP(aux->obj, poly->obj->head->obj);
-    if(checkLine(line, mx, my, t)) return 1;
+    //line = createLineP(aux->obj, poly->obj->head->obj);
+    //if(checkLine(line, mx, my, t)) return 1;
 
     return 0;
 }
