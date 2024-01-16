@@ -1,16 +1,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-enum events
-{
-    EVENT_SELECT,
-    EVENT_CREATE,
-    EVENT_MOVE,
-    EVENT_ROTATE,
-    EVENT_SCALE
-};
-
-extern enum events CURRENT_EVENT;
+#define CUSTOM_KEY_ESC 27
 
 extern int KEYS[256];
 extern int SP_KEYS[256];

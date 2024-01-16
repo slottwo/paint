@@ -2,8 +2,8 @@
 #include <windows.h>
 #endif
 
-#include <GL/freeglut.h>
 #include <GL/glut.h>
+#include <GL/freeglut.h>
 #include <stdlib.h>
 #include <stdio.h>
 
