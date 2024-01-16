@@ -2,18 +2,13 @@
 #define INPUT_H
 
 #define KEY_ENTER 13
-#define KEY_ESC 27
-
-extern int KEYS[256];
-extern int SP_KEYS[256];
+#define KEY_ESCAPE 27
 
 void keyPressed(unsigned char, int, int);
 void keyReleased(unsigned char, int, int);
-void keyOperations();
 
 void keySpecialPressed(int, int, int);
 void keySpecialReleased(int, int, int);
-void keySpecialOperations();
 
 void onMouseClick(int, int, int, int);
 

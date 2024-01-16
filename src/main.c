@@ -37,10 +37,6 @@ void onInitialization()
 
 void onDisplay()
 {
-    // Perform configured tasks for each key
-    keyOperations();
-    keySpecialOperations();
-
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Render each object in DATA
@@ -80,7 +76,7 @@ int main(int argc, char const *argv[])
     glutSpecialFunc(keySpecialPressed);
     glutSpecialFunc(keySpecialReleased);
 
-    glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
+    // glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
 
     // Loop
     glutMainLoop();

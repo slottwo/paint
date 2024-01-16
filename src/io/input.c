@@ -8,68 +8,33 @@
 #include "../settings.h"
 #include "../types/data.h"
 
-int KEYS[256] = {0};
-int SP_KEYS[256] = {0};
-
 void keyPressed(unsigned char key, int x, int y)
 {
-    KEYS[key] = 1;
+    switch (key)
+    {
+    case KEY_ENTER:
+        if (CURRENT_EVENT == EVENT_CREATE)
+        {
+            createOperation(0,0);
+        }
+        
+        break;
+
+    default:
+        break;
+    }
 }
 
 void keyReleased(unsigned char key, int x, int y)
 {
-    KEYS[key] = 0;
-}
-
-void keyOperations()
-{
-    if (KEYS['p']) // _P_OINT
-    {
-        if (CURRENT_EVENT != EVENT_CREATE)
-        {
-            CURRENT_EVENT = EVENT_CREATE;
-            
-            SELECTED.type = point_type;
-        }
-    }
-    else if (KEYS['l']) // _L_INE
-    {
-        if (CURRENT_EVENT != EVENT_CREATE)
-        {
-            CURRENT_EVENT = EVENT_CREATE;
-            
-            SELECTED.type = point_type;
-        }
-    }
-    else if (KEYS['o']) // P_O_LYGON
-    {
-        /* code */
-    }
-    if (KEYS[13]) // Enter
-    {
-        printf("Enter\n");
-    }
 }
 
 void keySpecialPressed(int key, int x, int y)
 {
-    SP_KEYS[key] = 1;
 }
 
 void keySpecialReleased(int key, int x, int y)
 {
-    SP_KEYS[key] = 0;
-}
- 
-void keySpecialOperations()
-{
-    if (SP_KEYS[CUSTOM_KEY_ESC])
-    {
-        if (CURRENT_EVENT != EVENT_SELECT)
-        {
-
-        }
-    }
 }
 
 void onMouseClick(int button, int state, int x, int y)
@@ -83,7 +48,7 @@ void onMouseClick(int button, int state, int x, int y)
         break;
 
     case EVENT_CREATE:
-        createOperation(x, y);
+        createOperation(OP_CLICK, x, y);
         break;
 
     case EVENT_MOVE:

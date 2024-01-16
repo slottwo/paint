@@ -7,7 +7,7 @@ int selectOperation(int x, int y)
 {
 }
 
-int createOperation(int x, int y)
+int createOperation(enum operation op, int x, int y)
 {
     switch (SELECTED.type)
     {
