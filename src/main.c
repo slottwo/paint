@@ -56,7 +56,7 @@ int main(int argc, char const *argv[])
     glutInit(&argc, (char **)argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowPosition(
-        (SCREEN_WIDTH - W) / 2,
+        (SCREEN_WIDTH   - W) / 2,
         (SCREEN_HEIGH - H) / 2);
     glutInitWindowSize(W, H);
     glutCreateWindow("Paint");

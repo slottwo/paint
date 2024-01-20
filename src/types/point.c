@@ -60,6 +60,11 @@ Point *createPointXY(double x, double y)
     return new_point;
 }
 
+int pointCompare(Point *point, double x, double y)
+{
+    return (point->x == x) && (point->y == y);
+}
+
 /**
  * @brief Get the Point coordinates
  *

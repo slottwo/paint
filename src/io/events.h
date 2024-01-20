@@ -10,7 +10,7 @@ enum events
     EVENT_SCALE
 };
 
-extern enum events CURRENT_EVENT;
+extern enum events EVENT;
 
 enum operation
 {
@@ -21,10 +21,11 @@ enum operation
     OP_REDO
 };
 
-int selectOperation(int, int);
-int createOperation(enum operation, int, int);
-int moveOperation(int, int);
-int rotateOperation(int, int);
-int scaleOperation(int, int);
+int selectEvent(int, double, double);
+int createEvent(int, double, double);
+int moveEvent(int, double, double);
+int rotateEvent(int, double, double);
+int scaleEvent(int, double, double);
+int deleteEvent(int);
 
 #endif

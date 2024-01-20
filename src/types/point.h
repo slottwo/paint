@@ -12,7 +12,9 @@ typedef struct Point
 Point *createPointV(double *);
 Point *createPointXY(double, double);
 
-double *getV(Point *Point);
+int pointCompare(Point *, double, double);
+
+double *getV(Point *);
 
 void freePoint(Point *);
 
