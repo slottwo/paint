@@ -1,9 +1,10 @@
+#include <stdlib.h>
+#include <stdio.h>
+
 #include "events.h"
-#include "selection.h"
+// #include "selection.h"
 #include "../types/data.h"
 #include "../types/point.h"
-
-#include <stdio.h>
 
 enum events EVENT = EVENT_SELECT;
 
@@ -40,43 +41,86 @@ int createEvent(int OP, double x, double y)
         break;
 
     case OP_INIT:
-        if (SELECTED.type == polygon_type)
-        {
-            polylineDataPush(createPoly());
-        }
-        else if (SELECTED.type == none_type || SELECTED.type > 4)
-        {
-            printf("Creation Tool Error: No object type selected\n");
-            return 1;
-        }
-        break;
+        EVENT = EVENT_CREATE;
 
-    case OP_CLICK:
+        printf("Init creating tool. Type: %d\n", SELECTED.type);
+
         switch (SELECTED.type)
         {
         case point_type:
-            pointDataPush(createPointXY(x, y));
             break;
 
         case line_type:
-            if (SELECTED.line->obj->start)
+            SELECTED.line = NULL;
+            break;
+
+        case polygon_type:
+            polylineDataPush(createPoly());
+            break;
+
+        default:
+            printf("Creation Tool Error: No object type selected\n");
+            return 0;
+            break;
+        }
+
+        break;
+
+    case OP_CLICK:
+        printf("Creation tool clicking. Type: %d\n", SELECTED.type);
+
+        switch (SELECTED.type)
+        {
+        case point_type:
+            if (pointDataPush(createPointXY(x, y)) == 0)
             {
-                if (pointCompare(SELECTED.line->obj->start, x, y))
+                printf("Point Creation Tool Error: Point not pushed\n");
+                return 0;
+            }
+            break;
+
+        case line_type:
+            if (SELECTED.line == NULL)
+            {
+                printf("Line start at (%.2f, %.2f)\n", x, y);
+
+                if (pointDataPush(createPointXY(x, y)) == 0) // Line start preview
                 {
-                    printf("Line Creation Tool Error: End point coincides with beginning\n");
-                    break;
+                    printf("Line Creation Tool Error: Point line view not pushed on DATA\n");
+                    return 0;
                 }
-                else
+                if (lineDataPush(createLine()) == 0)
                 {
-                    setLineEnd(SELECTED.line->obj, x, y);
-                    createEvent(OP_DONE, 0, 0); // remove rendered starter point
+                    printf("Line Creation Tool Error: Line not pushed on DATA\n");
+                    return 0;
+                }
+                else if (setLineStart(SELECTED.line->obj, x, y) == 0)
+                {
+                    printf("Line Creation Tool Error: Line start setting\n");
+                    return 0;
                 }
             }
             else
             {
-                setLineStart(SELECTED.line->obj, x, y);
-                pointDataPush(createPointXY(x, y)); // render starter point :D
-                SELECTED.type = line_type;
+                printf("Line end at (%.2f, %.2f)\n", x, y);
+
+                if (pointCompare(SELECTED.line->obj->start, x, y))
+                {
+                    printf("Line Creation Tool Error: Line ends coincides\n");
+                    return 1;
+                }
+                else
+                {
+                    if (setLineEnd(SELECTED.line->obj, x, y) == 0)
+                    {
+                        printf("Line Creation Tool Error: Line end setting\n");
+                        return 0;
+                    }
+
+                    pointDataRemove(SELECTED.point); // Rm line start preview
+                    SELECTED.type = line_type;
+                    SELECTED.line = NULL;
+                }
             }
             break;
 
@@ -87,7 +131,7 @@ int createEvent(int OP, double x, double y)
 
         default:
             printf("Creation Tool Error: No object type selected\n");
-            return 1;
+            return 0;
             break;
         }
 
@@ -95,7 +139,8 @@ int createEvent(int OP, double x, double y)
         switch (SELECTED.type)
         {
         case point_type:
-            /* code */
+            SELECTED.type = none_type;
+            SELECTED.point = NULL;
             break;
 
         case line_type:
@@ -143,7 +188,7 @@ int createEvent(int OP, double x, double y)
         break;
     }
 
-    return 0;
+    return 1;
 }
 
 int moveEvent(int OP, double x, double y)

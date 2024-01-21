@@ -9,6 +9,7 @@ typedef struct Line
     Point *end;
 } Line;
 
+Line *createLine();
 Line *createLineP(Point *, Point*);
 Line *createLineV(double **);
 

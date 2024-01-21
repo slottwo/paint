@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #include "render.h"
-
+#include "../settings.h"
 #include "../types/data.h"
 
 /**
@@ -22,7 +22,7 @@ int renderPoint(Point *point)
     glBegin(GL_POINT);
 
     glVertex2d(point->x, point->y);
-    printf("Ponto (%.2f, %.2f) renderizado!\n", point->x, point->y);
+    printf("Point (%.2f, %.2f) rendered\n", point->x, point->y);
 
     glEnd();
 
@@ -48,10 +48,10 @@ int renderPoints(NodePoint *node)
     {
         if (node->obj == NULL)
         {
-            exit(1);
             return 0;
         }
 
+        printf("(%.2f, %.2f) ", node->obj->x, node->obj->y);
         glVertex2d(node->obj->x, node->obj->y);
 
         node = node->next;
@@ -72,6 +72,12 @@ int renderLine(Line *line)
 {
     if (line == NULL)
     {
+        return 0;
+    }
+
+    if (line->start == NULL || line->end == NULL)
+    {
+        printf("Render Line Error: Incomplete line received\n");
         return 0;
     }
 
@@ -110,6 +116,13 @@ int renderLines(NodeLine *node)
         {
             exit(1);
             return 1;
+        }
+
+        if (line->start == NULL || line->end == NULL)
+        {
+            printf("[skip incomplete line] ");
+            node = node->next;
+            continue;
         }
 
         glVertex2d(line->start->x, line->start->y);
@@ -215,23 +228,31 @@ int renderData()
 
     // Render Points
 
-    glColor3d(0, 0, 0);
+    glColor3d(POINT_COLOR);
 
     if (DATA.point_head)
+    {
+        printf("Point rendering: ");
         out &= renderPoints(DATA.point_head);
+        printf("\n");
+    }
 
     // Render Lines
 
-    glColor3d(1, 0, 0);
+    glColor3d(LINE_COLOR);
 
     if (DATA.line_head)
+    {
+        printf("Lines rendering: ");
         out &= renderLines(DATA.line_head);
+        printf("\n");
+    }
 
     NodePoly *node;
 
     // Render Polylines
 
-    glColor3d(0, 1, 0);
+    glColor3d(POLYLINE_COLOR);
 
     node = DATA.polyline_head;
     while (node != NULL)
@@ -242,7 +263,7 @@ int renderData()
 
     // Render Polygons
 
-    glColor3d(0, 0, 1);
+    glColor3d(POLYGON_COLOR);
 
     node = DATA.polygon_head;
     while (node != NULL)

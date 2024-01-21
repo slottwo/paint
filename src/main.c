@@ -12,24 +12,10 @@
 #include "io/render.h"
 #include "io/input.h"
 
-double TOL = 2.5;
-double CANVAS_SIZE[4] = {ORTHO_SIZE};
-
 void onInitialization()
 {
-    glClearColor(1, 1, 1, 0);
+    glClearColor(BG_COLOR);
     glPointSize(TOL * 2);
-
-    pointDataPush(createPointXY(0.5, 0.5));
-
-    lineDataPush(createLineP(createPointXY(0.25, 0.5), createPointXY(0.5, 0.75)));
-
-    Poly *p = createPoly();
-    polyPush(p, createPointXY(0.5, 0.5));
-    polyPush(p, createPointXY(0.25, 0.5));
-    polyPush(p, createPointXY(0.25, 0.25));
-
-    polygonDataPush(p);
 
     glMatrixMode(GL_PROJECTION);
     gluOrtho2D(ORTHO_SIZE);
@@ -56,7 +42,7 @@ int main(int argc, char const *argv[])
     glutInit(&argc, (char **)argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowPosition(
-        (SCREEN_WIDTH   - W) / 2,
+        (SCREEN_WIDTH - W) / 2,
         (SCREEN_HEIGH - H) / 2);
     glutInitWindowSize(W, H);
     glutCreateWindow("Paint");
@@ -69,10 +55,10 @@ int main(int argc, char const *argv[])
 
     // Input
     glutMouseFunc(onMouseClick);
-    
+
     glutKeyboardFunc(keyPressed);
     glutKeyboardUpFunc(keyReleased);
-    
+
     glutSpecialFunc(keySpecialPressed);
     glutSpecialFunc(keySpecialReleased);
 

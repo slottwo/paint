@@ -5,10 +5,9 @@
 
 #include "input.h"
 #include "events.h"
+#include "render.h"
 #include "../settings.h"
 #include "../types/data.h"
-
-double CANVAS_SIZE[4] = {ORTHO_SIZE};
 
 void keyPressed(unsigned char key, int x, int y)
 {
@@ -18,6 +17,7 @@ void keyPressed(unsigned char key, int x, int y)
         switch (EVENT)
         {
         case EVENT_CREATE:
+            printf("Done Creation Tool (Type: %d)\n", SELECTED.type);
             createEvent(OP_DONE, 0, 0);
             break;
 
@@ -42,11 +42,11 @@ void keyPressed(unsigned char key, int x, int y)
             break;
 
         case EVENT_ROTATE:
-            createEvent(OP_ESC, 0, 0);
+            rotateEvent(OP_ESC, 0, 0);
             break;
 
         case EVENT_SCALE:
-            createEvent(OP_ESC, 0, 0);
+            scaleEvent(OP_ESC, 0, 0);
             break;
 
         default:
@@ -54,45 +54,86 @@ void keyPressed(unsigned char key, int x, int y)
         }
         break;
 
-    case 'p': // point creation tool
-        if (EVENT == EVENT_SELECT)
+    case 'p': // Point Creation Tool
+        if (EVENT == EVENT_SELECT || EVENT == EVENT_CREATE)
         {
+            printf("Point Creation Tool pre-setup\n");
+
+            if (EVENT == EVENT_CREATE)
+            {
+                printf("Quit previous Creation Tool\n");
+                createEvent(OP_ESC, 0, 0);
+            }
+
             SELECTED.type = point_type;
-            createEvent(OP_INIT, 0, 0);
+
+            if (createEvent(OP_INIT, 0, 0) == 0)
+            {
+                printf("Point Creation Tool Error: Returned 0\n");
+                exit(1);
+            }
         }
+
         break;
 
-    case 'l': // line creation tool
-        if (EVENT == EVENT_SELECT)
+    case 'l': // Line Creation Tool
+        if (EVENT == EVENT_SELECT || EVENT == EVENT_CREATE)
         {
+            printf("Line Creation Tool pre-setup\n");
+
+            if (EVENT == EVENT_CREATE)
+            {
+                printf("Quit previous Creation Tool\n");
+                createEvent(OP_ESC, 0, 0);
+            }
+
             SELECTED.type = line_type;
-            createEvent(OP_INIT, 0, 0);
+
+            if (createEvent(OP_INIT, 0, 0) == 0)
+            {
+                printf("Line Creation Tool Error: Returned 0\n");
+                exit(1);
+            }
         }
         break;
 
-    case 'o': // polygon creation tool / open file
-        if (EVENT == EVENT_SELECT)
+    case 'o': // polygon Creation Tool / Open File
+        if (EVENT == EVENT_SELECT || EVENT == EVENT_CREATE)
         {
+            printf("Polygon Creation Tool pre-setup\n");
+
+            if (EVENT == EVENT_CREATE)
+            {
+                printf("Quit previous Creation Tool\n");
+                createEvent(OP_ESC, 0, 0);
+            }
+
             SELECTED.type = polygon_type;
-            createEvent(OP_INIT, 0, 0);
+            if (createEvent(OP_INIT, 0, 0) == 0)
+            {
+                printf("Polygon Creation Tool Error: Returned 0\n");
+                exit(1);
+            }
         }
         break;
 
-    case 'm': // move tool
+    case 'm': // Move Tool
         break;
 
-    case 'r': // rotate tool
+    case 'r': // Rotate Tool
         break;
 
-    case 's': // scale tool / save file
+    case 's': // Scale Tool / Save File
         break;
 
-    case 'z': // redo
+    case 'z': // Redo
         break;
 
     default:
         break;
     }
+
+    glutPostRedisplay();
 }
 
 void keyReleased(unsigned char key, int x, int y)
@@ -118,6 +159,8 @@ void keySpecialPressed(int key, int x, int y)
             break;
         }
     }
+
+    glutPostRedisplay();
 }
 
 void keySpecialReleased(int key, int x, int y)
@@ -129,29 +172,41 @@ void onMouseClick(int button, int state, int x, int y)
     double ortho_x = CANVAS_SIZE[1] * x / W;
     double ortho_y = CANVAS_SIZE[3] * (H - y) / H;
 
-    switch (EVENT)
+    if (state == GLUT_DOWN)
     {
-    case EVENT_SELECT:
-        selectEvent(OP_CLICK, x, y);
-        break;
+        printf("Click. Event: %d\n", EVENT);
 
-    case EVENT_CREATE:
-        createEvent(OP_CLICK, x, y);
-        break;
+        switch (EVENT)
+        {
+        case EVENT_SELECT:
+            selectEvent(OP_CLICK, ortho_x, ortho_y);
+            break;
 
-    case EVENT_MOVE:
-        moveEvent(OP_CLICK, x, y);
-        break;
+        case EVENT_CREATE:
+            createEvent(OP_CLICK, ortho_x, ortho_y);
+            break;
 
-    case EVENT_ROTATE:
-        rotateEvent(OP_CLICK, x, y);
-        break;
+        case EVENT_MOVE:
+            moveEvent(OP_CLICK, ortho_x, ortho_y);
+            break;
 
-    case EVENT_SCALE:
-        scaleEvent(OP_CLICK, x, y);
-        break;
+        case EVENT_ROTATE:
+            rotateEvent(OP_CLICK, ortho_x, ortho_y);
+            break;
 
-    default:
-        break;
-    }
+        case EVENT_SCALE:
+            scaleEvent(OP_CLICK, ortho_x, ortho_y);
+            break;
+
+        default:
+            break;
+        }
+
+        glutPostRedisplay();
+    } /*
+    else if (EVENT == EVENT_CREATE)
+    {
+        createEvent(OP_CLICK, ortho_x, ortho_y);
+        glutPostRedisplay();
+    } */
 }
