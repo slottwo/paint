@@ -127,6 +127,8 @@ int renderLines(NodeLine *node)
 
         glVertex2d(line->start->x, line->start->y);
         glVertex2d(line->end->x, line->end->y);
+        char f[] = "[(%.2f, %.2f), (%.2f, %.2f)]";
+        printf(f, line->start->x, line->start->y, line->end->x, line->end->y);
 
         node = node->next;
     }

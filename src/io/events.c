@@ -19,25 +19,33 @@ int createEvent(int OP, double x, double y)
     case OP_ESC:
         switch (SELECTED.type)
         {
-        case point_type:
-            /* code */
-            break;
-
         case line_type:
-            /* code */
+            if (SELECTED.line != NULL)
+            {
+                pointDataRemove(SELECTED.point); // Rm line start preview
+                lineDataRemove(SELECTED.line);   // Rm incomplete line
+            }
             break;
 
         case polyline_type:
-            /* code */
-            break;
-
-        case polygon_type:
-            /* code */
+            if (SELECTED.polyline != NULL)
+            {
+                polylineDataRemove(SELECTED.polyline);
+            }
             break;
 
         default:
             break;
         }
+
+        SELECTED.type = none_type;
+        SELECTED.point = NULL;
+        SELECTED.line = NULL;
+        SELECTED.polyline = NULL;
+        SELECTED.polygon = NULL;
+
+        EVENT = EVENT_SELECT;
+
         break;
 
     case OP_INIT:
@@ -135,29 +143,31 @@ int createEvent(int OP, double x, double y)
             break;
         }
 
+        break;
+
     case OP_DONE:
-        switch (SELECTED.type)
+
+        if (SELECTED.type == polyline_type && SELECTED.polyline != NULL)
         {
-        case point_type:
-            SELECTED.type = none_type;
-            SELECTED.point = NULL;
-            break;
+            if (polyLength(SELECTED.polyline->obj) < 3)
+            {
+                printf("Polygon Creation Tool Error: Polygons needs to have at last ");
+                return 1;
+            }
 
-        case line_type:
-            /* code */
-            break;
+            // Turn polyline in a polygon
+            polygonDataPush(SELECTED.polyline->obj);
+            polylineDataRemove(SELECTED.polyline);
 
-        case polyline_type:
-            /* code */
-            break;
-
-        case polygon_type:
-            /* code */
-            break;
-
-        default:
-            break;
+            // Setup to create another polygon
+            SELECTED.type = polygon_type;
+            createEvent(OP_INIT, 0, 0);
         }
+        else
+        {
+            createEvent(OP_ESC, 0, 0);
+        }
+
         break;
 
     case OP_REDO:
