@@ -176,7 +176,7 @@ int polylineDataRemove(NodePoly *node, int keepPoly)
     {
         printf("Polyline DATA Remove Error: NULL poly on node received\n");
         return 0;
-    }
+    }   
 
     if (node->prior == NULL)
     {
@@ -268,7 +268,7 @@ int polygonDataRemove(NodePoly *node)
     return 1;
 }
 
-int pointIsInDATA(NodePoint *node)
+int pointInDATA(NodePoint *node)
 {
     NodePoint *parse = DATA.point_head;
     while (parse != NULL)
@@ -281,7 +281,7 @@ int pointIsInDATA(NodePoint *node)
     return 0;
 }
 
-int lineIsInDATA(NodeLine *node)
+int lineInDATA(NodeLine *node)
 {
     NodeLine *parse = DATA.line_head;
     while (parse != NULL)
@@ -294,7 +294,7 @@ int lineIsInDATA(NodeLine *node)
     return 0;
 }
 
-int polylineIsInDATA(NodePoly *node)
+int polylineInDATA(NodePoly *node)
 {
     NodePoly *parse = DATA.polyline_head;
     while (parse != NULL)
@@ -307,7 +307,7 @@ int polylineIsInDATA(NodePoly *node)
     return 0;
 }
 
-int polygonIsInDATA(NodePoly *node)
+int polygonInDATA(NodePoly *node)
 {
     NodePoly *parse = DATA.polygon_head;
     while (parse != NULL)

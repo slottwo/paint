@@ -217,14 +217,74 @@ int createEvent(int OP, double x, double y)
 
 int moveEvent(int OP, double x, double y)
 {
+    switch (OP)
+    {
+    case OP_ESC:
+        EVENT = EVENT_SELECT;
+        break;
+
+    case OP_CLICK:
+        break;
+
+    case OP_DONE:
+        moveEvent(OP_ESC, 0, 0);
+        break;
+
+    default:
+        printf("Move Tool Error: Invalid Operation\n");
+        return 0;
+        break;
+    }
+
+    return 1;
 }
 
 int rotateEvent(int OP, double x, double y)
 {
+        switch (OP)
+    {
+    case OP_ESC:
+        EVENT = EVENT_SELECT;
+        break;
+
+    case OP_CLICK:
+        break;
+
+    case OP_DONE:
+        moveEvent(OP_ESC, 0, 0);
+        break;
+
+    default:
+        printf("Move Tool Error: Invalid Operation\n");
+        return 0;
+        break;
+    }
+
+    return 1;
 }
 
 int scaleEvent(int OP, double x, double y)
 {
+        switch (OP)
+    {
+    case OP_ESC:
+        EVENT = EVENT_SELECT;
+        break;
+
+    case OP_CLICK:
+        break;
+
+    case OP_DONE:
+        moveEvent(OP_ESC, 0, 0);
+        break;
+
+    default:
+        printf("Move Tool Error: Invalid Operation\n");
+        return 0;
+        break;
+    }
+
+    return 1;
 }
 
 int deleteEvent(int OP)

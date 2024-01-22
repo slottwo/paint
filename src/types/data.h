@@ -45,9 +45,10 @@ int polylineDataRemove(NodePoly *, int);
 int polygonDataPush(Poly *);
 int polygonDataRemove(NodePoly *);
 
-int pointIsInDATA(NodePoint *);
-int lineIsInDATA(NodeLine *);
-int polylineIsInDATA(NodePoly *);
-int polygonIsInDATA(NodePoly *);
+// Not working...
+// int pointInDATA(NodePoint *);
+// int lineInDATA(NodeLine *);
+// int polylineInDATA(NodePoly *);
+// int polygonInDATA(NodePoly *);
 
 #endif

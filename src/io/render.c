@@ -263,17 +263,6 @@ int renderData()
     }
     printf("\n");
 
-    // Render Points
-
-    glColor3d(POINT_COLOR);
-
-    printf("Point rendering: ");
-    if (DATA.point_head)
-    {
-        out &= renderPoints(DATA.point_head);
-    }
-    printf("\n");
-
     // Render Polylines
 
     glColor3d(POLYLINE_COLOR);
@@ -296,6 +285,17 @@ int renderData()
     if (DATA.line_head)
     {
         out &= renderLines(DATA.line_head);
+    }
+    printf("\n");
+
+    // Render Points
+
+    glColor3d(POINT_COLOR);
+
+    printf("Point rendering: ");
+    if (DATA.point_head)
+    {
+        out &= renderPoints(DATA.point_head);
     }
     printf("\n");
 
