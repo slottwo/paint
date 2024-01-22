@@ -50,7 +50,10 @@ int pointDataRemove(NodePoint *node)
     if (node->prior == NULL)
     {
         DATA.point_head = node->next;
-        DATA.point_head->prior = NULL;
+        if (node->next != NULL)
+        {
+            DATA.point_head->prior = NULL;
+        }
     }
     else
     {
@@ -110,7 +113,10 @@ int lineDataRemove(NodeLine *node)
     if (node->prior == NULL)
     {
         DATA.line_head = node->next;
-        DATA.line_head->prior = NULL;
+        if (node->next != NULL)
+        {
+            DATA.line_head->prior = NULL;
+        }
     }
     else
     {
@@ -175,7 +181,10 @@ int polylineDataRemove(NodePoly *node, int keepPoly)
     if (node->prior == NULL)
     {
         DATA.polyline_head = node->next;
-        DATA.polygon_head->prior = NULL;
+        if (node->next != NULL)
+        {
+            DATA.polyline_head->prior = NULL;
+        }
     }
     else
     {
@@ -238,8 +247,11 @@ int polygonDataRemove(NodePoly *node)
 
     if (node->prior == NULL)
     {
-        // Devo verificar se node está em data?
         DATA.polygon_head = node->next;
+        if (node->next != NULL)
+        {
+            DATA.polygon_head->prior = NULL;
+        }
     }
     else
     {

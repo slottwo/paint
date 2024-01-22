@@ -17,6 +17,8 @@ int createEvent(int OP, double x, double y)
     switch (OP)
     {
     case OP_ESC:
+        printf("Creating tool. Op: ESC. Type: %d\n", SELECTED.type);
+
         switch (SELECTED.type)
         {
         case line_type:
