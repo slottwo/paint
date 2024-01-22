@@ -123,7 +123,6 @@ int createEvent(int OP, double x, double y)
             return 0;
             break;
         }
-
         break;
 
     case OP_CLICK:
@@ -255,19 +254,15 @@ int createEvent(int OP, double x, double y)
         //     case point_type:
         //         /* code */
         //         break;
-
         //     case line_type:
         //         /* code */
         //         break;
-
         //     case polyline_type:
         //         /* code */
         //         break;
-
         //     case polygon_type:
         //         /* code */
         //         break;
-
         //     default:
         //         break;
         //     }
@@ -383,6 +378,8 @@ int deleteEvent(int OP)
             return 0;
             break;
         }
+
+        selectEvent(OP_ESC, 0, 0);
     }
     else
     {

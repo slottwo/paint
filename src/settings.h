@@ -19,4 +19,6 @@
 extern double TOL;
 extern double CANVAS_SIZE[4];
 
+extern char file[];
+
 #endif

@@ -21,6 +21,12 @@ enum operation
     OP_REDO
 };
 
+// struct eventLog
+// {
+// };
+
+// struct eventLog LAST_Event;
+
 int selectEvent(int, double, double);
 int createEvent(int, double, double);
 int moveEvent(int, double, double);

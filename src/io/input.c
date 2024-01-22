@@ -13,6 +13,42 @@ void keyPressed(unsigned char key, int x, int y)
 {
     switch (key)
     {
+    case KEY_BACKSPACE: // Redo
+        switch (EVENT)
+        {
+        case EVENT_SELECT:
+            selectEvent(OP_ESC, 0, 0);
+            break;
+
+        case EVENT_CREATE:
+            switch (SELECTED.type)
+            {
+            case point_type:
+                SELECTED.point = DATA.point_head;
+                deleteEvent(OP_DONE);
+                SELECTED.type = point_type;
+                createEvent(OP_INIT, 0, 0);
+                break;
+
+            case polyline_type:
+                if (SELECTED.polyline != NULL)
+                {
+                    Point *point = polyPop(SELECTED.polyline->obj);
+                    if (point)
+                    {
+                        freePoint(point);
+                    }
+                }
+                break;
+
+            default:
+                break;
+            }
+        default:
+            break;
+        }
+        break;
+
     case KEY_ENTER:
         switch (EVENT)
         {
@@ -136,19 +172,16 @@ void keyPressed(unsigned char key, int x, int y)
         }
         break;
 
-    case 'i': // Polyline Creation Tool
-        break;
-
     case 'm': // Move Tool
         break;
 
     case 'r': // Rotate Tool
         break;
 
-    case 's': // Scale Tool
+    case 'a': // Load Tool
         break;
 
-    case 'z': // Redo
+    case 's': // Scale Tool
         break;
 
     default:
@@ -164,16 +197,6 @@ void keyReleased(unsigned char key, int x, int y)
 
 void keySpecialPressed(int key, int x, int y)
 {
-    switch (key)
-    {
-    case GLUT_KEY_F1:
-        printf("F1\n");
-        break;
-    default:
-        break;
-    }
-
-    glutPostRedisplay();
 }
 
 void keySpecialReleased(int key, int x, int y)

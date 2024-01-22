@@ -13,7 +13,7 @@ Poly *createPoly();
 Poly *createFPoly(double **, int);
 
 int polyPush(Poly *, Point *);
-Point *polygonPop(Poly *);
+Point *polyPop(Poly *);
 
 int polyIsEmpty(Poly *);
 int polyLength(Poly *);

@@ -1,6 +1,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+#define KEY_BACKSPACE 8
 #define KEY_ENTER 13
 #define KEY_ESCAPE 27
 #define KEY_DELETE 127

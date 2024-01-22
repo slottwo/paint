@@ -11,11 +11,14 @@
 #include "types/data.h"
 #include "io/render.h"
 #include "io/input.h"
+#include "io/file/load.h"
 
 void onInitialization()
 {
     glClearColor(BG_COLOR);
     glPointSize(5);
+
+    loadArquive(file);
 
     glMatrixMode(GL_PROJECTION);
     gluOrtho2D(ORTHO_SIZE);

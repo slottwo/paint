@@ -99,7 +99,7 @@ int polyPush(Poly *poly, Point *vertex)
  * @param poly Poly object
  * @return Point* removed vertex | NULL
  */
-Point *polygonPop(Poly *poly)
+Point *polyPop(Poly *poly)
 {
     if (poly == NULL)
     {
@@ -192,7 +192,7 @@ void freePoly(Poly *poly)
 
     while (polyIsEmpty(poly) == 0)
     {
-        point = polygonPop(poly);
+        point = polyPop(poly);
         freePoint(point);
     }
 

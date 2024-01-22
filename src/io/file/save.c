@@ -95,11 +95,12 @@ int savePolygons(FILE *file)
     {
         int num_points = polyLength(aux->obj);
         char buffer[50];
-        char *string_num_points = itoa(num_points, buffer, 10);
+        snprintf(buffer, sizeof(buffer), "%d", num_points);
+        // char *string_num_points = itoa(num_points, buffer, 10);
         char newline[MAX] = "";
         //strcpy(newline, strcat(string_poly, DELIMITER)); //poly,
         strcpy(newline, string_poly);
-        strcpy(newline, strcat(newline, string_num_points));//poly,num
+        strcpy(newline, strcat(newline, buffer));//poly,num
 
 
         NodePoint *actual_point = aux->obj->head;
@@ -143,7 +144,8 @@ int savePolylines(FILE *file)
     {
         int num_points = polyLength(aux->obj);
         char buffer[50];
-        char *string_num_points = itoa(num_points, buffer, 10);
+        snprintf(buffer, sizeof(buffer), "%d", num_points);
+        // char *string_num_points = itoa(num_points, buffer, 10);
         char newline[MAX] = "";
         strcpy(newline, string_polyline); //polyline,
         //printf("\n1:%s\n", newline);
@@ -153,7 +155,6 @@ int savePolylines(FILE *file)
         NodePoint *actual_point = aux->obj->head;
         while(actual_point != NULL)
         {
-
             strcpy(newline, strcat(newline, DELIMITER));//polyline,num,
 
             char x_string[50] = "";
