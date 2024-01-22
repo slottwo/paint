@@ -2,10 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "load.h"
 #include "../../types/data.h"
+#include "../../settings.h"
 
 #define MAX_LINE 1024
 #define DELIMITER ','
+
 int loadPoint(char *src)
 {
     int type;
@@ -61,7 +64,7 @@ int loadPainting(char *path)
 {
     FILE *file;
 
-    file = fopen(path != NULL ? path : "painting.txt", "r");
+    file = fopen(path != NULL ? path : DEFAULT_FILE, "r");
 
     if (file == NULL)
     {
@@ -70,31 +73,27 @@ int loadPainting(char *path)
         return 0;
     }
 
-    char line[MAX_LINE];
-    fgets(line, sizeof(line), file);
+    char str_line[MAX_LINE];
 
     int type;
     double x, y;
 
-    while (line != NULL)
+    while (fgets(str_line, sizeof(str_line), file))
     {
-        sscanf(line, "%d,", &type);
+        sscanf(str_line, "%d,", &type);
+
         switch (type)
         {
         case point_type:
-            loadPoint(line);
+            loadPoint(str_line);
             break;
 
         case line_type:
-            loadLine(line);
-            break;
-
-        case polyline_type:
-            /* code */
+            loadLine(str_line);
             break;
 
         case polygon_type:
-            loadPoly(line);
+            loadPoly(str_line);
             break;
 
         default:
@@ -102,8 +101,6 @@ int loadPainting(char *path)
             return 0;
             break;
         }
-
-        fgets(line, sizeof(line), file); // Skip "\n"
     }
 
     fclose(file);

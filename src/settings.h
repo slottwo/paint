@@ -7,6 +7,7 @@
 #define H 600
 #define ORTHO_SCALE 1
 #define ORTHO_SIZE 0, (ORTHO_SCALE * W / H), 0, ORTHO_SCALE
+#define DEFAULT_FILE "painting.txt"
 
 // default colors
 

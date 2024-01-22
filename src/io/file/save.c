@@ -4,6 +4,7 @@
 
 #include "save.h"
 #include "../../types/data.h"
+#include "../../settings.h"
 
 #define MAX 1024
 #define DELIMITER ","
@@ -181,14 +182,14 @@ int savePolylines(FILE *file)
     return 1;
 }
 
-int saveArquive(char *file_name)
+int savePainting(char *path)
 {
-    FILE *file = fopen(file_name, "w");
+    FILE *file = fopen(path != NULL ? path : DEFAULT_FILE, "w");
     //SALVAR OS PONTOS
     savePoints(file);
     //SALVAR AS LINHAS
     saveLines(file);
-    //SALVAR OS POL�GONOS
+    //SALVAR OS POLÍGONOS
     savePolygons(file);
     //SALVAR AS POLILINHAS
     savePolylines(file);

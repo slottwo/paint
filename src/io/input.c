@@ -164,13 +164,13 @@ void keyPressed(unsigned char key, int x, int y)
             SELECTED.type = all_type;
             deleteEvent(OP_DONE);
 
-            if (loadPainting(NULL))
+            if (loadPainting(NULL) == 0)
             {
-                printf("Loading Event Error: Returned 0\n");
+                printf("Loading File Error: Returned 0\n");
             }
             else
             {
-                printf("Loading Event: Loaded with success\n");
+                printf("Loading File: Loaded with success\n");
             }
 
             EVENT = EVENT_SELECT;
@@ -178,7 +178,21 @@ void keyPressed(unsigned char key, int x, int y)
         }
         break;
 
-    case 's': // Scale Tool
+    case 's': // Save Tool
+        if (EVENT == EVENT_SELECT)
+        {
+            if (savePainting(NULL) == 0)
+            {
+                printf("Saving File Error: Returned 0\n");
+            }
+            else
+            {
+                printf("Saving File: Saved with success\n");
+            }
+
+            EVENT = EVENT_SELECT;
+            selectEvent(OP_ESC, 0, 0);
+        }
         break;
 
     default:

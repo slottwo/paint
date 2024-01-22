@@ -1,6 +1,6 @@
 #ifndef SAVE_H
 #define SAVE_H
 
-int saveArquive(char *);
+int savePainting(char *);
 
 #endif
