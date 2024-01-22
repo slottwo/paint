@@ -40,7 +40,7 @@ int lineDataPush(Line *);
 int lineDataRemove(NodeLine *);
 
 int polylineDataPush(Poly *);
-int polylineDataRemove(NodePoly *);
+int polylineDataRemove(NodePoly *, int);
 
 int polygonDataPush(Poly *);
 int polygonDataRemove(NodePoly *);

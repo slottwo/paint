@@ -17,8 +17,12 @@ void keyPressed(unsigned char key, int x, int y)
         switch (EVENT)
         {
         case EVENT_CREATE:
-            printf("Done Creation Tool (Type: %d)\n", SELECTED.type);
-            createEvent(OP_DONE, 0, 0);
+            printf("Creation Tool. OP: DONE. Type: %d\n", SELECTED.type);
+            if (createEvent(OP_DONE, 0, 0) == 0)
+            {
+                printf("Creation Tool Error: Returned 0\n");
+                exit(1);
+            }
             break;
 
         default:
@@ -117,6 +121,10 @@ void keyPressed(unsigned char key, int x, int y)
         }
         break;
 
+    case 'i': // Polyline Creation Tool
+        // Not implemented
+        break;
+
     case 'm': // Move Tool
         break;
 
@@ -127,6 +135,7 @@ void keyPressed(unsigned char key, int x, int y)
         break;
 
     case 'z': // Redo
+        // Not implemented
         break;
 
     default:

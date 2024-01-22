@@ -2,9 +2,9 @@
 #include <stdio.h>
 
 #include "events.h"
-#include "../math/selection.h"
 #include "../types/data.h"
 #include "../types/point.h"
+#include "../math/selection.h"
 
 enum events EVENT = EVENT_SELECT;
 
@@ -30,7 +30,7 @@ int createEvent(int OP, double x, double y)
         case polyline_type:
             if (SELECTED.polyline != NULL)
             {
-                polylineDataRemove(SELECTED.polyline);
+                polylineDataRemove(SELECTED.polyline, 0);
             }
             break;
 
@@ -133,8 +133,11 @@ int createEvent(int OP, double x, double y)
             break;
 
         case polyline_type:
-
-            polyPush(SELECTED.polygon->obj, createPointXY(x, y));
+            printf("Adding a new point to poly (%.2f, %.2f)\n", x, y);
+            if (polyPush(SELECTED.polyline->obj, createPointXY(x, y)) == 0)
+            {
+                printf("Polygon Creation Tool Error: Returned 0\n");
+            }
             break;
 
         default:
@@ -151,13 +154,22 @@ int createEvent(int OP, double x, double y)
         {
             if (polyLength(SELECTED.polyline->obj) < 3)
             {
-                printf("Polygon Creation Tool Error: Polygons needs to have at last ");
+                printf("Polygon Creation Tool Error: Polygons needs to have at least\n");
                 return 1;
             }
 
             // Turn polyline in a polygon
-            polygonDataPush(SELECTED.polyline->obj);
-            polylineDataRemove(SELECTED.polyline);
+            if (polygonDataPush(SELECTED.polyline->obj) == 0)
+            {
+                printf("Polygon Creation Tool Error: Polygon not pushed to DATA\n");
+                return 0;
+            }
+
+            if (polylineDataRemove(SELECTED.polyline, 1) == 0)
+            {
+                printf("Polygon Creation Tool Error: Polyline not removed from DATA\n");
+                return 0;
+            }
 
             // Setup to create another polygon
             SELECTED.type = polygon_type;

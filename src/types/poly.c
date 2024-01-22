@@ -116,12 +116,16 @@ Point *polygonPop(Poly *poly)
 
     NodePoint *last_added_node = poly->head;
 
-    last_added_node->next->prior = NULL;
+    poly->head = last_added_node->next;
+
+    if (poly->head != NULL) // if it wasn't the last
+    {
+        poly->head->prior = NULL;
+    }
 
     Point *popped_point = last_added_node->obj;
 
     free(last_added_node);
-
     return popped_point;
 }
 
@@ -163,7 +167,7 @@ int polyLength(Poly *poly)
 
     while (node != NULL)
     {
-        length++;
+        length += 1;
         node = node->next;
     }
 
@@ -186,7 +190,7 @@ void freePoly(Poly *poly)
 
     Point *point;
 
-    while (!polyIsEmpty(poly))
+    while (polyIsEmpty(poly) == 0)
     {
         point = polygonPop(poly);
         freePoint(point);

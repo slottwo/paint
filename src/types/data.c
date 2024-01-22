@@ -50,6 +50,7 @@ int pointDataRemove(NodePoint *node)
     if (node->prior == NULL)
     {
         DATA.point_head = node->next;
+        DATA.point_head->prior = NULL;
     }
     else
     {
@@ -109,6 +110,7 @@ int lineDataRemove(NodeLine *node)
     if (node->prior == NULL)
     {
         DATA.line_head = node->next;
+        DATA.line_head->prior = NULL;
     }
     else
     {
@@ -157,24 +159,34 @@ int polylineDataPush(Poly *poly)
     return 1;
 }
 
-int polylineDataRemove(NodePoly *node)
+int polylineDataRemove(NodePoly *node, int keepPoly)
 {
     if (node == NULL)
     {
-        /* code */
+        printf("Polyline DATA Remove Error: NULL node poly received\n");
+        return 0;
+    }
+    if (node->obj == NULL)
+    {
+        printf("Polyline DATA Remove Error: NULL poly on node received\n");
         return 0;
     }
 
     if (node->prior == NULL)
     {
         DATA.polyline_head = node->next;
+        DATA.polygon_head->prior = NULL;
     }
     else
     {
         node->prior->next = node->next;
     }
 
-    freePoly(node->obj);
+    if (keepPoly != 1)
+    {
+        freePoly(node->obj);
+    }
+
     free(node);
     node = NULL;
 
@@ -198,6 +210,7 @@ int polygonDataPush(Poly *poly)
         /* code */
         return 0;
     }
+
     if (DATA.polygon_head == NULL)
     {
         DATA.polygon_head = new_node;
