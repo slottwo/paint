@@ -247,57 +247,59 @@ int renderData()
 {
     int out = 1;
 
+    printf("Rendering:\n");
+
     NodePoly *node;
 
     // Render Polygons
 
-    glColor3d(POLYGON_COLOR);
-
     node = DATA.polygon_head;
-
-    printf("Polygons rendering: ");
-    while (node != NULL)
+    if (node)
     {
-        out &= renderPolygon(node->obj);
-        node = node->next;
+        printf("Polygons: ");
+        glColor3d(POLYGON_COLOR);
+        while (node != NULL)
+        {
+            out &= renderPolygon(node->obj);
+            node = node->next;
+        }
+        printf("\n");
     }
-    printf("\n");
 
     // Render Polylines
 
-    glColor3d(POLYLINE_COLOR);
-
     node = DATA.polyline_head;
-
-    printf("Polylines rendering: ");
-    while (node != NULL)
+    if (node)
     {
-        out &= renderPolyline(node->obj);
-        node = node->next;
+        printf("Polylines: ");
+        glColor3d(POLYLINE_COLOR);
+        while (node != NULL)
+        {
+            out &= renderPolyline(node->obj);
+            node = node->next;
+        }
+        printf("\n");
     }
-    printf("\n");
 
     // Render Lines
 
-    glColor3d(LINE_COLOR);
-
-    printf("Lines rendering: ");
     if (DATA.line_head)
     {
+        printf("Lines: ");
+        glColor3d(LINE_COLOR);
         out &= renderLines(DATA.line_head);
+        printf("\n");
     }
-    printf("\n");
 
     // Render Points
 
-    glColor3d(POINT_COLOR);
-
-    printf("Point rendering: ");
     if (DATA.point_head)
     {
+        printf("Point: ");
+        glColor3d(POINT_COLOR);
         out &= renderPoints(DATA.point_head);
+        printf("\n");
     }
-    printf("\n");
 
     return out;
 }

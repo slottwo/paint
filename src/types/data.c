@@ -58,6 +58,10 @@ int pointDataRemove(NodePoint *node)
     else
     {
         node->prior->next = node->next;
+        if (node->next != NULL)
+        {
+            node->next->prior = node->prior;
+        }
     }
 
     freePoint(node->obj);
@@ -121,6 +125,10 @@ int lineDataRemove(NodeLine *node)
     else
     {
         node->prior->next = node->next;
+        if (node->next != NULL)
+        {
+            node->next->prior = node->prior;
+        }
     }
 
     freeLine(node->obj);
@@ -176,7 +184,7 @@ int polylineDataRemove(NodePoly *node, int keepPoly)
     {
         printf("Polyline DATA Remove Error: NULL poly on node received\n");
         return 0;
-    }   
+    }
 
     if (node->prior == NULL)
     {
@@ -189,6 +197,10 @@ int polylineDataRemove(NodePoly *node, int keepPoly)
     else
     {
         node->prior->next = node->next;
+        if (node->next != NULL)
+        {
+            node->next->prior = node->prior;
+        }
     }
 
     if (keepPoly != 1)
@@ -256,6 +268,10 @@ int polygonDataRemove(NodePoly *node)
     else
     {
         node->prior->next = node->next;
+        if (node->next != NULL)
+        {
+            node->next->prior = node->prior;
+        }
     }
 
     freePoly(node->obj);

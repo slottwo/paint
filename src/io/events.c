@@ -24,7 +24,7 @@ int selectEvent(int OP, double x, double y)
         break;
 
     case OP_CLICK:
-        printf("Selecting (%.2f, %.2f).\n", x, y);
+        printf("Selecting (%.2f, %.2f). Result: ", x, y);
         SELECTED.point = selectPoint(x, y, TOL);
         if (SELECTED.point != NULL)
         {
@@ -187,19 +187,19 @@ int createEvent(int OP, double x, double y)
         case polyline_type:
             printf("Adding a new point to poly (%.2f, %.2f)\n", x, y);
 
-            if (polyIsEmpty(SELECTED.polyline->obj) > 0)
-            {
-                NodePoint *first = SELECTED.polyline->obj->head;
-                while (first->next != NULL)
-                {
-                    first = first->next;
-                }
-                if (checkPoint(first->obj, x, y, TOL))
-                {
-                    createEvent(OP_DONE, 0, 0);
-                    break;
-                }
-            }
+            // if (polyIsEmpty(SELECTED.polyline->obj) > 0)
+            // {
+            //     NodePoint *first = SELECTED.polyline->obj->head;
+            //     while (first->next != NULL)
+            //     {
+            //         first = first->next;
+            //     }
+            //     if (checkPoint(first->obj, x, y, TOL))
+            //     {
+            //         createEvent(OP_DONE, 0, 0);
+            //         break;
+            //     }
+            // }
 
             if (polyPush(SELECTED.polyline->obj, createPointXY(x, y)) == 0)
             {
@@ -359,7 +359,7 @@ int deleteEvent(int OP)
         switch (SELECTED.type)
         {
         case none_type:
-            return 0;
+            printf("Delete Tool: No object selected\n");
             break;
 
         case point_type:
@@ -367,15 +367,15 @@ int deleteEvent(int OP)
             break;
 
         case line_type:
-            pointDataRemove(SELECTED.point);
+            lineDataRemove(SELECTED.line);
             break;
 
         case polyline_type:
-            pointDataRemove(SELECTED.point);
+            polylineDataRemove(SELECTED.polyline, 0);
             break;
 
         case polygon_type:
-            pointDataRemove(SELECTED.point);
+            polygonDataRemove(SELECTED.polygon);
             break;
 
         default:

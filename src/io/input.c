@@ -58,6 +58,22 @@ void keyPressed(unsigned char key, int x, int y)
         }
         break;
 
+    case KEY_DELETE:
+        switch (EVENT)
+        {
+        case EVENT_SELECT:
+            deleteEvent(OP_DONE);
+            break;
+
+        case EVENT_CREATE:
+            createEvent(OP_ESC, 0, 0);
+            break;
+
+        default:
+            break;
+        }
+        break;
+
     case 'p': // Point Creation Tool
         if (EVENT == EVENT_SELECT || EVENT == EVENT_CREATE)
         {
@@ -77,7 +93,6 @@ void keyPressed(unsigned char key, int x, int y)
                 exit(1);
             }
         }
-
         break;
 
     case 'l': // Line Creation Tool
@@ -122,7 +137,6 @@ void keyPressed(unsigned char key, int x, int y)
         break;
 
     case 'i': // Polyline Creation Tool
-        // Not implemented
         break;
 
     case 'm': // Move Tool
@@ -135,7 +149,6 @@ void keyPressed(unsigned char key, int x, int y)
         break;
 
     case 'z': // Redo
-        // Not implemented
         break;
 
     default:
@@ -153,23 +166,10 @@ void keySpecialPressed(int key, int x, int y)
 {
     switch (key)
     {
-    case GLUT_KEY_DELETE:
-        switch (EVENT)
-        {
-        case EVENT_SELECT:
-            deleteEvent(OP_DONE);
-            break;
-
-        case EVENT_CREATE:
-            createEvent(OP_ESC, 0, 0);
-            break;
-
-        default:
-            break;
-        }
-        
     case GLUT_KEY_F1:
         printf("F1\n");
+        break;
+    default:
         break;
     }
 
@@ -187,7 +187,7 @@ void onMouseClick(int button, int state, int x, int y)
 
     if (state == GLUT_DOWN)
     {
-        printf("Click. Event: %d\n", EVENT);
+        printf("Click (%.2f, %.2f). Event: %d\n", ortho_x, ortho_y, EVENT);
 
         switch (EVENT)
         {

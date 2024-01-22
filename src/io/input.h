@@ -3,6 +3,7 @@
 
 #define KEY_ENTER 13
 #define KEY_ESCAPE 27
+#define KEY_DELETE 127
 
 void keyPressed(unsigned char, int, int);
 void keyReleased(unsigned char, int, int);
