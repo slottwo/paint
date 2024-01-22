@@ -49,10 +49,6 @@ int selectEvent(int OP, double x, double y)
         selectEvent(OP_ESC, 0, 0); // Clicked out
         break;
 
-        // case OP_DONE:
-        //     editEvent();
-        //     break;
-
     default:
         printf("Move Tool Error: Invalid Operation\n");
         return 0;
@@ -275,6 +271,9 @@ int createEvent(int OP, double x, double y)
     return 1;
 }
 
+int editEvent(int OP, double x, double y)
+{}
+
 int moveEvent(int OP, double x, double y)
 {
     switch (OP)
@@ -374,6 +373,7 @@ int deleteEvent(int OP)
             break;
         
         case all_type:
+            printf("Clearing data...\n");
             clearDATA();
             break;
 

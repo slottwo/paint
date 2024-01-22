@@ -5,6 +5,7 @@ enum events
 {
     EVENT_SELECT,
     EVENT_CREATE,
+    EVENT_EDIT,
     EVENT_MOVE,
     EVENT_ROTATE,
     EVENT_SCALE
@@ -29,6 +30,7 @@ enum operation
 
 int selectEvent(int, double, double);
 int createEvent(int, double, double);
+int editEvent(int, double, double);
 int moveEvent(int, double, double);
 int rotateEvent(int, double, double);
 int scaleEvent(int, double, double);

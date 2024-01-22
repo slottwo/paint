@@ -54,6 +54,10 @@ void keyPressed(unsigned char key, int x, int y)
     case KEY_ENTER:
         switch (EVENT)
         {
+        case EVENT_SELECT:
+            editEvent(OP_INIT, 0, 0);
+            break;
+
         case EVENT_CREATE:
             printf("Creation Tool. OP: DONE. Type: %d\n", SELECTED.type);
             if (createEvent(OP_DONE, 0, 0) == 0)
@@ -174,16 +178,21 @@ void keyPressed(unsigned char key, int x, int y)
         }
         break;
 
-    case 'm': // Move Tool
-        break;
-
-    case 'r': // Rotate Tool
-        break;
-
     case 'a': // Load Tool
         if (EVENT == EVENT_SELECT)
         {
-            loadPainting(NULL);
+            SELECTED.type = all_type;
+            deleteEvent(OP_DONE);
+
+            if (loadPainting(NULL))
+            {
+                printf("Loading Event Error: Returned 0\n");
+            }
+            else
+            {
+                printf("Loading Event: LOaded with success\n");
+            }
+
             EVENT = EVENT_SELECT;
             selectEvent(OP_ESC, 0, 0);
         }
@@ -229,6 +238,26 @@ void onMouseClick(int button, int state, int x, int y)
         case EVENT_CREATE:
             createEvent(OP_CLICK, ortho_x, ortho_y);
             break;
+        
+        case EVENT_EDIT:
+            editEvent(OP_CLICK, ortho_x, ortho_y);
+            break;
+
+        default:
+            break;
+        }
+
+        glutPostRedisplay();
+    }
+    else
+    {
+        printf("Click Up (%.2f, %.2f). Event: %d\n", ortho_x, ortho_y, EVENT);
+
+        switch (EVENT)
+        {
+            // case EVENT_CREATE:
+            //     createEvent(OP_CLICK, ortho_x, ortho_y);
+            //     break;
 
         case EVENT_MOVE:
             moveEvent(OP_CLICK, ortho_x, ortho_y);
@@ -246,11 +275,7 @@ void onMouseClick(int button, int state, int x, int y)
             break;
         }
 
-        glutPostRedisplay();
-    } /*
-    else if (EVENT == EVENT_CREATE)
-    {
         createEvent(OP_CLICK, ortho_x, ortho_y);
         glutPostRedisplay();
-    } */
+    }
 }
