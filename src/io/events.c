@@ -272,14 +272,40 @@ int createEvent(int OP, double x, double y)
 }
 
 int editEvent(int OP, double x, double y)
-{}
+{
+
+    switch (OP)
+    {
+    case OP_ESC:
+        EVENT = EVENT_SELECT;
+        break;
+
+    case OP_INIT:
+        EVENT = EVENT_EDIT;
+        break;
+
+    case OP_CLICK:
+        break;
+
+    case OP_DONE:
+        editEvent(OP_ESC, 0, 0);
+        break;
+
+    default:
+        printf("Move Tool Error: Invalid move operation\n");
+        return 0;
+        break;
+    }
+
+    return 1;
+}
 
 int moveEvent(int OP, double x, double y)
 {
     switch (OP)
     {
     case OP_ESC:
-        EVENT = EVENT_SELECT;
+        editEvent(OP_INIT, 0, 0);
         break;
 
     case OP_CLICK:
@@ -371,7 +397,7 @@ int deleteEvent(int OP)
         case polygon_type:
             polygonDataRemove(SELECTED.polygon);
             break;
-        
+
         case all_type:
             printf("Clearing data...\n");
             clearDATA();
