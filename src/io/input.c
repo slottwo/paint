@@ -23,29 +23,9 @@ void keyPressed(unsigned char key, int x, int y)
             break;
 
         case EVENT_CREATE:
-            switch (SELECTED.type)
-            {
-            case point_type:
-                SELECTED.point = DATA.point_head;
-                deleteEvent(OP_DONE);
-                SELECTED.type = point_type;
-                createEvent(OP_INIT, 0, 0);
-                break;
+            createEvent(OP_REDO, 0, 0);
+            break;
 
-            case polyline_type:
-                if (SELECTED.polyline != NULL)
-                {
-                    Point *point = polyPop(SELECTED.polyline->obj);
-                    if (point)
-                    {
-                        freePoint(point);
-                    }
-                }
-                break;
-
-            default:
-                break;
-            }
         default:
             break;
         }
@@ -190,7 +170,7 @@ void keyPressed(unsigned char key, int x, int y)
             }
             else
             {
-                printf("Loading Event: LOaded with success\n");
+                printf("Loading Event: Loaded with success\n");
             }
 
             EVENT = EVENT_SELECT;
@@ -238,7 +218,7 @@ void onMouseClick(int button, int state, int x, int y)
         case EVENT_CREATE:
             createEvent(OP_CLICK, ortho_x, ortho_y);
             break;
-        
+
         case EVENT_EDIT:
             editEvent(OP_CLICK, ortho_x, ortho_y);
             break;
@@ -275,7 +255,6 @@ void onMouseClick(int button, int state, int x, int y)
             break;
         }
 
-        createEvent(OP_CLICK, ortho_x, ortho_y);
         glutPostRedisplay();
     }
 }

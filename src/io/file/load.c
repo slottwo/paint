@@ -78,7 +78,6 @@ int loadPainting(char *path)
 
     while (line != NULL)
     {
-
         sscanf(line, "%d,", &type);
         switch (type)
         {

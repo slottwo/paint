@@ -46,11 +46,11 @@ int selectEvent(int OP, double x, double y)
             printf("Polygon selected\n");
             break;
         }
-        selectEvent(OP_ESC, 0, 0); // Clicked out
+        selectEvent(OP_ESC, 0, 0); // If clicked out
         break;
 
     default:
-        printf("Move Tool Error: Invalid Operation\n");
+        printf("Selection Tool Error: Invalid operation\n");
         return 0;
         break;
     }
@@ -107,7 +107,6 @@ int createEvent(int OP, double x, double y)
             break;
 
         case line_type:
-            SELECTED.line = NULL;
             break;
 
         case polygon_type:
@@ -182,20 +181,6 @@ int createEvent(int OP, double x, double y)
         case polyline_type:
             printf("Adding a new point to poly (%.2f, %.2f)\n", x, y);
 
-            // if (polyIsEmpty(SELECTED.polyline->obj) > 0)
-            // {
-            //     NodePoint *first = SELECTED.polyline->obj->head;
-            //     while (first->next != NULL)
-            //     {
-            //         first = first->next;
-            //     }
-            //     if (checkPoint(first->obj, x, y, TOL))
-            //     {
-            //         createEvent(OP_DONE, 0, 0);
-            //         break;
-            //     }
-            // }
-
             if (polyPush(SELECTED.polyline->obj, createPointXY(x, y)) == 0)
             {
                 printf("Polygon Creation Tool Error: Returned 0\n");
@@ -244,27 +229,39 @@ int createEvent(int OP, double x, double y)
 
         break;
 
-        // case OP_REDO:
-        //     switch (SELECTED.type)
-        //     {
-        //     case point_type:
-        //         /* code */
-        //         break;
-        //     case line_type:
-        //         /* code */
-        //         break;
-        //     case polyline_type:
-        //         /* code */
-        //         break;
-        //     case polygon_type:
-        //         /* code */
-        //         break;
-        //     default:
-        //         break;
-        //     }
-        //     break;
+    case OP_REDO:
+        switch (SELECTED.type)
+        {
+        case point_type:
+            // del last point
+            SELECTED.point = DATA.point_head;
+            deleteEvent(OP_DONE);
+
+            // return to point creation tool
+            SELECTED.type = point_type;
+            createEvent(OP_INIT, 0, 0);
+            break;
+
+        case polyline_type:
+            if (SELECTED.polyline != NULL)
+            {
+                Point *point = polyPop(SELECTED.polyline->obj);
+                if (point)
+                {
+                    freePoint(point);
+                }
+            }
+            break;
+
+        default:
+            printf("Creation Tool: Not implemente OP_REDO for type %d\n", SELECTED.type);
+            break;
+        }
+        break;
 
     default:
+        printf("Creation Tool Error: Invalid operation\n");
+        return 0;
         break;
     }
 
