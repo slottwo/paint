@@ -10,7 +10,7 @@
 
 int savePoints(FILE *file)
 {
-    char string_point[7] = "point,";
+    char string_point[7] = "1,";
 
     NodePoint *aux = DATA.point_head;
 
@@ -42,7 +42,7 @@ int savePoints(FILE *file)
 
 int saveLines(FILE *file)
 {
-    char string_line[6] = "line,";
+    char string_line[6] = "2,";
 
     NodeLine *aux = DATA.line_head;
 
@@ -86,7 +86,7 @@ int saveLines(FILE *file)
 
 int savePolygons(FILE *file)
 {
-    char string_poly[6] = "poly,";
+    char string_poly[6] = "4,";
     int i;
 
     NodePoly *aux = DATA.polygon_head;
@@ -135,7 +135,7 @@ int savePolygons(FILE *file)
 
 int savePolylines(FILE *file)
 {
-    char string_polyline[9] = "polyline,";
+    char string_polyline[9] = "3,";
     int i;
 
     NodePoly *aux = DATA.polyline_head;
