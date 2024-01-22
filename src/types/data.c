@@ -335,3 +335,25 @@ int polygonInDATA(NodePoly *node)
     }
     return 0;
 }
+
+int clearDATA()
+{
+    while (DATA.point_head != NULL)
+    {
+        pointDataRemove(DATA.point_head);
+    }
+    while (DATA.line_head != NULL)
+    {
+        lineDataRemove(DATA.line_head);
+    }
+    while (DATA.polygon_head != NULL)
+    {
+        polygonDataRemove(DATA.polygon_head);
+    }
+    while (DATA.polyline_head != NULL)
+    {
+        polylineDataRemove(DATA.polyline_head, 0);
+    }
+
+    return 1;
+}

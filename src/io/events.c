@@ -372,6 +372,10 @@ int deleteEvent(int OP)
         case polygon_type:
             polygonDataRemove(SELECTED.polygon);
             break;
+        
+        case all_type:
+            clearDATA();
+            break;
 
         default:
             printf("Delete Tool Error: Invalid type\n");

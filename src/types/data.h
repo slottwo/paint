@@ -19,7 +19,8 @@ enum object_type
     point_type,
     line_type,
     polyline_type,
-    polygon_type
+    polygon_type,
+    all_type
 };
 
 struct current_node
@@ -44,6 +45,8 @@ int polylineDataRemove(NodePoly *, int);
 
 int polygonDataPush(Poly *);
 int polygonDataRemove(NodePoly *);
+
+int clearDATA();
 
 // Not working...
 // int pointInDATA(NodePoint *);

@@ -6,6 +6,8 @@
 #include "input.h"
 #include "events.h"
 #include "render.h"
+#include "file/load.h"
+#include "file/save.h"
 #include "../settings.h"
 #include "../types/data.h"
 
@@ -179,6 +181,12 @@ void keyPressed(unsigned char key, int x, int y)
         break;
 
     case 'a': // Load Tool
+        if (EVENT == EVENT_SELECT)
+        {
+            loadPainting(NULL);
+            EVENT = EVENT_SELECT;
+            selectEvent(OP_ESC, 0, 0);
+        }
         break;
 
     case 's': // Scale Tool

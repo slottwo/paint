@@ -5,18 +5,69 @@
 #include "../../types/data.h"
 
 #define MAX_LINE 1024
-#define DELIMITER ","
+#define DELIMITER ','
+int loadPoint(char *src)
+{
+    int type;
+    double x, y;
+    sscanf(src, "%d,%lf,%lf", &type, &x, &y);
+    pointDataPush(createPointXY(x, y));
+}
 
-int loadPainting(char *campo)
+int loadLine(char *src)
+{
+    int type;
+    double x1, y1, x2, y2;
+    sscanf(src, "%d,%lf,%lf,%lf,%lf", &type, &x1, &y1, &x2, &y2);
+    lineDataPush(createLineP(createPointXY(x1, y1), createPointXY(x2, y2)));
+
+    return 1;
+}
+
+int loadPoly(char *src)
+{
+    int type, num_points;
+    double x, y;
+
+    sscanf(src, "%d,%d", &type, &num_points);
+
+    Poly *poly = createPoly();
+
+    for (int i = 0; i < num_points; i++)
+    {
+        if (sscanf(src, "%lf,%lf", &x, &y) != 1)
+        {
+            printf("Load File Error: Invalid type (%d)\n", type);
+            return 0;
+        }
+
+        src = strchr(src, DELIMITER);
+
+        if (src == NULL)
+        {
+            break;
+        }
+        src++;
+
+        polyPush(poly, createPointXY(x, y));
+    }
+
+    polygonDataPush(poly);
+
+    return 1;
+}
+
+int loadPainting(char *path)
 {
     FILE *file;
 
-    file = fopen("painting.txt", "r");
+    file = fopen(path != NULL ? path : "painting.txt", "r");
 
     if (file == NULL)
     {
         printf("Load File Error: fopen failed\n");
         exit(1);
+        return 0;
     }
 
     char line[MAX_LINE];
@@ -52,59 +103,11 @@ int loadPainting(char *campo)
             return 0;
             break;
         }
+
+        fgets(line, sizeof(line), file); // Skip "\n"
     }
 
     fclose(file);
-
-    return 1;
-}
-
-int loadPoint(char *src)
-{
-    int type;
-    double x, y;
-    sscanf(src, "%d,%f,%f", &type, &x, &y);
-    pointDataPush(createPointXY(x, y));
-}
-
-int loadLine(char *src)
-{
-    int type;
-    double x1, y1, x2, y2;
-    sscanf(src, "%d,%f,%f,%f,%f", &type, &x1, &y1, &x2, &y2);
-    lineDataPush(createLineP(createPointXY(x1, y1), createPointXY(x2, y2)));
-
-    return 1;
-}
-
-int loadPoly(char *src)
-{
-    int type, num_points;
-    sscanf(src, "%d,%f", &type, &num_points);
-
-    double v[num_points][2];
-
-    for (int i = 0; i < num_points; i++)
-    {
-        if (sscanf(src, "%f", &v[i]) != 1)
-        {
-            printf("Load File Error: Invalid type (%d)\n", type);
-            free(v);
-            return 0;
-        }
-        src = strchr(src, DELIMITER);
-        if (src == NULL)
-        {
-            break;
-        }
-        src++;
-    }
-
-    Point *poly = createFPoly(v, num_points);
-
-    polygonDataPush(poly);
-
-    free(v);
 
     return 1;
 }
