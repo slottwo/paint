@@ -101,7 +101,7 @@ void keyPressed(unsigned char key, int x, int y)
         }
         break;
 
-    case 'o': // polygon Creation Tool / Open File
+    case 'o': // polygon Creation Tool
         if (EVENT == EVENT_SELECT || EVENT == EVENT_CREATE)
         {
             printf("Polygon Creation Tool pre-setup\n");
@@ -131,7 +131,7 @@ void keyPressed(unsigned char key, int x, int y)
     case 'r': // Rotate Tool
         break;
 
-    case 's': // Scale Tool / Save File
+    case 's': // Scale Tool
         break;
 
     case 'z': // Redo
@@ -167,6 +167,10 @@ void keySpecialPressed(int key, int x, int y)
         default:
             break;
         }
+        
+    case GLUT_KEY_F1:
+        printf("F1\n");
+        break;
     }
 
     glutPostRedisplay();

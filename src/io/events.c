@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "events.h"
+#include "../settings.h"
 #include "../types/data.h"
 #include "../types/point.h"
 #include "../math/selection.h"
@@ -10,6 +11,55 @@ enum events EVENT = EVENT_SELECT;
 
 int selectEvent(int OP, double x, double y)
 {
+    switch (OP)
+    {
+    case OP_ESC:
+        SELECTED.type = none_type;
+        SELECTED.point = NULL;
+        SELECTED.line = NULL;
+        SELECTED.polyline = NULL;
+        SELECTED.polygon = NULL;
+        printf("Deselect\n");
+
+        break;
+
+    case OP_CLICK:
+        printf("Selecting (%.2f, %.2f).\n", x, y);
+        SELECTED.point = selectPoint(x, y, TOL);
+        if (SELECTED.point != NULL)
+        {
+            SELECTED.type = point_type;
+            printf("Point selected\n");
+            break;
+        }
+        SELECTED.line = selectLine(x, y, TOL);
+        if (SELECTED.line != NULL)
+        {
+            SELECTED.type = line_type;
+            printf("Line selected\n");
+            break;
+        }
+        SELECTED.polygon = selectPolygon(x, y);
+        if (SELECTED.polygon != NULL)
+        {
+            SELECTED.type = polygon_type;
+            printf("Polygon selected\n");
+            break;
+        }
+        selectEvent(OP_ESC, 0, 0); // Clicked out
+        break;
+
+        // case OP_DONE:
+        //     editEvent();
+        //     break;
+
+    default:
+        printf("Move Tool Error: Invalid Operation\n");
+        return 0;
+        break;
+    }
+
+    return 1;
 }
 
 int createEvent(int OP, double x, double y)
@@ -136,6 +186,21 @@ int createEvent(int OP, double x, double y)
 
         case polyline_type:
             printf("Adding a new point to poly (%.2f, %.2f)\n", x, y);
+
+            if (polyIsEmpty(SELECTED.polyline->obj) > 0)
+            {
+                NodePoint *first = SELECTED.polyline->obj->head;
+                while (first->next != NULL)
+                {
+                    first = first->next;
+                }
+                if (checkPoint(first->obj, x, y, TOL))
+                {
+                    createEvent(OP_DONE, 0, 0);
+                    break;
+                }
+            }
+
             if (polyPush(SELECTED.polyline->obj, createPointXY(x, y)) == 0)
             {
                 printf("Polygon Creation Tool Error: Returned 0\n");
@@ -184,29 +249,29 @@ int createEvent(int OP, double x, double y)
 
         break;
 
-    case OP_REDO:
-        switch (SELECTED.type)
-        {
-        case point_type:
-            /* code */
-            break;
+        // case OP_REDO:
+        //     switch (SELECTED.type)
+        //     {
+        //     case point_type:
+        //         /* code */
+        //         break;
 
-        case line_type:
-            /* code */
-            break;
+        //     case line_type:
+        //         /* code */
+        //         break;
 
-        case polyline_type:
-            /* code */
-            break;
+        //     case polyline_type:
+        //         /* code */
+        //         break;
 
-        case polygon_type:
-            /* code */
-            break;
+        //     case polygon_type:
+        //         /* code */
+        //         break;
 
-        default:
-            break;
-        }
-        break;
+        //     default:
+        //         break;
+        //     }
+        //     break;
 
     default:
         break;
@@ -231,7 +296,7 @@ int moveEvent(int OP, double x, double y)
         break;
 
     default:
-        printf("Move Tool Error: Invalid Operation\n");
+        printf("Move Tool Error: Invalid move operation\n");
         return 0;
         break;
     }
@@ -241,7 +306,7 @@ int moveEvent(int OP, double x, double y)
 
 int rotateEvent(int OP, double x, double y)
 {
-        switch (OP)
+    switch (OP)
     {
     case OP_ESC:
         EVENT = EVENT_SELECT;
@@ -251,11 +316,11 @@ int rotateEvent(int OP, double x, double y)
         break;
 
     case OP_DONE:
-        moveEvent(OP_ESC, 0, 0);
+        rotateEvent(OP_ESC, 0, 0);
         break;
 
     default:
-        printf("Move Tool Error: Invalid Operation\n");
+        printf("Rotate Tool Error: Invalid rotate operation\n");
         return 0;
         break;
     }
@@ -265,7 +330,7 @@ int rotateEvent(int OP, double x, double y)
 
 int scaleEvent(int OP, double x, double y)
 {
-        switch (OP)
+    switch (OP)
     {
     case OP_ESC:
         EVENT = EVENT_SELECT;
@@ -275,11 +340,11 @@ int scaleEvent(int OP, double x, double y)
         break;
 
     case OP_DONE:
-        moveEvent(OP_ESC, 0, 0);
+        scaleEvent(OP_ESC, 0, 0);
         break;
 
     default:
-        printf("Move Tool Error: Invalid Operation\n");
+        printf("Scale Tool Error: Invalid scale operation\n");
         return 0;
         break;
     }
@@ -314,11 +379,14 @@ int deleteEvent(int OP)
             break;
 
         default:
+            printf("Delete Tool Error: Invalid type\n");
+            return 0;
             break;
         }
     }
     else
     {
+        printf("Delete Tool Error: Invalid operation\n");
         return 0;
     }
 

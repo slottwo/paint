@@ -15,7 +15,7 @@
 void onInitialization()
 {
     glClearColor(BG_COLOR);
-    glPointSize(TOL * 2);
+    glPointSize(5);
 
     glMatrixMode(GL_PROJECTION);
     gluOrtho2D(ORTHO_SIZE);
