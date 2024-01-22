@@ -18,7 +18,7 @@ void onInitialization()
     glClearColor(BG_COLOR);
     glPointSize(5);
 
-    loadArquive(file);
+    loadDrawingFile(file);
 
     glMatrixMode(GL_PROJECTION);
     gluOrtho2D(ORTHO_SIZE);

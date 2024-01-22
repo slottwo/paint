@@ -1,6 +1,6 @@
 #ifndef LOAD_H
 #define LOAD_H
 
-int loadArquive(char *);
+int loadPainting(char *);
 
 #endif

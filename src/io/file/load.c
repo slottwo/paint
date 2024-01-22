@@ -7,136 +7,104 @@
 #define MAX_LINE 1024
 #define DELIMITER ","
 
-int loadPoint(char *campo)
+int loadPainting(char *campo)
 {
-    char *ptr;
+    FILE *file;
+
+    file = fopen("painting.txt", "r");
+
+    if (file == NULL)
+    {
+        printf("Load File Error: fopen failed\n");
+        exit(1);
+    }
+
+    char line[MAX_LINE];
+    fgets(line, sizeof(line), file);
+
+    int type;
     double x, y;
 
-    campo = strtok(NULL, DELIMITER);
-    printf("x: %s\t", campo);
-    x = atoi(campo);
+    while (line != NULL)
+    {
 
+        sscanf(line, "%d,", &type);
+        switch (type)
+        {
+        case point_type:
+            loadPoint(line);
+            break;
 
-    campo = strtok(NULL, DELIMITER);
-    printf("y: %s\n", campo);
-    y = atoi(campo);
+        case line_type:
+            loadLine(line);
+            break;
 
-    pointDataPush(createPointXY(x, y));
+        case polyline_type:
+            /* code */
+            break;
+
+        case polygon_type:
+            loadPoly(line);
+            break;
+
+        default:
+            printf("Load File Error: Invalid type (%d)\n", type);
+            return 0;
+            break;
+        }
+    }
+
+    fclose(file);
 
     return 1;
 }
 
-int loadLine(char *campo)
+int loadPoint(char *src)
 {
-    char *ptr;
+    int type;
+    double x, y;
+    sscanf(src, "%d,%f,%f", &type, &x, &y);
+    pointDataPush(createPointXY(x, y));
+}
+
+int loadLine(char *src)
+{
+    int type;
     double x1, y1, x2, y2;
-
-    campo = strtok(NULL, DELIMITER);
-    printf("x1: %s\t", campo);
-    x1 = atoi(campo);
-
-    campo = strtok(NULL, DELIMITER);
-    printf("y1: %s\n", campo);
-    y1 = atoi(campo);
-
-    campo = strtok(NULL, DELIMITER);
-    printf("x2: %s\t", campo);
-    x2 = atoi(campo);
-
-    campo = strtok(NULL, DELIMITER);
-    printf("y2: %s\n", campo);
-    y2 = atoi(campo);
-
+    sscanf(src, "%d,%f,%f,%f,%f", &type, &x1, &y1, &x2, &y2);
     lineDataPush(createLineP(createPointXY(x1, y1), createPointXY(x2, y2)));
 
     return 1;
 }
 
-int loadPoly(char *campo)
+int loadPoly(char *src)
 {
-    campo = strtok(NULL, DELIMITER);
-    int i, num_points = atoi(campo);
-    double x, y;
+    int type, num_points;
+    sscanf(src, "%d,%f", &type, &num_points);
 
-    Poly *p = createPoly();
+    double v[num_points][2];
 
-    for(i = 0; i < num_points; i++)
+    for (int i = 0; i < num_points; i++)
     {
-        campo = strtok(NULL, DELIMITER);
-        printf("x%d: %s\t", i+1, campo);
-        x = atoi(campo);
-
-        campo = strtok(NULL, DELIMITER);
-        printf("y%d: %s\n", i+1, campo);
-        y = atoi(campo);
-
-        polyPush(p, createPointXY(x, y));
-
-    }
-
-    polygonDataPush(p);
-
-    return 1;
-}
-
-int loadPolyline(char *campo)
-{
-    campo = strtok(NULL, DELIMITER);
-    int i, num_points = atoi(campo);
-    double x, y;
-
-    Poly *p = createPoly();
-
-    for(i = 0; i < num_points; i++)
-    {
-        campo = strtok(NULL, DELIMITER);
-        printf("x%d: %s\t", i+1, campo);
-        x = atoi(campo);
-
-        campo = strtok(NULL, DELIMITER);
-        printf("y%d: %s\n", i+1, campo);
-        y = atoi(campo);
-
-        polyPush(p, createPointXY(x, y));
-    }
-
-    polylineDataPush(p);
-
-    return 1;
-}
-
-
-int loadArquive(char *file_name)
-{
-    FILE *file = fopen(file_name, "r");
-
-    if(file == NULL)
-    {
-        printf("Fail to load the arquive");
-        return 0;
-    }
-
-    char linha[MAX_LINE];
-    char *campo;
-
-    while(fgets(linha, MAX_LINE, file) != NULL)
-    {
-
-        campo = strtok(linha, DELIMITER);
-
-        while(campo != NULL)
+        if (sscanf(src, "%f", &v[i]) != 1)
         {
-            printf("%s\n", campo);
-            //printf("linha:%s\n", linha);
-
-            if(strcmp(linha, "point") == 0) loadPoint(campo);
-            if(strcmp(linha, "line") == 0) loadLine(campo);
-            if(strcmp(linha, "poly") == 0) loadPoly(campo);
-            if(strcmp(linha, "polyline") == 0) loadPolyline(campo);
-
-            campo = strtok(NULL, DELIMITER);
+            printf("Load File Error: Invalid type (%d)\n", type);
+            free(v);
+            return 0;
         }
+        src = strchr(src, DELIMITER);
+        if (src == NULL)
+        {
+            break;
+        }
+        src++;
     }
+
+    Point *poly = createFPoly(v, num_points);
+
+    polygonDataPush(poly);
+
+    free(v);
 
     return 1;
 }
